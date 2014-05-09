@@ -1,9 +1,11 @@
 package hs.merseburg.miks13.wbs;
 
+import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
 import hs.merseburg.miks12.wbs.persistence.dialog.DialogDatabaseConfiguration;
 
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -30,8 +32,11 @@ public class WBSApplication implements IApplication {
 		if (isFirstStart) {
 			DialogDatabaseConfiguration dialog = new DialogDatabaseConfiguration(
 					new Shell(Display.getCurrent(), SWT.None));
-			dialog.open();
+			if (dialog.open() != Window.OK)
+				return IApplication.EXIT_OK;
+
 		}
+		PersistenceUtility.getINSTANCE().init();
 
 		try {
 

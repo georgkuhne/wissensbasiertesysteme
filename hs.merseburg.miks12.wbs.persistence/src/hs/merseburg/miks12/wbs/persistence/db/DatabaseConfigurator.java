@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import org.eclipse.ui.PlatformUI;
 import org.h2.api.ErrorCode;
+import org.hibernate.cfg.Environment;
 
 public class DatabaseConfigurator {
 	private static final DatabaseConfigurator INSTANCE = new DatabaseConfigurator();
@@ -39,7 +40,21 @@ public class DatabaseConfigurator {
 	}
 
 	public Properties getHBDatastoreProperties() {
-		return null;
+		Properties properties = new Properties();
+
+		String url = getDatabaseURLFromPreferencestore();
+
+		properties.setProperty(Environment.USER,
+				ConstantsPersistence.PREFERENCESTORE_DATABASEUSERNAME);
+		properties.setProperty(Environment.PASS,
+				ConstantsPersistence.PREFERENCESTORE_DATABASEPW);
+		properties.setProperty(Environment.URL, url);
+		properties.setProperty(Environment.HBM2DDL_AUTO, "update"); //$NON-NLS-1$
+		properties.setProperty(Environment.DIALECT, getHibernateDialect());
+		properties.setProperty(Environment.DRIVER, "org.h2.Driver");
+		properties.setProperty(Environment.FORMAT_SQL, "true");
+		properties.setProperty(Environment.SHOW_SQL, "true");
+		return properties;
 	}
 
 	public void persistDatabaseFolderPath(String path) {

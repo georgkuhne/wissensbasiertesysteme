@@ -7,6 +7,7 @@ Bundle-Activator: hs.merseburg.miks13.wbs.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.draw2d;bundle-version="3.9.0",
- hs.merseburg.miks12.wbs.persistence
+ hs.merseburg.miks12.wbs.persistence,
+ hs.merseburg.miks12.wbs.model;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
