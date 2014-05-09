@@ -5,6 +5,8 @@ Bundle-SymbolicName: hs.merseburg.miks13.wbs;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: hs.merseburg.miks13.wbs.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.draw2d;bundle-version="3.9.0",
+ hs.merseburg.miks12.wbs.persistence
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

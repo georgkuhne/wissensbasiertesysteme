@@ -42,12 +42,6 @@ public class DatabaseConfigurator {
 		return null;
 	}
 
-	public void persistDatabaseName(String databaseName) {
-		PlatformUI.getPreferenceStore()
-				.setValue(ConstantsPersistence.PREFERENCESTORE_DATABASENAME,
-						databaseName);
-	}
-
 	public void persistDatabaseFolderPath(String path) {
 		PlatformUI.getPreferenceStore().setValue(
 				ConstantsPersistence.PREFERENCESTORE_DATABASEPATH, path);
@@ -59,8 +53,7 @@ public class DatabaseConfigurator {
 	}
 
 	public String getDatabaseName() {
-		return PlatformUI.getPreferenceStore().getString(
-				ConstantsPersistence.PREFERENCESTORE_DATABASENAME);
+		return ConstantsPersistence.PREFERENCESTORE_DATABASEPW;
 	}
 
 	private String getDatabaseURLFromPreferencestore() {
@@ -116,8 +109,9 @@ public class DatabaseConfigurator {
 
 	}
 
-	public LIDbStateType canConnectToDB(String path, String dbName) {
-		String url = getDatabaseURL(path, dbName);
+	public LIDbStateType canConnectToDB(String path) {
+		String url = getDatabaseURL(path,
+				ConstantsPersistence.PREFERENCESTORE_DATABASENAME);
 		int dbErrorCode = 0;
 		Connection dbConnection = null;
 		try {

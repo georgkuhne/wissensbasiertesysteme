@@ -8,8 +8,13 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.teneo.hibernate;bundle-version="2.0.1",
  org.eclipse.emf.teneo.hibernate.eclipse;bundle-version="2.0.0",
  org.eclipse.ui.workbench,
- org.eclipse.jface
+ org.eclipse.jface,
+ org.eclipse.swt,
+ org.eclipse.draw2d
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/h2-1.4.178.jar,
  .
+Export-Package: hs.merseburg.miks12.wbs.persistence,
+ hs.merseburg.miks12.wbs.persistence.db,
+ hs.merseburg.miks12.wbs.persistence.dialog
