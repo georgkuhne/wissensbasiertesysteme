@@ -34,6 +34,8 @@ public class WBSApplication implements IApplication {
 					new Shell(Display.getCurrent(), SWT.None));
 			if (dialog.open() != Window.OK)
 				return IApplication.EXIT_OK;
+			PlatformUI.getPreferenceStore().setValue(
+					ConstantsGUI.PREFERENCE_ISFIRSTSTART, false);
 
 		}
 		PersistenceUtility.getINSTANCE().init();

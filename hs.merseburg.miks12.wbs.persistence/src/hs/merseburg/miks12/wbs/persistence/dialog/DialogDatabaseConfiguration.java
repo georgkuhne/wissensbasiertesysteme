@@ -376,7 +376,7 @@ public class DialogDatabaseConfiguration extends Dialog {
 	@Override
 	protected void okPressed() {
 		String path = text_userDBPath.getText().trim();
-		path = path + File.separator + tDatabase.getSelection()[0]
+		path = path + File.separator + tDatabase.getSelection()[0].getText()
 				+ ConstantsPersistence.PREFERENCESTORE_DATABASENAME_SUFFIX;
 		DatabaseConfigurator.getInstance().persistDatabaseFolderPath(path);
 		super.okPressed();

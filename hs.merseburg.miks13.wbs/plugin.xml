@@ -14,28 +14,29 @@
    <extension
          point="org.eclipse.ui.perspectives">
       <perspective
-            name="Perspective"
             class="hs.merseburg.miks13.wbs.Perspective"
-            id="hs.merseburg.miks13.wbs.perspective">
+            fixed="true"
+            id="hs.merseburg.miks13.wbs.perspective"
+            name="Perspective">
       </perspective>
    </extension>
    <extension
          point="org.eclipse.ui.views">
       <view
             name="View"
-            class="hs.merseburg.miks13.wbs.View"
+            class="hs.merseburg.miks13.wbs.MainView"
             id="hs.merseburg.miks13.wbs.view">
       </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
-            targetID="*">
+            targetID="hs.merseburg.miks13.wbs.perspective">
          <view
                standalone="true"
                minimized="false"
-               relative="org.eclipse.ui.editorss"
-               relationship="left"
+               relative="right"
+               relationship="stack"
                id="hs.merseburg.miks13.wbs.view">
          </view>
       </perspectiveExtension>

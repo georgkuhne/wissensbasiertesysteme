@@ -12,7 +12,7 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
-public class View extends ViewPart {
+public class MainView extends ViewPart {
 	public static final String ID = "hs.merseburg.miks13.wbs.view";
 
 	private TableViewer viewer;
