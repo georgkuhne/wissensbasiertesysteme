@@ -8,6 +8,10 @@ import java.util.List;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -36,6 +40,7 @@ public class CompositeBrowseWBS extends Composite {
 	public CompositeBrowseWBS(Composite parent, int style, MainView mainView1) {
 		super(parent, style);
 		// define the TableViewer
+		mainView=mainView1;
 		viewer = new TableViewer(this, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
 				| SWT.FULL_SELECTION | SWT.BORDER);
 
@@ -49,9 +54,38 @@ public class CompositeBrowseWBS extends Composite {
 		viewer.setContentProvider(ArrayContentProvider.getInstance());
 		Composite c_buttons = new Composite(this, SWT.None);
 		c_buttons.setLayout(new RowLayout(SWT.HORIZONTAL));
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				IStructuredSelection S = (IStructuredSelection) viewer.getSelection();
+				if(S.getFirstElement() != null){
+					b_open.setEnabled(true);
+				}else {
+					b_open.setEnabled(false);
+				}
+			}
+		});
 		b_open = new Button(c_buttons, SWT.None);
 		b_open.setText("Open");
+		b_open.setEnabled(false);
+		b_open.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				openWbs();
+				
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				
+			}
+		});
+				
+				
 		b_new = new Button(c_buttons, SWT.None);
+		b_new.setText("New");
 		b_new.addSelectionListener(new SelectionListener() {
 			
 			@Override
@@ -64,7 +98,7 @@ public class CompositeBrowseWBS extends Composite {
 				
 			}
 		});
-		b_new.setText("New");
+		
 		FormData fdviewer = new FormData();
 		fdviewer.top = new FormAttachment(0);
 		fdviewer.bottom = new FormAttachment(100);
@@ -78,7 +112,14 @@ public class CompositeBrowseWBS extends Composite {
 		fdbutton.right = new FormAttachment(100);
 		table.setLayoutData(fdviewer);
 		c_buttons.setLayoutData(fdbutton);
+		refreshTable();
 
+	}
+
+	protected void openWbs() {
+		IStructuredSelection s = (IStructuredSelection) viewer.getSelection();
+		WissensBasis wb = (WissensBasis) s.getFirstElement();
+		mainView.openWBS(wb.getID());
 	}
 
 	protected void createNewWBS() {
