@@ -23,23 +23,10 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            name="View"
+            name="Browse"
             class="hs.merseburg.miks13.wbs.MainView"
             id="hs.merseburg.miks13.wbs.view">
       </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="hs.merseburg.miks13.wbs.perspective">
-         <view
-               standalone="true"
-               minimized="false"
-               relative="right"
-               relationship="stack"
-               id="hs.merseburg.miks13.wbs.view">
-         </view>
-      </perspectiveExtension>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
