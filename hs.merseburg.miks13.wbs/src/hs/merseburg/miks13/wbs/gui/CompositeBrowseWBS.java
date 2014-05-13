@@ -1,6 +1,7 @@
 package hs.merseburg.miks13.wbs.gui;
 
 import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
+import hs.merseburg.miks12.wbs.persistence.dialog.NewDatabaseDialog;
 import hs.merseburg.miks13.wbs.MainView;
 
 import java.util.List;
@@ -10,16 +11,20 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import wissensbasismodel.WissensBasis;
+import wissensbasismodel.WissensbasismodelFactory;
 
 public class CompositeBrowseWBS extends Composite {
 	MainView mainView;
@@ -47,6 +52,18 @@ public class CompositeBrowseWBS extends Composite {
 		b_open = new Button(c_buttons, SWT.None);
 		b_open.setText("Open");
 		b_new = new Button(c_buttons, SWT.None);
+		b_new.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				createNewWBS();
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				
+			}
+		});
 		b_new.setText("New");
 		FormData fdviewer = new FormData();
 		fdviewer.top = new FormAttachment(0);
@@ -62,6 +79,17 @@ public class CompositeBrowseWBS extends Composite {
 		table.setLayoutData(fdviewer);
 		c_buttons.setLayoutData(fdbutton);
 
+	}
+
+	protected void createNewWBS() {
+		DiaLogCreateNewWBS dialog = new DiaLogCreateNewWBS();
+		if (dialog.open() == NewDatabaseDialog.OK) {
+			String wmname=dialog.getWBSName();
+		WissensBasis wissensbasis = WissensbasismodelFactory.eINSTANCE.createWissensBasis();
+		wissensbasis.setName(wmname);
+		PersistenceUtility.getINSTANCE().save(wissensbasis);
+		refreshTable();
+		}
 	}
 
 	private void createColumns(TableViewer viewer) {

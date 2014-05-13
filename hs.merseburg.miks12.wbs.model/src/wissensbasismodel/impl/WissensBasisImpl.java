@@ -2,12 +2,19 @@
  */
 package wissensbasismodel.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import wissensbasismodel.Bauteil;
 import wissensbasismodel.WissensBasis;
 import wissensbasismodel.WissensbasismodelPackage;
 
@@ -20,6 +27,7 @@ import wissensbasismodel.WissensbasismodelPackage;
  * <ul>
  *   <li>{@link wissensbasismodel.impl.WissensBasisImpl#getName <em>Name</em>}</li>
  *   <li>{@link wissensbasismodel.impl.WissensBasisImpl#getID <em>ID</em>}</li>
+ *   <li>{@link wissensbasismodel.impl.WissensBasisImpl#getBauteile <em>Bauteile</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,6 +71,16 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 	 * @ordered
 	 */
 	protected long id = ID_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getBauteile() <em>Bauteile</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBauteile()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Bauteil> bauteile;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -130,6 +148,32 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Bauteil> getBauteile() {
+		if (bauteile == null) {
+			bauteile = new EObjectContainmentEList<Bauteil>(Bauteil.class, this, WissensbasismodelPackage.WISSENS_BASIS__BAUTEILE);
+		}
+		return bauteile;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case WissensbasismodelPackage.WISSENS_BASIS__BAUTEILE:
+				return ((InternalEList<?>)getBauteile()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -137,6 +181,8 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 				return getName();
 			case WissensbasismodelPackage.WISSENS_BASIS__ID:
 				return getID();
+			case WissensbasismodelPackage.WISSENS_BASIS__BAUTEILE:
+				return getBauteile();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -146,6 +192,7 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -154,6 +201,10 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 				return;
 			case WissensbasismodelPackage.WISSENS_BASIS__ID:
 				setID((Long)newValue);
+				return;
+			case WissensbasismodelPackage.WISSENS_BASIS__BAUTEILE:
+				getBauteile().clear();
+				getBauteile().addAll((Collection<? extends Bauteil>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -173,6 +224,9 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 			case WissensbasismodelPackage.WISSENS_BASIS__ID:
 				setID(ID_EDEFAULT);
 				return;
+			case WissensbasismodelPackage.WISSENS_BASIS__BAUTEILE:
+				getBauteile().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -189,6 +243,8 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case WissensbasismodelPackage.WISSENS_BASIS__ID:
 				return id != ID_EDEFAULT;
+			case WissensbasismodelPackage.WISSENS_BASIS__BAUTEILE:
+				return bauteile != null && !bauteile.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

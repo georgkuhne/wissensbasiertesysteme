@@ -2,6 +2,7 @@
  */
 package wissensbasismodel;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link wissensbasismodel.WissensBasis#getName <em>Name</em>}</li>
  *   <li>{@link wissensbasismodel.WissensBasis#getID <em>ID</em>}</li>
+ *   <li>{@link wissensbasismodel.WissensBasis#getBauteile <em>Bauteile</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,4 +76,20 @@ public interface WissensBasis extends EObject {
 	 * @generated
 	 */
 	void setID(long value);
+
+	/**
+	 * Returns the value of the '<em><b>Bauteile</b></em>' containment reference list.
+	 * The list contents are of type {@link wissensbasismodel.Bauteil}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Bauteile</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Bauteile</em>' containment reference list.
+	 * @see wissensbasismodel.WissensbasismodelPackage#getWissensBasis_Bauteile()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Bauteil> getBauteile();
 } // WissensBasis

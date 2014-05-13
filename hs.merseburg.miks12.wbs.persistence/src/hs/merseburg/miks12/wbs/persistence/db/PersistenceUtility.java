@@ -78,7 +78,7 @@ public class PersistenceUtility {
 			session.flush();
 			return true;
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 			return false;
 
 		} finally {
@@ -144,7 +144,7 @@ public class PersistenceUtility {
 			session.flush();
 			return results;
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 			return null;
 		} finally {
 			session.close();
@@ -190,7 +190,7 @@ public class PersistenceUtility {
 			session.flush();
 			return results;
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 			return null;
 		} finally {
 			session.close();
@@ -239,7 +239,7 @@ public class PersistenceUtility {
 			session.flush();
 			return results;
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 			return null;
 		} finally {
 			session.close();
@@ -285,7 +285,7 @@ public class PersistenceUtility {
 			session.flush();
 			return results;
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 			return null;
 		} finally {
 			session.close();
@@ -345,7 +345,7 @@ public class PersistenceUtility {
 
 			return result;
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 			return null;
 		} finally {
 			session.close();
@@ -402,7 +402,7 @@ public class PersistenceUtility {
 			session.flush();
 			return result;
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 			return -1;
 		} finally {
 			session.close();
@@ -429,7 +429,7 @@ public class PersistenceUtility {
 			session.flush();
 			return true;
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 			return false;
 		} finally {
 			session.close();
@@ -459,7 +459,7 @@ public class PersistenceUtility {
 
 			return true;
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 			return false;
 		} finally {
 			session.close();
@@ -579,7 +579,7 @@ public class PersistenceUtility {
 					else
 						query.setParameter(variables[i], substitutions[i]);
 				} catch (QueryParameterException e) {
-					System.err.println(e);
+					e.printStackTrace();
 
 				}
 		session.getTransaction().commit();
@@ -627,7 +627,7 @@ public class PersistenceUtility {
 			List<?> results = query.list();
 			return results;
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 			return null;
 		}
 	}

@@ -6,8 +6,10 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import wissensbasismodel.Bauteil;
 import wissensbasismodel.WissensBasis;
 import wissensbasismodel.WissensbasismodelFactory;
 import wissensbasismodel.WissensbasismodelPackage;
@@ -25,6 +27,13 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 	 * @generated
 	 */
 	private EClass wissensBasisEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bauteilEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -119,6 +128,42 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getWissensBasis_Bauteile() {
+		return (EReference)wissensBasisEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBauteil() {
+		return bauteilEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBauteil_ID() {
+		return (EAttribute)bauteilEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBauteil_Name() {
+		return (EAttribute)bauteilEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public WissensbasismodelFactory getWissensbasismodelFactory() {
 		return (WissensbasismodelFactory)getEFactoryInstance();
 	}
@@ -145,6 +190,11 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 		wissensBasisEClass = createEClass(WISSENS_BASIS);
 		createEAttribute(wissensBasisEClass, WISSENS_BASIS__NAME);
 		createEAttribute(wissensBasisEClass, WISSENS_BASIS__ID);
+		createEReference(wissensBasisEClass, WISSENS_BASIS__BAUTEILE);
+
+		bauteilEClass = createEClass(BAUTEIL);
+		createEAttribute(bauteilEClass, BAUTEIL__ID);
+		createEAttribute(bauteilEClass, BAUTEIL__NAME);
 	}
 
 	/**
@@ -180,6 +230,11 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 		initEClass(wissensBasisEClass, WissensBasis.class, "WissensBasis", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getWissensBasis_Name(), ecorePackage.getEString(), "Name", null, 0, 1, WissensBasis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getWissensBasis_ID(), ecorePackage.getELong(), "ID", null, 0, 1, WissensBasis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWissensBasis_Bauteile(), this.getBauteil(), null, "bauteile", null, 0, -1, WissensBasis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(bauteilEClass, Bauteil.class, "Bauteil", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBauteil_ID(), ecorePackage.getELong(), "ID", null, 0, 1, Bauteil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBauteil_Name(), ecorePackage.getEString(), "Name", null, 0, 1, Bauteil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
