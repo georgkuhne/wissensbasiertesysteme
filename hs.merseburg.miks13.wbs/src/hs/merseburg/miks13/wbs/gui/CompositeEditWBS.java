@@ -45,7 +45,7 @@ public class CompositeEditWBS extends Composite {
 		cbuttons.setLayout(new RowLayout(SWT.HORIZONTAL));
 		b_save = new Button(cbuttons, SWT.PUSH);
 
-		b_save.setText("save");
+		b_save.setText("Speichern");
 		b_save.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -53,7 +53,7 @@ public class CompositeEditWBS extends Composite {
 			}
 		});
 		Button b_close = new Button(cbuttons, SWT.PUSH);
-		b_close.setText("Close");
+		b_close.setText("Schließen");
 		b_close.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -68,9 +68,9 @@ public class CompositeEditWBS extends Composite {
 		TabItem tab2 = new TabItem(tabfolder, SWT.NONE);
 		TabItem tab3 = new TabItem(tabfolder, SWT.NONE);
 
-		tab1.setText("Component");
-		tab2.setText("Statement");
-		tab3.setText("Rule");
+		tab1.setText("Bauteil");
+		tab2.setText("Aussage");
+		tab3.setText("Regel");
 		tab1.setControl(compositeComponents);
 		tab2.setControl(compositeStatement);
 		tab3.setControl(crules);
