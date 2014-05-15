@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link wissensbasismodel.WissensBasis#getName <em>Name</em>}</li>
  *   <li>{@link wissensbasismodel.WissensBasis#getID <em>ID</em>}</li>
  *   <li>{@link wissensbasismodel.WissensBasis#getBauteile <em>Bauteile</em>}</li>
+ *   <li>{@link wissensbasismodel.WissensBasis#getRegeln <em>Regeln</em>}</li>
+ *   <li>{@link wissensbasismodel.WissensBasis#getAussagen <em>Aussagen</em>}</li>
  * </ul>
  * </p>
  *
@@ -92,4 +94,36 @@ public interface WissensBasis extends EObject {
 	 * @generated
 	 */
 	EList<Bauteil> getBauteile();
+
+	/**
+	 * Returns the value of the '<em><b>Regeln</b></em>' containment reference list.
+	 * The list contents are of type {@link wissensbasismodel.Regel}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Regeln</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Regeln</em>' containment reference list.
+	 * @see wissensbasismodel.WissensbasismodelPackage#getWissensBasis_Regeln()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Regel> getRegeln();
+
+	/**
+	 * Returns the value of the '<em><b>Aussagen</b></em>' reference list.
+	 * The list contents are of type {@link wissensbasismodel.Aussage}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Aussagen</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Aussagen</em>' reference list.
+	 * @see wissensbasismodel.WissensbasismodelPackage#getWissensBasis_Aussagen()
+	 * @model
+	 * @generated
+	 */
+	EList<Aussage> getAussagen();
 } // WissensBasis

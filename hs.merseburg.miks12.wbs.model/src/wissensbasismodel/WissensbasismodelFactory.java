@@ -40,6 +40,24 @@ public interface WissensbasismodelFactory extends EFactory {
 	Bauteil createBauteil();
 
 	/**
+	 * Returns a new object of class '<em>Regel</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Regel</em>'.
+	 * @generated
+	 */
+	Regel createRegel();
+
+	/**
+	 * Returns a new object of class '<em>Aussage</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Aussage</em>'.
+	 * @generated
+	 */
+	Aussage createAussage();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

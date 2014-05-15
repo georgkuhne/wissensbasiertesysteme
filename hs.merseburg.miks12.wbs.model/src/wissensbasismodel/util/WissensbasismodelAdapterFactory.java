@@ -76,6 +76,14 @@ public class WissensbasismodelAdapterFactory extends AdapterFactoryImpl {
 				return createBauteilAdapter();
 			}
 			@Override
+			public Adapter caseRegel(Regel object) {
+				return createRegelAdapter();
+			}
+			@Override
+			public Adapter caseAussage(Aussage object) {
+				return createAussageAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -120,6 +128,34 @@ public class WissensbasismodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBauteilAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link wissensbasismodel.Regel <em>Regel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see wissensbasismodel.Regel
+	 * @generated
+	 */
+	public Adapter createRegelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link wissensbasismodel.Aussage <em>Aussage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see wissensbasismodel.Aussage
+	 * @generated
+	 */
+	public Adapter createAussageAdapter() {
 		return null;
 	}
 

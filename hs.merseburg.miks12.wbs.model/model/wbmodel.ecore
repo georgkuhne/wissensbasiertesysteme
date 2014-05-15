@@ -10,28 +10,31 @@
         eType="#//Bauteil" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="regeln" upperBound="-1"
         eType="#//Regel" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aussagen" upperBound="-1"
+        eType="#//Aussage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Bauteil">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
         iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Asset_ID" defaultValueLiteral=""/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ist_Teil_von"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Regeln"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Regelgruppen"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Koroutine"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Medien"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Asset_ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ist_Teil_von" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Regeln" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Regelgruppen" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Koroutine" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Medien" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Regel">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Preamisse"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Konklusion"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Preamisse" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Konklusion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Aussage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Wertebereich"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Fragetext"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Diagnosetext"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Wertebereich" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Fragetext" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Diagnosetext" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

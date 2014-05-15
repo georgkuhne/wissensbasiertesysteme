@@ -58,6 +58,8 @@ public class WissensbasismodelFactoryImpl extends EFactoryImpl implements Wissen
 		switch (eClass.getClassifierID()) {
 			case WissensbasismodelPackage.WISSENS_BASIS: return createWissensBasis();
 			case WissensbasismodelPackage.BAUTEIL: return createBauteil();
+			case WissensbasismodelPackage.REGEL: return createRegel();
+			case WissensbasismodelPackage.AUSSAGE: return createAussage();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -81,6 +83,26 @@ public class WissensbasismodelFactoryImpl extends EFactoryImpl implements Wissen
 	public Bauteil createBauteil() {
 		BauteilImpl bauteil = new BauteilImpl();
 		return bauteil;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Regel createRegel() {
+		RegelImpl regel = new RegelImpl();
+		return regel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Aussage createAussage() {
+		AussageImpl aussage = new AussageImpl();
+		return aussage;
 	}
 
 	/**
