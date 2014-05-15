@@ -8,10 +8,30 @@
         iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bauteile" upperBound="-1"
         eType="#//Bauteil" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="regeln" upperBound="-1"
+        eType="#//Regel" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Bauteil">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
         iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Asset_ID" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ist_Teil_von"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Regeln"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Regelgruppen"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Koroutine"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Medien"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Regel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Preamisse"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Konklusion"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Aussage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Wertebereich"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Fragetext"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Diagnosetext"/>
   </eClassifiers>
 </ecore:EPackage>
