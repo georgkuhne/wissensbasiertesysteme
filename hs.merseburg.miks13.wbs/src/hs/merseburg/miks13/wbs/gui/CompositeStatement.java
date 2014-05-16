@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-public class CompositeStatement extends Composite {
+public class CompositeStatement extends Composite implements GlobalEditActions {
 
 	Label L_Name;
 	Label L_Wertebereich;
@@ -57,6 +57,12 @@ public class CompositeStatement extends Composite {
 		fdtext.left = new FormAttachment(c_Label);
 		fdtext.right = new FormAttachment(100);
 		c_Text.setLayoutData(fdtext);
+	}
+
+	@Override
+	public void save() {
+		System.err.println("Statements Saved");
+
 	}
 
 }

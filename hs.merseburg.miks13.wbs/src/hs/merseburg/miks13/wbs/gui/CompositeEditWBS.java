@@ -11,6 +11,7 @@ import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
@@ -82,7 +83,14 @@ public class CompositeEditWBS extends Composite {
 	}
 
 	protected void save() {
-		System.err.println("Save");
+		TabItem[] items = tabfolder.getSelection();
+		if (items != null) {
+			for (int i = 0; i < items.length; i++) {
+				Control control = items[i].getControl();
+				if (control instanceof GlobalEditActions)
+					((GlobalEditActions) control).save();
+			}
+		}
 
 	}
 

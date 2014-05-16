@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-public class CompositeRules extends Composite {
+public class CompositeRules extends Composite implements GlobalEditActions {
 
 	private Text T_Name;
 	private Text T_Praemisse;
@@ -53,6 +53,12 @@ public class CompositeRules extends Composite {
 		fdtext.left = new FormAttachment(c_Label);
 		fdtext.right = new FormAttachment(100);
 		c_Text.setLayoutData(fdtext);
+	}
+
+	@Override
+	public void save() {
+		System.err.println("Rules Saved");
+
 	}
 
 }

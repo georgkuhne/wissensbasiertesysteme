@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
-public class CompositeComponents extends Composite {
+public class CompositeComponents extends Composite implements GlobalEditActions {
 
 	private TableViewer viewer;
 	private Table table;
@@ -77,5 +77,11 @@ public class CompositeComponents extends Composite {
 		fdtext.left = new FormAttachment(c_Label);
 		fdtext.right = new FormAttachment(100);
 		c_Text.setLayoutData(fdtext);
+	}
+
+	@Override
+	public void save() {
+		System.err.println("Components Saved");
+
 	}
 }
