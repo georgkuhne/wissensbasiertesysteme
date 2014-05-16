@@ -220,12 +220,12 @@ public interface Bauteil extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Medien</em>' attribute.
-	 * @see #setMedien(byte)
+	 * @see #setMedien(String)
 	 * @see wissensbasismodel.WissensbasismodelPackage#getBauteil_Medien()
 	 * @model
 	 * @generated
 	 */
-	byte getMedien();
+	String getMedien();
 
 	/**
 	 * Sets the value of the '{@link wissensbasismodel.Bauteil#getMedien <em>Medien</em>}' attribute.
@@ -235,6 +235,6 @@ public interface Bauteil extends EObject {
 	 * @see #getMedien()
 	 * @generated
 	 */
-	void setMedien(byte value);
+	void setMedien(String value);
 
 } // Bauteil

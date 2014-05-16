@@ -181,7 +181,7 @@ public class BauteilImpl extends MinimalEObjectImpl.Container implements Bauteil
 	 * @generated
 	 * @ordered
 	 */
-	protected static final byte MEDIEN_EDEFAULT = 0x00;
+	protected static final String MEDIEN_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getMedien() <em>Medien</em>}' attribute.
@@ -191,7 +191,7 @@ public class BauteilImpl extends MinimalEObjectImpl.Container implements Bauteil
 	 * @generated
 	 * @ordered
 	 */
-	protected byte medien = MEDIEN_EDEFAULT;
+	protected String medien = MEDIEN_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -364,7 +364,7 @@ public class BauteilImpl extends MinimalEObjectImpl.Container implements Bauteil
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public byte getMedien() {
+	public String getMedien() {
 		return medien;
 	}
 
@@ -373,8 +373,8 @@ public class BauteilImpl extends MinimalEObjectImpl.Container implements Bauteil
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMedien(byte newMedien) {
-		byte oldMedien = medien;
+	public void setMedien(String newMedien) {
+		String oldMedien = medien;
 		medien = newMedien;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.BAUTEIL__MEDIEN, oldMedien, medien));
@@ -438,7 +438,7 @@ public class BauteilImpl extends MinimalEObjectImpl.Container implements Bauteil
 				setKoroutine((String)newValue);
 				return;
 			case WissensbasismodelPackage.BAUTEIL__MEDIEN:
-				setMedien((Byte)newValue);
+				setMedien((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -503,7 +503,7 @@ public class BauteilImpl extends MinimalEObjectImpl.Container implements Bauteil
 			case WissensbasismodelPackage.BAUTEIL__KOROUTINE:
 				return KOROUTINE_EDEFAULT == null ? koroutine != null : !KOROUTINE_EDEFAULT.equals(koroutine);
 			case WissensbasismodelPackage.BAUTEIL__MEDIEN:
-				return medien != MEDIEN_EDEFAULT;
+				return MEDIEN_EDEFAULT == null ? medien != null : !MEDIEN_EDEFAULT.equals(medien);
 		}
 		return super.eIsSet(featureID);
 	}
