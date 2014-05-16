@@ -66,7 +66,7 @@ public class CompositeBrowseWBS extends Composite {
 			}
 		});
 		b_open = new Button(c_buttons, SWT.None);
-		b_open.setText("Ã–ffnen");
+		b_open.setText("Öffnen");
 		b_open.setEnabled(false);
 		b_open.addSelectionListener(new SelectionListener() {
 

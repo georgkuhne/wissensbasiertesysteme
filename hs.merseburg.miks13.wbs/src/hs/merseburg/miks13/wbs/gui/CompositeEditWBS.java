@@ -54,7 +54,7 @@ public class CompositeEditWBS extends Composite {
 			}
 		});
 		Button b_close = new Button(cbuttons, SWT.PUSH);
-		b_close.setText("Schlie√üen");
+		b_close.setText("Schlieﬂen");
 		b_close.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
