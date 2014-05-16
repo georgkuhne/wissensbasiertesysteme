@@ -82,13 +82,14 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 		
 		//dummy eingabe
 		String string = "testdaten";
-		T_Name.setText(string);
-		T_Asset_ID.setText(string);
-		T_ist_Teil_von.setText(string);
-		T_regeln.setText(string);
-		T_regelgruppen.setText(string);
-		T_Koroutine.setText(string);
-		T_medien.setText(string);
+		
+		T_Name.setText(string + 1);
+		T_Asset_ID.setText(string + 2);
+		T_ist_Teil_von.setText(string + 3);
+		T_regeln.setText(string + 4);
+		T_regelgruppen.setText(string + 5);
+		T_Koroutine.setText(string + 6);
+		T_medien.setText(string + 7);
 		
 		
 		// Setzen der Labeltexte
@@ -157,7 +158,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 			@Override
 			public String getText(Object element) {
 				Bauteil wb = (Bauteil) element;
-				return wb.getName();
+				return wb.getAsset_ID();
 
 			}
 		});
@@ -166,7 +167,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 			@Override
 			public String getText(Object element) {
 				Bauteil wb = (Bauteil) element;
-				return wb.getName();
+				return wb.getIst_Teil_von();
 
 			}
 		});
@@ -175,7 +176,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 			@Override
 			public String getText(Object element) {
 				Bauteil wb = (Bauteil) element;
-				return wb.getName();
+				return wb.getRegeln();
 
 			}
 		});
@@ -184,7 +185,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 			@Override
 			public String getText(Object element) {
 				Bauteil wb = (Bauteil) element;
-				return wb.getName();
+				return wb.getRegelgruppen();
 
 			}
 		});
@@ -193,7 +194,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 			@Override
 			public String getText(Object element) {
 				Bauteil wb = (Bauteil) element;
-				return wb.getName();
+				return wb.getKoroutine();
 
 			}
 		});
@@ -202,7 +203,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 			@Override
 			public String getText(Object element) {
 				Bauteil wb = (Bauteil) element;
-				return wb.getName();
+				return wb.getMedien();
 
 			}
 		});

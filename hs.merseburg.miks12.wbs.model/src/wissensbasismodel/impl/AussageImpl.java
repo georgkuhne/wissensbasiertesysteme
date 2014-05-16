@@ -23,6 +23,7 @@ import wissensbasismodel.WissensbasismodelPackage;
  *   <li>{@link wissensbasismodel.impl.AussageImpl#getWertebereich <em>Wertebereich</em>}</li>
  *   <li>{@link wissensbasismodel.impl.AussageImpl#getFragetext <em>Fragetext</em>}</li>
  *   <li>{@link wissensbasismodel.impl.AussageImpl#getDiagnosetext <em>Diagnosetext</em>}</li>
+ *   <li>{@link wissensbasismodel.impl.AussageImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -108,6 +109,26 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 	 * @ordered
 	 */
 	protected String diagnosetext = DIAGNOSETEXT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -217,6 +238,27 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.AUSSAGE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -228,6 +270,8 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 				return getFragetext();
 			case WissensbasismodelPackage.AUSSAGE__DIAGNOSETEXT:
 				return getDiagnosetext();
+			case WissensbasismodelPackage.AUSSAGE__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -251,6 +295,9 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 				return;
 			case WissensbasismodelPackage.AUSSAGE__DIAGNOSETEXT:
 				setDiagnosetext((String)newValue);
+				return;
+			case WissensbasismodelPackage.AUSSAGE__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -276,6 +323,9 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 			case WissensbasismodelPackage.AUSSAGE__DIAGNOSETEXT:
 				setDiagnosetext(DIAGNOSETEXT_EDEFAULT);
 				return;
+			case WissensbasismodelPackage.AUSSAGE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -296,6 +346,8 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 				return FRAGETEXT_EDEFAULT == null ? fragetext != null : !FRAGETEXT_EDEFAULT.equals(fragetext);
 			case WissensbasismodelPackage.AUSSAGE__DIAGNOSETEXT:
 				return DIAGNOSETEXT_EDEFAULT == null ? diagnosetext != null : !DIAGNOSETEXT_EDEFAULT.equals(diagnosetext);
+			case WissensbasismodelPackage.AUSSAGE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -318,6 +370,8 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 		result.append(fragetext);
 		result.append(", Diagnosetext: ");
 		result.append(diagnosetext);
+		result.append(", Name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

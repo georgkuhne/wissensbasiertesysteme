@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link wissensbasismodel.Aussage#getWertebereich <em>Wertebereich</em>}</li>
  *   <li>{@link wissensbasismodel.Aussage#getFragetext <em>Fragetext</em>}</li>
  *   <li>{@link wissensbasismodel.Aussage#getDiagnosetext <em>Diagnosetext</em>}</li>
+ *   <li>{@link wissensbasismodel.Aussage#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -127,5 +128,31 @@ public interface Aussage extends EObject {
 	 * @generated
 	 */
 	void setDiagnosetext(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see wissensbasismodel.WissensbasismodelPackage#getAussage_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link wissensbasismodel.Aussage#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
 } // Aussage

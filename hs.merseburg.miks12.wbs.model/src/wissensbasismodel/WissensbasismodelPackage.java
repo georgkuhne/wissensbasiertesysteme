@@ -342,13 +342,22 @@ public interface WissensbasismodelPackage extends EPackage {
 	int AUSSAGE__DIAGNOSETEXT = 3;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUSSAGE__NAME = 4;
+
+	/**
 	 * The number of structural features of the '<em>Aussage</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AUSSAGE_FEATURE_COUNT = 4;
+	int AUSSAGE_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Aussage</em>' class.
@@ -632,6 +641,17 @@ public interface WissensbasismodelPackage extends EPackage {
 	EAttribute getAussage_Diagnosetext();
 
 	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Aussage#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see wissensbasismodel.Aussage#getName()
+	 * @see #getAussage()
+	 * @generated
+	 */
+	EAttribute getAussage_Name();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -837,6 +857,13 @@ public interface WissensbasismodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute AUSSAGE__DIAGNOSETEXT = eINSTANCE.getAussage_Diagnosetext();
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AUSSAGE__NAME = eINSTANCE.getAussage_Name();
 
 	}
 

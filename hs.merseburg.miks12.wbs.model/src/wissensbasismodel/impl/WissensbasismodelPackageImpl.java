@@ -342,6 +342,15 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAussage_Name() {
+		return (EAttribute)aussageEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public WissensbasismodelFactory getWissensbasismodelFactory() {
 		return (WissensbasismodelFactory)getEFactoryInstance();
 	}
@@ -393,6 +402,7 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 		createEAttribute(aussageEClass, AUSSAGE__WERTEBEREICH);
 		createEAttribute(aussageEClass, AUSSAGE__FRAGETEXT);
 		createEAttribute(aussageEClass, AUSSAGE__DIAGNOSETEXT);
+		createEAttribute(aussageEClass, AUSSAGE__NAME);
 	}
 
 	/**
@@ -453,6 +463,7 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 		initEAttribute(getAussage_Wertebereich(), ecorePackage.getEString(), "Wertebereich", null, 0, 1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAussage_Fragetext(), ecorePackage.getEString(), "Fragetext", null, 0, 1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAussage_Diagnosetext(), ecorePackage.getEString(), "Diagnosetext", null, 0, 1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAussage_Name(), ecorePackage.getEString(), "Name", null, 0, 1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

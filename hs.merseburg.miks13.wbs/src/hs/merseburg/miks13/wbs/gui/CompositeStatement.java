@@ -1,7 +1,13 @@
 package hs.merseburg.miks13.wbs.gui;
 
+import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
+
+import java.util.List;
+
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
@@ -10,7 +16,12 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
+
+import wissensbasismodel.Aussage;
+import wissensbasismodel.Regel;
+import wissensbasismodel.WissensbasismodelFactory;
 
 public class CompositeStatement extends Composite implements GlobalEditActions {
 
@@ -35,7 +46,9 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		viewer.setContentProvider(ArrayContentProvider.getInstance());
-		
+		createColumns(viewer);
+
+	
 		// Initialisieren der Elemente und Zuweisung zu einem vertikalen Layout
 		Composite c_Label = new Composite(this, SWT.None);
 		c_Label.setLayout(new RowLayout(SWT.VERTICAL));
@@ -76,12 +89,97 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 		fdviewer.left = new FormAttachment(0);
 		fdviewer.right = new FormAttachment(100);
 		table.setLayoutData(fdviewer);
+		
+		refreshTable();
 	}
 
+	public void refreshTable() {
+		List list = PersistenceUtility.getINSTANCE().getAll("Aussage",
+				null, null);
+		viewer.setInput(list);
+	}
+	
+	private void createColumns(TableViewer viewer) {
+		TableViewerColumn col = createTableViewerColumn("ID", 100, 0);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Aussage wb = (Aussage) element;
+				return "" + wb.getID();
+
+			}
+		});
+		
+		col = createTableViewerColumn("Name", 100, 0);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Aussage wb = (Aussage) element;
+				return wb.getName();
+
+			}
+		});
+		col = createTableViewerColumn("Wertebereich", 100, 0);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Aussage wb = (Aussage) element;
+				return wb.getWertebereich();
+
+			}
+		});
+		
+		col = createTableViewerColumn("Fragetext", 100, 0);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Aussage wb = (Aussage) element;
+				return wb.getFragetext();
+
+			}
+		});
+		col = createTableViewerColumn("Diagnosetext", 100, 0);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Aussage wb = (Aussage) element;
+				return wb.getDiagnosetext();
+
+			}
+		});
+	
+	}
+
+	private TableViewerColumn createTableViewerColumn(String title, int bound,
+			final int colNumber) {
+		final TableViewerColumn viewerColumn = new TableViewerColumn(viewer,
+				SWT.NONE);
+		final TableColumn column = viewerColumn.getColumn();
+		column.setText(title);
+		column.setWidth(bound);
+		column.setResizable(false);
+		column.setMoveable(false);
+		return viewerColumn;
+	}
 	@Override
 	public void save() {
 		System.err.println("Statements Saved");
 
+		String Name = T_Name.getText().trim();
+		String Wertebereich = T_Wertebereich.getText().trim();
+		String Fragetext = T_Fragetext.getText().trim();
+		String Diagnosetext = T_Diagnosetext.getText().trim();
+					
+		WissensbasismodelFactory wb = WissensbasismodelFactory.eINSTANCE;
+		Aussage aussage = wb.createAussage();
+		aussage.setName(Name);
+		aussage.setWertebereich(Wertebereich);
+		aussage.setFragetext(Fragetext);
+		aussage.setDiagnosetext(Diagnosetext);
+				
+		PersistenceUtility.getINSTANCE().save(aussage);
+		
+		refreshTable();
 	}
 
 }
