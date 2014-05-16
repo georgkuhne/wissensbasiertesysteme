@@ -4,6 +4,7 @@ import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
 
 import java.util.List;
 
+import org.eclipse.jface.viewers.AbstractTableViewer;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
@@ -78,6 +79,18 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 		T_Koroutine = new Text(c_Text, SWT.None);
 		T_medien = new Text(c_Text, SWT.None);
 
+		
+		//dummy eingabe
+		String string = "testdaten";
+		T_Name.setText(string);
+		T_Asset_ID.setText(string);
+		T_ist_Teil_von.setText(string);
+		T_regeln.setText(string);
+		T_regelgruppen.setText(string);
+		T_Koroutine.setText(string);
+		T_medien.setText(string);
+		
+		
 		// Setzen der Labeltexte
 		L_Name.setText("Name: ");
 		L_Asset_ID.setText("Asset ID: ");
@@ -123,7 +136,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				WissensBasis wb = (WissensBasis) element;
+				Bauteil wb = (Bauteil) element;
 				return "" + wb.getID();
 
 			}
@@ -133,7 +146,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				WissensBasis wb = (WissensBasis) element;
+				Bauteil wb = (Bauteil) element;
 				return wb.getName();
 
 			}
@@ -143,7 +156,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				WissensBasis wb = (WissensBasis) element;
+				Bauteil wb = (Bauteil) element;
 				return wb.getName();
 
 			}
@@ -152,7 +165,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				WissensBasis wb = (WissensBasis) element;
+				Bauteil wb = (Bauteil) element;
 				return wb.getName();
 
 			}
@@ -161,7 +174,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				WissensBasis wb = (WissensBasis) element;
+				Bauteil wb = (Bauteil) element;
 				return wb.getName();
 
 			}
@@ -170,7 +183,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				WissensBasis wb = (WissensBasis) element;
+				Bauteil wb = (Bauteil) element;
 				return wb.getName();
 
 			}
@@ -179,7 +192,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				WissensBasis wb = (WissensBasis) element;
+				Bauteil wb = (Bauteil) element;
 				return wb.getName();
 
 			}
@@ -188,7 +201,7 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				WissensBasis wb = (WissensBasis) element;
+				Bauteil wb = (Bauteil) element;
 				return wb.getName();
 
 			}
@@ -220,8 +233,9 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 		String regelgruppen = T_regelgruppen.getText().trim();
 		String koroutine = T_Koroutine.getText().trim();
 		String medien = T_medien.getText().trim();
-		
-		Bauteil bauteil = WissensbasismodelFactory.eINSTANCE.createBauteil();
+				
+		WissensbasismodelFactory wb = WissensbasismodelFactory.eINSTANCE;
+		Bauteil bauteil = wb.createBauteil();
 		bauteil.setName(Name);
 		bauteil.setAsset_ID(AssetID);
 		bauteil.setIst_Teil_von(istTeil);
@@ -233,13 +247,6 @@ public class CompositeComponents extends Composite implements GlobalEditActions 
 		PersistenceUtility.getINSTANCE().save(bauteil);
 		
 		refreshTable();
-		
-//		String wmname = dialog.getWBSName();
-//		WissensBasis wissensbasis = WissensbasismodelFactory.eINSTANCE
-//				.createWissensBasis();
-//		wissensbasis.setName(wmname);
-//		PersistenceUtility.getINSTANCE().save(wissensbasis);
-//		refreshTable();
 		
 		
 	}
