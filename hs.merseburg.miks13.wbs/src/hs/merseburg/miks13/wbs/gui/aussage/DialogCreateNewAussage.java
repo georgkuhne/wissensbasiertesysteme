@@ -6,6 +6,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
@@ -16,6 +17,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
@@ -27,6 +29,7 @@ public class DialogCreateNewAussage extends Dialog {
 	private Text text_Fragetext;
 	private Text text_Diagnose;
 	private Combo combo;
+	private StyledText styledText;
 
 	/**
 	 * Create the dialog.
@@ -130,7 +133,7 @@ public class DialogCreateNewAussage extends Dialog {
 		lblGebenSieDen
 				.setText("Geben Sie den Wertebereich als Liste von Strings ein. Trennen Sie die Elemente mit einen \",\" (Komma )");
 
-		StyledText styledText = new StyledText(grpWertebereich, SWT.BORDER);
+		styledText = new StyledText(grpWertebereich, SWT.BORDER);
 		FormData fd_styledText = new FormData();
 		fd_styledText.bottom = new FormAttachment(100);
 		fd_styledText.right = new FormAttachment(100, -3);
@@ -140,17 +143,29 @@ public class DialogCreateNewAussage extends Dialog {
 
 		container.layout();
 
+		styledText.setEditable(false);
+		Color bg = Display.getDefault().getSystemColor(SWT.COLOR_GRAY);
+		styledText.setBackground(bg);
+
 		combo.add("bool", 0);
 		combo.add("integer", 1);
 		combo.add("real", 2);
 		combo.add("list", 3);
-		combo.pack();
+
 		combo.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (combo.getSelectionIndex() == 3) {
-
+					styledText.setEditable(true);
+					Color bg = Display.getDefault().getSystemColor(
+							SWT.COLOR_WHITE);
+					styledText.setBackground(bg);
+				} else {
+					styledText.setEditable(false);
+					Color bg = Display.getDefault().getSystemColor(
+							SWT.COLOR_GRAY);
+					styledText.setBackground(bg);
 				}
 
 			}
@@ -182,6 +197,21 @@ public class DialogCreateNewAussage extends Dialog {
 		String Name = text_Name.getText().trim();
 		String FrageText = text_Fragetext.getText().trim();
 		String DiagnoseText = text_Diagnose.getText().trim();
+		String Wertebereich = combo.getText().trim();
+		String TextA;
+		if (combo.getSelectionIndex() == 3) {
+			TextA = styledText.getText();
+			System.out.println("Name: " + Name);
+			System.out.println(" FrageText: " + FrageText);
+			System.out.println("Diagn: " + DiagnoseText);
+			System.out.println(Wertebereich);
+			System.out.println("Array: " + TextA);
+		} else {
+			System.out.println("Name: " + Name);
+			System.out.println(" FrageText: " + FrageText);
+			System.out.println("Diagn: " + DiagnoseText);
+			System.out.println(Wertebereich);
+		}
 
 		super.okPressed();
 	}
