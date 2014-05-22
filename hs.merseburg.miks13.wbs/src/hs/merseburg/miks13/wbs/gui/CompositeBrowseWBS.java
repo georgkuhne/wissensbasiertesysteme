@@ -66,7 +66,7 @@ public class CompositeBrowseWBS extends Composite {
 			}
 		});
 		b_open = new Button(c_buttons, SWT.None);
-		b_open.setText("Öffnen");
+		b_open.setText("ï¿½ffnen");
 		b_open.setEnabled(false);
 		b_open.addSelectionListener(new SelectionListener() {
 
@@ -101,7 +101,7 @@ public class CompositeBrowseWBS extends Composite {
 		fdviewer.top = new FormAttachment(0);
 		fdviewer.bottom = new FormAttachment(100);
 		fdviewer.left = new FormAttachment(0);
-		fdviewer.right = new FormAttachment(70);
+		fdviewer.right = new FormAttachment(90);
 
 		FormData fdbutton = new FormData();
 		fdbutton.top = new FormAttachment(0);

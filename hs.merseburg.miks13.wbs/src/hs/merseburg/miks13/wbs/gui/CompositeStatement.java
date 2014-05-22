@@ -9,32 +9,24 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.Text;
 
 import wissensbasismodel.Aussage;
-import wissensbasismodel.Regel;
-import wissensbasismodel.WissensbasismodelFactory;
 
-public class CompositeStatement extends Composite implements GlobalEditActions {
+public class CompositeStatement extends Composite {
 
-	Label L_Name;
-	Label L_Wertebereich;
-	Label L_Fragetext;
-	Label L_Diagnosetext;
-	Text T_Name;
-	Text T_Wertebereich;
-	Text T_Fragetext;
-	Text T_Diagnosetext;
 	private TableViewer viewer;
 	private Table table;
+	private Button b_new, b_edit;
 
 	public CompositeStatement(Composite parent, int style) {
 		super(parent, style);
@@ -48,57 +40,52 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 		viewer.setContentProvider(ArrayContentProvider.getInstance());
 		createColumns(viewer);
 
-	
-		// Initialisieren der Elemente und Zuweisung zu einem vertikalen Layout
-		Composite c_Label = new Composite(this, SWT.None);
-		c_Label.setLayout(new RowLayout(SWT.VERTICAL));
-		L_Name = new Label(c_Label, SWT.None);
-		L_Wertebereich = new Label(c_Label, SWT.None);
-		L_Fragetext = new Label(c_Label, SWT.None);
-		L_Diagnosetext = new Label(c_Label, SWT.None);
-		Composite c_Text = new Composite(this, SWT.None);
-		c_Text.setLayout(new RowLayout(SWT.VERTICAL));
-		T_Name = new Text(c_Text, SWT.None);
-		T_Wertebereich = new Text(c_Text, SWT.None);
-		T_Fragetext = new Text(c_Text, SWT.None);
-		T_Diagnosetext = new Text(c_Text, SWT.None);
-
-		// Setzen der Labeltexte
-		L_Name.setText("Name: ");
-		L_Wertebereich.setText("Wertebereich: ");
-		L_Fragetext.setText("Fragetext: ");
-		L_Diagnosetext.setText("Diagnosetext: ");
-
-		// Erstellen von FormData zum besseren Anordnen der Elementgruppen
-		FormData fdlabels = new FormData();
-		fdlabels.top = new FormAttachment(5);
-		fdlabels.bottom = new FormAttachment(50);
-		fdlabels.left = new FormAttachment(5);
-		fdlabels.right = new FormAttachment(30);
-		c_Label.setLayoutData(fdlabels);
-		FormData fdtext = new FormData();
-		fdtext.top = new FormAttachment(5);
-		fdtext.bottom = new FormAttachment(50);
-		fdtext.left = new FormAttachment(c_Label);
-		fdtext.right = new FormAttachment(100);
-		c_Text.setLayoutData(fdtext);
-		
 		FormData fdviewer = new FormData();
-		fdviewer.top = new FormAttachment(60);
+		fdviewer.top = new FormAttachment(0);
 		fdviewer.bottom = new FormAttachment(100);
 		fdviewer.left = new FormAttachment(0);
-		fdviewer.right = new FormAttachment(100);
+		fdviewer.right = new FormAttachment(90);
 		table.setLayoutData(fdviewer);
-		
+
+		FormData fdButtons = new FormData();
+		fdButtons.top = new FormAttachment(0);
+		fdButtons.bottom = new FormAttachment(100);
+		fdButtons.left = new FormAttachment(table);
+		fdButtons.right = new FormAttachment(100);
+
+		Composite cbuttons = new Composite(this, SWT.None);
+		cbuttons.setLayoutData(fdButtons);
+		cbuttons.setLayout(new RowLayout(SWT.HORIZONTAL));
+		b_new = new Button(cbuttons, SWT.PUSH);
+		b_edit = new Button(cbuttons, SWT.None);
+		b_new.setText("Anlegen");
+		b_edit.setText("Bearbeiten");
+		b_edit.setEnabled(false);
+
 		refreshTable();
+
+		table.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				b_edit.setEnabled(true);
+
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 	}
 
 	public void refreshTable() {
-		List list = PersistenceUtility.getINSTANCE().getAll("Aussage",
-				null, null);
+		List list = PersistenceUtility.getINSTANCE().getAll("Aussage", null,
+				null);
 		viewer.setInput(list);
 	}
-	
+
 	private void createColumns(TableViewer viewer) {
 		TableViewerColumn col = createTableViewerColumn("ID", 100, 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
@@ -109,7 +96,7 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 
 			}
 		});
-		
+
 		col = createTableViewerColumn("Name", 100, 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
@@ -128,7 +115,7 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 
 			}
 		});
-		
+
 		col = createTableViewerColumn("Fragetext", 100, 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
@@ -147,7 +134,7 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 
 			}
 		});
-	
+
 	}
 
 	private TableViewerColumn createTableViewerColumn(String title, int bound,
@@ -161,24 +148,24 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 		column.setMoveable(false);
 		return viewerColumn;
 	}
-	@Override
+
 	public void save() {
 		System.err.println("Statements Saved");
 
-		String Name = T_Name.getText().trim();
-		String Wertebereich = T_Wertebereich.getText().trim();
-		String Fragetext = T_Fragetext.getText().trim();
-		String Diagnosetext = T_Diagnosetext.getText().trim();
-					
-		WissensbasismodelFactory wb = WissensbasismodelFactory.eINSTANCE;
-		Aussage aussage = wb.createAussage();
-		aussage.setName(Name);
-		aussage.setWertebereich(Wertebereich);
-		aussage.setFragetext(Fragetext);
-		aussage.setDiagnosetext(Diagnosetext);
-				
-		PersistenceUtility.getINSTANCE().save(aussage);
-		
+		// String Name = T_Name.getText().trim();
+		// String Wertebereich = T_Wertebereich.getText().trim();
+		// String Fragetext = T_Fragetext.getText().trim();
+		// String Diagnosetext = T_Diagnosetext.getText().trim();
+		//
+		// WissensbasismodelFactory wb = WissensbasismodelFactory.eINSTANCE;
+		// Aussage aussage = wb.createAussage();
+		// aussage.setName(Name);
+		// aussage.setWertebereich(Wertebereich);
+		// aussage.setFragetext(Fragetext);
+		// aussage.setDiagnosetext(Diagnosetext);
+		//
+		// PersistenceUtility.getINSTANCE().save(aussage);
+
 		refreshTable();
 	}
 

@@ -19,7 +19,7 @@ public class CompositeEditWBS extends Composite {
 	MainView mainView;
 	private long wbsid;
 	TabFolder tabfolder;
-	private Button b_save;
+
 	private CompositeStatement compositeStatement;
 	private CompositeRules crules;
 	private CompositeComponents compositeComponents;
@@ -34,7 +34,7 @@ public class CompositeEditWBS extends Composite {
 		fdtabfolder.top = new FormAttachment(0);
 		fdtabfolder.bottom = new FormAttachment(100);
 		fdtabfolder.left = new FormAttachment(0);
-		fdtabfolder.right = new FormAttachment(70);
+		fdtabfolder.right = new FormAttachment(90);
 
 		FormData fdbutton = new FormData();
 		fdbutton.top = new FormAttachment(0);
@@ -44,17 +44,9 @@ public class CompositeEditWBS extends Composite {
 		tabfolder.setLayoutData(fdtabfolder);
 		cbuttons.setLayoutData(fdbutton);
 		cbuttons.setLayout(new RowLayout(SWT.HORIZONTAL));
-		b_save = new Button(cbuttons, SWT.PUSH);
 
-		b_save.setText("Speichern");
-		b_save.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				save();
-			}
-		});
 		Button b_close = new Button(cbuttons, SWT.PUSH);
-		b_close.setText("Schließen");
+		b_close.setText("Schlieï¿½en");
 		b_close.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -69,12 +61,12 @@ public class CompositeEditWBS extends Composite {
 		TabItem tab2 = new TabItem(tabfolder, SWT.NONE);
 		TabItem tab3 = new TabItem(tabfolder, SWT.NONE);
 
-		tab1.setText("Bauteil");
-		tab2.setText("Aussage");
-		tab3.setText("Regel");
-		tab1.setControl(compositeComponents);
-		tab2.setControl(compositeStatement);
-		tab3.setControl(crules);
+		tab3.setText("Bauteil");
+		tab1.setText("Aussage");
+		tab2.setText("Regel");
+		tab3.setControl(compositeComponents);
+		tab1.setControl(compositeStatement);
+		tab2.setControl(crules);
 	}
 
 	protected void close() {
