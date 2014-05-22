@@ -191,7 +191,7 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 	private void createnewStatement() {
 
 		DialogCreateNewAussage dialog = new DialogCreateNewAussage(Display
-				.getCurrent().getActiveShell());
+				.getCurrent().getActiveShell(), wbsID);
 		if (dialog.open() == DialogCreateNewAussage.OK) {
 			refreshTable();
 		}

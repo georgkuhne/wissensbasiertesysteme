@@ -1,5 +1,7 @@
 package hs.merseburg.miks13.wbs.gui.aussage;
 
+import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
+
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
@@ -23,6 +25,12 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.hibernate.Session;
+
+import wissensbasismodel.Aussage;
+import wissensbasismodel.WertebereichTyp;
+import wissensbasismodel.WissensBasis;
+import wissensbasismodel.WissensbasismodelFactory;
 
 public class DialogCreateNewAussage extends Dialog {
 	private Text text_Name;
@@ -30,14 +38,17 @@ public class DialogCreateNewAussage extends Dialog {
 	private Text text_Diagnose;
 	private Combo combo;
 	private StyledText styledText;
+	private Long wbsID;
 
 	/**
 	 * Create the dialog.
 	 * 
 	 * @param parentShell
 	 */
-	public DialogCreateNewAussage(Shell parentShell) {
+	public DialogCreateNewAussage(Shell parentShell, Long WBSID) {
 		super(parentShell);
+		wbsID = WBSID;
+
 	}
 
 	/**
@@ -198,20 +209,33 @@ public class DialogCreateNewAussage extends Dialog {
 		String FrageText = text_Fragetext.getText().trim();
 		String DiagnoseText = text_Diagnose.getText().trim();
 		String Wertebereich = combo.getText().trim();
-		String TextA;
-		if (combo.getSelectionIndex() == 3) {
-			TextA = styledText.getText();
-			System.out.println("Name: " + Name);
-			System.out.println(" FrageText: " + FrageText);
-			System.out.println("Diagn: " + DiagnoseText);
-			System.out.println(Wertebereich);
-			System.out.println("Array: " + TextA);
-		} else {
-			System.out.println("Name: " + Name);
-			System.out.println(" FrageText: " + FrageText);
-			System.out.println("Diagn: " + DiagnoseText);
-			System.out.println(Wertebereich);
+		Aussage aussage = WissensbasismodelFactory.eINSTANCE.createAussage();
+
+		switch (combo.getSelectionIndex()) {
+		case 0:
+			aussage.setWertebereich(WertebereichTyp.BOOLEAN);
+			break;
+		case 1:
+			aussage.setWertebereich(WertebereichTyp.INTEGER);
+			break;
+		case 2:
+			aussage.setWertebereich(WertebereichTyp.REAL);
+			break;
+
+		case 3:
+			aussage.setWertebereich(WertebereichTyp.STRINGLIST);
+			break;
+		default:
+			break;
 		}
+		aussage.setName(Name);
+		aussage.setFragetext(FrageText);
+		aussage.setDiagnosetext(DiagnoseText);
+
+		Session session = PersistenceUtility.getINSTANCE().createSession();
+		WissensBasis wbs = PersistenceUtility.getWissensBasisById(wbsID,
+				session);
+		wbs.getAussagen().add(aussage);
 
 		super.okPressed();
 	}
