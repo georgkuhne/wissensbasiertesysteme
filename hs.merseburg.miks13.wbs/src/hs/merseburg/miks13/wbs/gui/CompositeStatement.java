@@ -123,15 +123,6 @@ public class CompositeStatement extends Composite {
 
 			}
 		});
-		col = createTableViewerColumn("Wertebereich", 100, 0);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Aussage wb = (Aussage) element;
-				return wb.getWertebereich();
-
-			}
-		});
 
 		col = createTableViewerColumn("Fragetext", 100, 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
