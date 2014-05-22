@@ -237,6 +237,8 @@ public class DialogCreateNewAussage extends Dialog {
 				session);
 		wbs.getAussagen().add(aussage);
 
+		session.flush();
+		session.close();
 		super.okPressed();
 	}
 
