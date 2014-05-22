@@ -57,16 +57,18 @@ public class DialogCreateNewAussage extends Dialog {
 		compleft.setLayout(new GridLayout(2, true));
 		FormData fd_compleft = new FormData();
 		fd_compleft.right = new FormAttachment(compTop, 0, SWT.RIGHT);
-		fd_compleft.bottom = new FormAttachment(100, -461);
 		fd_compleft.top = new FormAttachment(compTop);
+		fd_compleft.height = 150;
 		fd_compleft.left = new FormAttachment(0);
 		compleft.setLayoutData(fd_compleft);
 
 		Group grpWertebereich = new Group(container, SWT.NONE);
 		grpWertebereich.setText("Wertebereich");
 		FormData fd_grpWertebereich = new FormData();
-		fd_grpWertebereich.left = new FormAttachment(compleft, 10, SWT.LEFT);
-		fd_grpWertebereich.top = new FormAttachment(compTop, 112);
+		fd_grpWertebereich.left = new FormAttachment(0);
+		fd_grpWertebereich.top = new FormAttachment(compleft);
+		fd_grpWertebereich.right = new FormAttachment(100);
+		fd_grpWertebereich.bottom = new FormAttachment(100);
 
 		Label lblErstellenSieEine = new Label(compTop, SWT.NONE);
 		lblErstellenSieEine.setAlignment(SWT.CENTER);
@@ -114,22 +116,23 @@ public class DialogCreateNewAussage extends Dialog {
 		grpWertebereich.setLayout(new FormLayout());
 		fd_grpWertebereich.bottom = new FormAttachment(100, -10);
 		grpWertebereich.setLayoutData(fd_grpWertebereich);
+		Label lblGebenSieDen = new Label(grpWertebereich, SWT.NONE);
+		FormData fd_lblGebenSieDen = new FormData();
+		fd_lblGebenSieDen.top = new FormAttachment(0);
+		fd_lblGebenSieDen.height = 20;
+		fd_lblGebenSieDen.right = new FormAttachment(100);
+		lblGebenSieDen.setLayoutData(fd_lblGebenSieDen);
+		lblGebenSieDen
+				.setText("Geben Sie den Wertebereich als Liste von Strings ein. Trennen Sie die Elemente mit einen \",\" (Komma )");
 
 		StyledText styledText = new StyledText(grpWertebereich, SWT.BORDER);
 		FormData fd_styledText = new FormData();
 		fd_styledText.bottom = new FormAttachment(100);
 		fd_styledText.right = new FormAttachment(100, -3);
-		fd_styledText.top = new FormAttachment(0, 27);
+		fd_styledText.top = new FormAttachment(lblGebenSieDen);
 		fd_styledText.left = new FormAttachment(0);
 		styledText.setLayoutData(fd_styledText);
 
-		Label lblGebenSieDen = new Label(grpWertebereich, SWT.NONE);
-		FormData fd_lblGebenSieDen = new FormData();
-		fd_lblGebenSieDen.top = new FormAttachment(0);
-		fd_lblGebenSieDen.right = new FormAttachment(100, -96);
-		lblGebenSieDen.setLayoutData(fd_lblGebenSieDen);
-		lblGebenSieDen
-				.setText("Geben Sie den Wertebereich als Liste von Strings ein. Trennen Sie die Elemente mit einen \",\" (Komma )");
 		container.layout();
 		return container;
 	}
