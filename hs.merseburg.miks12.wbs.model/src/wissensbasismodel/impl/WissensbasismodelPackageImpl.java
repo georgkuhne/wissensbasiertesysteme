@@ -471,7 +471,7 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 		initEAttribute(getWissensBasis_ID(), ecorePackage.getELong(), "ID", null, 0, 1, WissensBasis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getWissensBasis_Bauteile(), this.getBauteil(), null, "bauteile", null, 0, -1, WissensBasis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getWissensBasis_Regeln(), this.getRegel(), null, "regeln", null, 0, -1, WissensBasis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getWissensBasis_Aussagen(), this.getAussage(), null, "aussagen", null, 0, -1, WissensBasis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWissensBasis_Aussagen(), this.getAussage(), null, "aussagen", null, 0, -1, WissensBasis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bauteilEClass, Bauteil.class, "Bauteil", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBauteil_ID(), ecorePackage.getELong(), "ID", null, 0, 1, Bauteil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

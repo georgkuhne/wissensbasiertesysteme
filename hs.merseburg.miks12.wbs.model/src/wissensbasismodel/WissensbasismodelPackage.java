@@ -104,7 +104,7 @@ public interface WissensbasismodelPackage extends EPackage {
 	int WISSENS_BASIS__REGELN = 3;
 
 	/**
-	 * The feature id for the '<em><b>Aussagen</b></em>' reference list.
+	 * The feature id for the '<em><b>Aussagen</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -445,10 +445,10 @@ public interface WissensbasismodelPackage extends EPackage {
 	EReference getWissensBasis_Regeln();
 
 	/**
-	 * Returns the meta object for the reference list '{@link wissensbasismodel.WissensBasis#getAussagen <em>Aussagen</em>}'.
+	 * Returns the meta object for the containment reference list '{@link wissensbasismodel.WissensBasis#getAussagen <em>Aussagen</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Aussagen</em>'.
+	 * @return the meta object for the containment reference list '<em>Aussagen</em>'.
 	 * @see wissensbasismodel.WissensBasis#getAussagen()
 	 * @see #getWissensBasis()
 	 * @generated
@@ -754,7 +754,7 @@ public interface WissensbasismodelPackage extends EPackage {
 		 */
 		EReference WISSENS_BASIS__REGELN = eINSTANCE.getWissensBasis_Regeln();
 		/**
-		 * The meta object literal for the '<em><b>Aussagen</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Aussagen</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

@@ -112,7 +112,7 @@ public interface WissensBasis extends EObject {
 	EList<Regel> getRegeln();
 
 	/**
-	 * Returns the value of the '<em><b>Aussagen</b></em>' reference list.
+	 * Returns the value of the '<em><b>Aussagen</b></em>' containment reference list.
 	 * The list contents are of type {@link wissensbasismodel.Aussage}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -120,9 +120,9 @@ public interface WissensBasis extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Aussagen</em>' reference list.
+	 * @return the value of the '<em>Aussagen</em>' containment reference list.
 	 * @see wissensbasismodel.WissensbasismodelPackage#getWissensBasis_Aussagen()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Aussage> getAussagen();

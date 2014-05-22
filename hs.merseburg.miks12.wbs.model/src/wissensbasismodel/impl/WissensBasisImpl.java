@@ -7,13 +7,10 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import wissensbasismodel.Aussage;
 import wissensbasismodel.Bauteil;
@@ -97,7 +94,7 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 	 */
 	protected EList<Regel> regeln;
 	/**
-	 * The cached value of the '{@link #getAussagen() <em>Aussagen</em>}' reference list.
+	 * The cached value of the '{@link #getAussagen() <em>Aussagen</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAussagen()
@@ -198,7 +195,7 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 	 */
 	public EList<Aussage> getAussagen() {
 		if (aussagen == null) {
-			aussagen = new EObjectResolvingEList<Aussage>(Aussage.class, this, WissensbasismodelPackage.WISSENS_BASIS__AUSSAGEN);
+			aussagen = new EObjectContainmentEList<Aussage>(Aussage.class, this, WissensbasismodelPackage.WISSENS_BASIS__AUSSAGEN);
 		}
 		return aussagen;
 	}
@@ -215,6 +212,8 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 				return ((InternalEList<?>)getBauteile()).basicRemove(otherEnd, msgs);
 			case WissensbasismodelPackage.WISSENS_BASIS__REGELN:
 				return ((InternalEList<?>)getRegeln()).basicRemove(otherEnd, msgs);
+			case WissensbasismodelPackage.WISSENS_BASIS__AUSSAGEN:
+				return ((InternalEList<?>)getAussagen()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
