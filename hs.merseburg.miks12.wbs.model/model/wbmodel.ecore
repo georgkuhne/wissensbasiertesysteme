@@ -33,9 +33,17 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Aussage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Wertebereich" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wertebereich" eType="#//WertebereichTyp"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Fragetext" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Diagnosetext" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="listWertebereich" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="WertebereichTyp">
+    <eLiterals name="BOOLEAN" literal="BOOLEAN"/>
+    <eLiterals name="INTEGER" value="1" literal="INTEGER"/>
+    <eLiterals name="REAL" value="2"/>
+    <eLiterals name="STRINGLIST" value="3" literal="STRINGLIST"/>
   </eClassifiers>
 </ecore:EPackage>

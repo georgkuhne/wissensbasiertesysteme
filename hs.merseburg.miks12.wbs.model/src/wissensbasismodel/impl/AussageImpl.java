@@ -2,14 +2,18 @@
  */
 package wissensbasismodel.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import wissensbasismodel.Aussage;
+import wissensbasismodel.WertebereichTyp;
 import wissensbasismodel.WissensbasismodelPackage;
 
 /**
@@ -24,6 +28,7 @@ import wissensbasismodel.WissensbasismodelPackage;
  *   <li>{@link wissensbasismodel.impl.AussageImpl#getFragetext <em>Fragetext</em>}</li>
  *   <li>{@link wissensbasismodel.impl.AussageImpl#getDiagnosetext <em>Diagnosetext</em>}</li>
  *   <li>{@link wissensbasismodel.impl.AussageImpl#getName <em>Name</em>}</li>
+ *   <li>{@link wissensbasismodel.impl.AussageImpl#getListWertebereich <em>List Wertebereich</em>}</li>
  * </ul>
  * </p>
  *
@@ -58,7 +63,7 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String WERTEBEREICH_EDEFAULT = null;
+	protected static final WertebereichTyp WERTEBEREICH_EDEFAULT = WertebereichTyp.BOOLEAN;
 
 	/**
 	 * The cached value of the '{@link #getWertebereich() <em>Wertebereich</em>}' attribute.
@@ -68,7 +73,7 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 	 * @generated
 	 * @ordered
 	 */
-	protected String wertebereich = WERTEBEREICH_EDEFAULT;
+	protected WertebereichTyp wertebereich = WERTEBEREICH_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getFragetext() <em>Fragetext</em>}' attribute.
@@ -131,6 +136,16 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 	protected String name = NAME_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getListWertebereich() <em>List Wertebereich</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getListWertebereich()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> listWertebereich;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -175,7 +190,7 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getWertebereich() {
+	public WertebereichTyp getWertebereich() {
 		return wertebereich;
 	}
 
@@ -184,9 +199,9 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWertebereich(String newWertebereich) {
-		String oldWertebereich = wertebereich;
-		wertebereich = newWertebereich;
+	public void setWertebereich(WertebereichTyp newWertebereich) {
+		WertebereichTyp oldWertebereich = wertebereich;
+		wertebereich = newWertebereich == null ? WERTEBEREICH_EDEFAULT : newWertebereich;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.AUSSAGE__WERTEBEREICH, oldWertebereich, wertebereich));
 	}
@@ -259,6 +274,18 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getListWertebereich() {
+		if (listWertebereich == null) {
+			listWertebereich = new EDataTypeUniqueEList<String>(String.class, this, WissensbasismodelPackage.AUSSAGE__LIST_WERTEBEREICH);
+		}
+		return listWertebereich;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -272,6 +299,8 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 				return getDiagnosetext();
 			case WissensbasismodelPackage.AUSSAGE__NAME:
 				return getName();
+			case WissensbasismodelPackage.AUSSAGE__LIST_WERTEBEREICH:
+				return getListWertebereich();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -281,6 +310,7 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -288,7 +318,7 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 				setID((Long)newValue);
 				return;
 			case WissensbasismodelPackage.AUSSAGE__WERTEBEREICH:
-				setWertebereich((String)newValue);
+				setWertebereich((WertebereichTyp)newValue);
 				return;
 			case WissensbasismodelPackage.AUSSAGE__FRAGETEXT:
 				setFragetext((String)newValue);
@@ -298,6 +328,10 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 				return;
 			case WissensbasismodelPackage.AUSSAGE__NAME:
 				setName((String)newValue);
+				return;
+			case WissensbasismodelPackage.AUSSAGE__LIST_WERTEBEREICH:
+				getListWertebereich().clear();
+				getListWertebereich().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -326,6 +360,9 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 			case WissensbasismodelPackage.AUSSAGE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case WissensbasismodelPackage.AUSSAGE__LIST_WERTEBEREICH:
+				getListWertebereich().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -341,13 +378,15 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 			case WissensbasismodelPackage.AUSSAGE__ID:
 				return id != ID_EDEFAULT;
 			case WissensbasismodelPackage.AUSSAGE__WERTEBEREICH:
-				return WERTEBEREICH_EDEFAULT == null ? wertebereich != null : !WERTEBEREICH_EDEFAULT.equals(wertebereich);
+				return wertebereich != WERTEBEREICH_EDEFAULT;
 			case WissensbasismodelPackage.AUSSAGE__FRAGETEXT:
 				return FRAGETEXT_EDEFAULT == null ? fragetext != null : !FRAGETEXT_EDEFAULT.equals(fragetext);
 			case WissensbasismodelPackage.AUSSAGE__DIAGNOSETEXT:
 				return DIAGNOSETEXT_EDEFAULT == null ? diagnosetext != null : !DIAGNOSETEXT_EDEFAULT.equals(diagnosetext);
 			case WissensbasismodelPackage.AUSSAGE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case WissensbasismodelPackage.AUSSAGE__LIST_WERTEBEREICH:
+				return listWertebereich != null && !listWertebereich.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -364,7 +403,7 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (ID: ");
 		result.append(id);
-		result.append(", Wertebereich: ");
+		result.append(", wertebereich: ");
 		result.append(wertebereich);
 		result.append(", Fragetext: ");
 		result.append(fragetext);
@@ -372,6 +411,8 @@ public class AussageImpl extends MinimalEObjectImpl.Container implements Aussage
 		result.append(diagnosetext);
 		result.append(", Name: ");
 		result.append(name);
+		result.append(", listWertebereich: ");
+		result.append(listWertebereich);
 		result.append(')');
 		return result.toString();
 	}

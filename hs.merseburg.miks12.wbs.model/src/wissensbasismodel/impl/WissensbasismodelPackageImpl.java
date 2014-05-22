@@ -4,6 +4,7 @@ package wissensbasismodel.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.EReference;
@@ -12,6 +13,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import wissensbasismodel.Aussage;
 import wissensbasismodel.Bauteil;
 import wissensbasismodel.Regel;
+import wissensbasismodel.WertebereichTyp;
 import wissensbasismodel.WissensBasis;
 import wissensbasismodel.WissensbasismodelFactory;
 import wissensbasismodel.WissensbasismodelPackage;
@@ -50,6 +52,13 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 	 * @generated
 	 */
 	private EClass aussageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum wertebereichTypEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -351,6 +360,24 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAussage_ListWertebereich() {
+		return (EAttribute)aussageEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getWertebereichTyp() {
+		return wertebereichTypEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public WissensbasismodelFactory getWissensbasismodelFactory() {
 		return (WissensbasismodelFactory)getEFactoryInstance();
 	}
@@ -403,6 +430,10 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 		createEAttribute(aussageEClass, AUSSAGE__FRAGETEXT);
 		createEAttribute(aussageEClass, AUSSAGE__DIAGNOSETEXT);
 		createEAttribute(aussageEClass, AUSSAGE__NAME);
+		createEAttribute(aussageEClass, AUSSAGE__LIST_WERTEBEREICH);
+
+		// Create enums
+		wertebereichTypEEnum = createEEnum(WERTEBEREICH_TYP);
 	}
 
 	/**
@@ -460,10 +491,18 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 
 		initEClass(aussageEClass, Aussage.class, "Aussage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAussage_ID(), ecorePackage.getELong(), "ID", null, 0, 1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAussage_Wertebereich(), ecorePackage.getEString(), "Wertebereich", null, 0, 1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAussage_Wertebereich(), this.getWertebereichTyp(), "wertebereich", null, 0, 1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAussage_Fragetext(), ecorePackage.getEString(), "Fragetext", null, 0, 1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAussage_Diagnosetext(), ecorePackage.getEString(), "Diagnosetext", null, 0, 1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAussage_Name(), ecorePackage.getEString(), "Name", null, 0, 1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAussage_ListWertebereich(), ecorePackage.getEString(), "listWertebereich", null, 0, -1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(wertebereichTypEEnum, WertebereichTyp.class, "WertebereichTyp");
+		addEEnumLiteral(wertebereichTypEEnum, WertebereichTyp.BOOLEAN);
+		addEEnumLiteral(wertebereichTypEEnum, WertebereichTyp.INTEGER);
+		addEEnumLiteral(wertebereichTypEEnum, WertebereichTyp.REAL);
+		addEEnumLiteral(wertebereichTypEEnum, WertebereichTyp.STRINGLIST);
 
 		// Create resource
 		createResource(eNS_URI);

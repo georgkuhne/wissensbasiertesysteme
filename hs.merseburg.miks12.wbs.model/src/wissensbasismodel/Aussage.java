@@ -2,6 +2,7 @@
  */
 package wissensbasismodel;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -17,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link wissensbasismodel.Aussage#getFragetext <em>Fragetext</em>}</li>
  *   <li>{@link wissensbasismodel.Aussage#getDiagnosetext <em>Diagnosetext</em>}</li>
  *   <li>{@link wissensbasismodel.Aussage#getName <em>Name</em>}</li>
+ *   <li>{@link wissensbasismodel.Aussage#getListWertebereich <em>List Wertebereich</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,6 +55,7 @@ public interface Aussage extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Wertebereich</b></em>' attribute.
+	 * The literals are from the enumeration {@link wissensbasismodel.WertebereichTyp}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Wertebereich</em>' attribute isn't clear,
@@ -60,22 +63,24 @@ public interface Aussage extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wertebereich</em>' attribute.
-	 * @see #setWertebereich(String)
+	 * @see wissensbasismodel.WertebereichTyp
+	 * @see #setWertebereich(WertebereichTyp)
 	 * @see wissensbasismodel.WissensbasismodelPackage#getAussage_Wertebereich()
 	 * @model
 	 * @generated
 	 */
-	String getWertebereich();
+	WertebereichTyp getWertebereich();
 
 	/**
 	 * Sets the value of the '{@link wissensbasismodel.Aussage#getWertebereich <em>Wertebereich</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Wertebereich</em>' attribute.
+	 * @see wissensbasismodel.WertebereichTyp
 	 * @see #getWertebereich()
 	 * @generated
 	 */
-	void setWertebereich(String value);
+	void setWertebereich(WertebereichTyp value);
 
 	/**
 	 * Returns the value of the '<em><b>Fragetext</b></em>' attribute.
@@ -154,5 +159,21 @@ public interface Aussage extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>List Wertebereich</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>List Wertebereich</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>List Wertebereich</em>' attribute list.
+	 * @see wissensbasismodel.WissensbasismodelPackage#getAussage_ListWertebereich()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getListWertebereich();
 
 } // Aussage

@@ -4,6 +4,7 @@ package wissensbasismodel;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -351,13 +352,22 @@ public interface WissensbasismodelPackage extends EPackage {
 	int AUSSAGE__NAME = 4;
 
 	/**
+	 * The feature id for the '<em><b>List Wertebereich</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUSSAGE__LIST_WERTEBEREICH = 5;
+
+	/**
 	 * The number of structural features of the '<em>Aussage</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AUSSAGE_FEATURE_COUNT = 5;
+	int AUSSAGE_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Aussage</em>' class.
@@ -367,6 +377,17 @@ public interface WissensbasismodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int AUSSAGE_OPERATION_COUNT = 0;
+
+
+	/**
+	 * The meta object id for the '{@link wissensbasismodel.WertebereichTyp <em>Wertebereich Typ</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see wissensbasismodel.WertebereichTyp
+	 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getWertebereichTyp()
+	 * @generated
+	 */
+	int WERTEBEREICH_TYP = 4;
 
 
 	/**
@@ -652,6 +673,27 @@ public interface WissensbasismodelPackage extends EPackage {
 	EAttribute getAussage_Name();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link wissensbasismodel.Aussage#getListWertebereich <em>List Wertebereich</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>List Wertebereich</em>'.
+	 * @see wissensbasismodel.Aussage#getListWertebereich()
+	 * @see #getAussage()
+	 * @generated
+	 */
+	EAttribute getAussage_ListWertebereich();
+
+	/**
+	 * Returns the meta object for enum '{@link wissensbasismodel.WertebereichTyp <em>Wertebereich Typ</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Wertebereich Typ</em>'.
+	 * @see wissensbasismodel.WertebereichTyp
+	 * @generated
+	 */
+	EEnum getWertebereichTyp();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -864,6 +906,22 @@ public interface WissensbasismodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute AUSSAGE__NAME = eINSTANCE.getAussage_Name();
+		/**
+		 * The meta object literal for the '<em><b>List Wertebereich</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AUSSAGE__LIST_WERTEBEREICH = eINSTANCE.getAussage_ListWertebereich();
+		/**
+		 * The meta object literal for the '{@link wissensbasismodel.WertebereichTyp <em>Wertebereich Typ</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see wissensbasismodel.WertebereichTyp
+		 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getWertebereichTyp()
+		 * @generated
+		 */
+		EEnum WERTEBEREICH_TYP = eINSTANCE.getWertebereichTyp();
 
 	}
 

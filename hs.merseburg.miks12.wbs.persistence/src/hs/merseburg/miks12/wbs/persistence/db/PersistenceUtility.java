@@ -13,6 +13,7 @@ import org.hibernate.Query;
 import org.hibernate.QueryParameterException;
 import org.hibernate.Session;
 
+import wissensbasismodel.Aussage;
 import wissensbasismodel.impl.WissensbasismodelPackageImpl;
 
 public class PersistenceUtility {
@@ -630,6 +631,11 @@ public class PersistenceUtility {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public Aussage getAussageByID() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
