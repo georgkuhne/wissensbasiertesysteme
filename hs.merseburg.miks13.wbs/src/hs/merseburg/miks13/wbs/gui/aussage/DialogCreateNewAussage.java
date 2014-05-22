@@ -147,6 +147,15 @@ public class DialogCreateNewAussage extends Dialog {
 				IDialogConstants.CANCEL_LABEL, false);
 	}
 
+	@Override
+	protected void okPressed() {
+		String Name = text_Name.getText().trim();
+		String FrageText = text_Fragetext.getText().trim();
+		String DiagnoseText = text_Diagnose.getText().trim();
+
+		super.okPressed();
+	}
+
 	/**
 	 * Return the initial size of the dialog.
 	 */

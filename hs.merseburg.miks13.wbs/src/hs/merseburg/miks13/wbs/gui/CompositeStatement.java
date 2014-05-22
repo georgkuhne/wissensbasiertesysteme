@@ -1,6 +1,7 @@
 package hs.merseburg.miks13.wbs.gui;
 
 import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
+import hs.merseburg.miks13.wbs.gui.aussage.DialogCreateNewAussage;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
@@ -69,6 +71,21 @@ public class CompositeStatement extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				b_edit.setEnabled(true);
+
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		b_new.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				createnewStatement();
 
 			}
 
@@ -151,22 +168,15 @@ public class CompositeStatement extends Composite {
 
 	public void save() {
 		System.err.println("Statements Saved");
-
-		// String Name = T_Name.getText().trim();
-		// String Wertebereich = T_Wertebereich.getText().trim();
-		// String Fragetext = T_Fragetext.getText().trim();
-		// String Diagnosetext = T_Diagnosetext.getText().trim();
-		//
-		// WissensbasismodelFactory wb = WissensbasismodelFactory.eINSTANCE;
-		// Aussage aussage = wb.createAussage();
-		// aussage.setName(Name);
-		// aussage.setWertebereich(Wertebereich);
-		// aussage.setFragetext(Fragetext);
-		// aussage.setDiagnosetext(Diagnosetext);
-		//
-		// PersistenceUtility.getINSTANCE().save(aussage);
-
 		refreshTable();
 	}
 
+	private void createnewStatement() {
+
+		DialogCreateNewAussage dialog = new DialogCreateNewAussage(Display
+				.getCurrent().getActiveShell());
+		if (dialog.open() == DialogCreateNewAussage.OK) {
+			refreshTable();
+		}
+	}
 }
