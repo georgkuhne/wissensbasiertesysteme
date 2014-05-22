@@ -79,6 +79,19 @@ public class CompositeComponents extends Composite {
 			}
 		});
 
+		b_new.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 		refreshTable();
 
 	}
@@ -180,27 +193,6 @@ public class CompositeComponents extends Composite {
 
 	public void save() {
 		System.err.println("Components Saved");
-		//
-		// String Name = T_Name.getText().trim();
-		// String AssetID = T_Asset_ID.getText().trim();
-		// String istTeil = T_ist_Teil_von.getText().trim();
-		// String regeln = T_regeln.getText().trim();
-		// String regelgruppen = T_regelgruppen.getText().trim();
-		// String koroutine = T_Koroutine.getText().trim();
-		// String medien = T_medien.getText().trim();
-		//
-		// WissensbasismodelFactory wb = WissensbasismodelFactory.eINSTANCE;
-		// Bauteil bauteil = wb.createBauteil();
-		// bauteil.setName(Name);
-		// bauteil.setAsset_ID(AssetID);
-		// bauteil.setIst_Teil_von(istTeil);
-		// bauteil.setRegeln(regeln);
-		// bauteil.setRegelgruppen(regelgruppen);
-		// bauteil.setKoroutine(koroutine);
-		// bauteil.setMedien(medien);
-		//
-		// PersistenceUtility.getINSTANCE().save(bauteil);
-
 		refreshTable();
 
 	}
