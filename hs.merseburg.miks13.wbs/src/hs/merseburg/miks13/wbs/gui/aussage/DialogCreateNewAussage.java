@@ -4,6 +4,8 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
@@ -24,6 +26,7 @@ public class DialogCreateNewAussage extends Dialog {
 	private Text text_Name;
 	private Text text_Fragetext;
 	private Text text_Diagnose;
+	private Combo combo;
 
 	/**
 	 * Create the dialog.
@@ -110,9 +113,11 @@ public class DialogCreateNewAussage extends Dialog {
 		lblWertebereich.setFont(SWTResourceManager.getFont("Tahoma", 11,
 				SWT.BOLD));
 
-		Combo combo = new Combo(compleft, SWT.NONE);
-		combo.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1,
-				1));
+		combo = new Combo(compleft, SWT.NONE);
+		GridData gdcombo = new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1);
+		gdcombo.widthHint = 100;
+		combo.setLayoutData(gdcombo);
+
 		grpWertebereich.setLayout(new FormLayout());
 		fd_grpWertebereich.bottom = new FormAttachment(100, -10);
 		grpWertebereich.setLayoutData(fd_grpWertebereich);
@@ -134,6 +139,28 @@ public class DialogCreateNewAussage extends Dialog {
 		styledText.setLayoutData(fd_styledText);
 
 		container.layout();
+
+		combo.add("bool", 0);
+		combo.add("integer", 1);
+		combo.add("real", 2);
+		combo.add("list", 3);
+		combo.pack();
+		combo.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (combo.getSelectionIndex() == 3) {
+
+				}
+
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 		return container;
 	}
 
