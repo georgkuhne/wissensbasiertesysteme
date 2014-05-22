@@ -6,6 +6,8 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
@@ -21,6 +23,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.hibernate.Session;
 
 import wissensbasismodel.Aussage;
 
@@ -30,15 +33,19 @@ public class DialogEditAussage extends Dialog {
 	private Text text_Diagnose;
 	private long IDAussage;
 	private StyledText styledText;
+	private Combo combo;
+	private Session session;
 
 	/**
 	 * Create the dialog.
 	 * 
 	 * @param parentShell
+	 * @param session
 	 */
-	public DialogEditAussage(Shell parentShell, long IDAussage) {
+	public DialogEditAussage(Shell parentShell, long IDAussage, Session session) {
 		super(parentShell);
 		this.IDAussage = IDAussage;
+		this.session = session;
 	}
 
 	/**
@@ -64,21 +71,23 @@ public class DialogEditAussage extends Dialog {
 		compleft.setLayout(new GridLayout(2, true));
 		FormData fd_compleft = new FormData();
 		fd_compleft.right = new FormAttachment(compTop, 0, SWT.RIGHT);
-		fd_compleft.bottom = new FormAttachment(100, -461);
 		fd_compleft.top = new FormAttachment(compTop);
+		fd_compleft.height = 150;
 		fd_compleft.left = new FormAttachment(0);
 		compleft.setLayoutData(fd_compleft);
 
 		Group grpWertebereich = new Group(container, SWT.NONE);
 		grpWertebereich.setText("Wertebereich");
 		FormData fd_grpWertebereich = new FormData();
-		fd_grpWertebereich.left = new FormAttachment(compleft, 10, SWT.LEFT);
-		fd_grpWertebereich.top = new FormAttachment(compTop, 112);
+		fd_grpWertebereich.left = new FormAttachment(0);
+		fd_grpWertebereich.top = new FormAttachment(compleft);
+		fd_grpWertebereich.right = new FormAttachment(100);
+		fd_grpWertebereich.bottom = new FormAttachment(100);
 
 		Label lblErstellenSieEine = new Label(compTop, SWT.NONE);
 		lblErstellenSieEine.setAlignment(SWT.CENTER);
 		lblErstellenSieEine
-				.setText("Bearbeiten Sie eine Aussage und speichern Sie diese durch Bet\u00E4tigen des \"OK\"-Buttons.");
+				.setText("Erstellen Sie eine Aussage und speichern Sie diese durch Bet\u00E4tigen des \"OK\"-Buttons.");
 		fd_grpWertebereich.right = new FormAttachment(100, -10);
 
 		Label lblName = new Label(compleft, SWT.NONE);
@@ -115,36 +124,75 @@ public class DialogEditAussage extends Dialog {
 		lblWertebereich.setFont(SWTResourceManager.getFont("Tahoma", 11,
 				SWT.BOLD));
 
-		Combo combo = new Combo(compleft, SWT.NONE);
-		combo.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1,
-				1));
+		combo = new Combo(compleft, SWT.NONE);
+		GridData gdcombo = new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1);
+		gdcombo.widthHint = 100;
+		combo.setLayoutData(gdcombo);
+
 		grpWertebereich.setLayout(new FormLayout());
 		fd_grpWertebereich.bottom = new FormAttachment(100, -10);
 		grpWertebereich.setLayoutData(fd_grpWertebereich);
-
-		styledText = new StyledText(grpWertebereich, SWT.BORDER);
-		FormData fd_styledText = new FormData();
-		fd_styledText.bottom = new FormAttachment(100);
-		fd_styledText.right = new FormAttachment(100, -3);
-		fd_styledText.top = new FormAttachment(0, 27);
-		fd_styledText.left = new FormAttachment(0);
-		styledText.setLayoutData(fd_styledText);
-
 		Label lblGebenSieDen = new Label(grpWertebereich, SWT.NONE);
 		FormData fd_lblGebenSieDen = new FormData();
 		fd_lblGebenSieDen.top = new FormAttachment(0);
-		fd_lblGebenSieDen.right = new FormAttachment(100, -96);
+		fd_lblGebenSieDen.height = 20;
+		fd_lblGebenSieDen.right = new FormAttachment(100);
 		lblGebenSieDen.setLayoutData(fd_lblGebenSieDen);
 		lblGebenSieDen
 				.setText("Geben Sie den Wertebereich als Liste von Strings ein. Trennen Sie die Elemente mit einen \",\" (Komma )");
+
+		StyledText styledText = new StyledText(grpWertebereich, SWT.BORDER);
+		FormData fd_styledText = new FormData();
+		fd_styledText.bottom = new FormAttachment(100);
+		fd_styledText.right = new FormAttachment(100, -3);
+		fd_styledText.top = new FormAttachment(lblGebenSieDen);
+		fd_styledText.left = new FormAttachment(0);
+		styledText.setLayoutData(fd_styledText);
+
 		container.layout();
+
+		combo.add("bool", 0);
+		combo.add("integer", 1);
+		combo.add("real", 2);
+		combo.add("list", 3);
+		combo.pack();
+		combo.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (combo.getSelectionIndex() == 3) {
+
+				}
+
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 		init();
 		return container;
 
 	}
 
 	private void init() {
-		Aussage aussage = PersistenceUtility.getINSTANCE().getAussageByID();
+		Aussage aussage = PersistenceUtility.getAussageByID(IDAussage, session);
+		text_Diagnose.setText(aussage.getDiagnosetext());
+		text_Fragetext.setText(aussage.getFragetext());
+		text_Name.setText(aussage.getName());
+		StringBuffer buffer = new StringBuffer();
+		for (int i = 0; i < aussage.getListWertebereich().size(); i++) {
+			String wbwert = aussage.getListWertebereich().get(i);
+			buffer.append(wbwert);
+			if (i < aussage.getListWertebereich().size() - 1)
+				buffer.append(",");
+
+		}
+		styledText.setText(buffer.toString());
+		combo.select(aussage.getWertebereich().getValue());
+
 	}
 
 	/**

@@ -2,14 +2,20 @@ package hs.merseburg.miks13.wbs.gui;
 
 import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
 import hs.merseburg.miks13.wbs.gui.aussage.DialogCreateNewAussage;
+import hs.merseburg.miks13.wbs.gui.aussage.DialogEditAussage;
 
 import java.util.List;
 
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FormAttachment;
@@ -21,6 +27,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.hibernate.Session;
 
 import wissensbasismodel.Aussage;
 
@@ -63,21 +70,17 @@ public class CompositeStatement extends Composite {
 		b_new.setText("Anlegen");
 		b_edit.setText("Bearbeiten");
 		b_edit.setEnabled(false);
-
-		refreshTable();
-
-		table.addSelectionListener(new SelectionListener() {
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			@Override
-			public void widgetSelected(SelectionEvent e) {
-				b_edit.setEnabled(true);
-
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
-
+			public void selectionChanged(SelectionChangedEvent event) {
+				IStructuredSelection S = (IStructuredSelection) viewer
+						.getSelection();
+				if (S.getFirstElement() != null) {
+					b_edit.setEnabled(true);
+				} else {
+					b_edit.setEnabled(false);
+				}
 			}
 		});
 
@@ -91,10 +94,29 @@ public class CompositeStatement extends Composite {
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 		});
+		b_edit.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				editSelectedStatement();
+			}
+		});
+		refreshTable();
+
+	}
+
+	protected void editSelectedStatement() {
+		IStructuredSelection s = (IStructuredSelection) viewer.getSelection();
+		Aussage aussage = (Aussage) s.getFirstElement();
+		Session session = PersistenceUtility.getINSTANCE().createSession();
+		DialogEditAussage dialog = new DialogEditAussage(Display.getCurrent()
+				.getActiveShell(), aussage.getID(), session);
+		if (dialog.open() == Dialog.OK) {
+			refreshTable();
+		}
+		session.close();
 	}
 
 	public void refreshTable() {

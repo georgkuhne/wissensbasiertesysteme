@@ -14,6 +14,7 @@ import org.hibernate.QueryParameterException;
 import org.hibernate.Session;
 
 import wissensbasismodel.Aussage;
+import wissensbasismodel.WissensBasis;
 import wissensbasismodel.impl.WissensbasismodelPackageImpl;
 
 public class PersistenceUtility {
@@ -633,9 +634,30 @@ public class PersistenceUtility {
 		}
 	}
 
-	public Aussage getAussageByID() {
-		// TODO Auto-generated method stub
+	public static final Aussage getAussageByID(long iDAussage, Session session) {
+		String fromClause = "Aussage";
+		String whereClause = "Aussage.ID=:id";
+		String[] variables = { "id" };
+		Object[] substitutions = { iDAussage };
+		List<?> list = getRows(session, fromClause, whereClause, variables,
+				substitutions);
+		if (!list.isEmpty()) {
+			return (Aussage) list.get(0);
+		}
 		return null;
 	}
 
+	public static final WissensBasis getWissensBasisById(long IDWB,
+			Session session) {
+		String fromClause = "WissensBasis";
+		String whereClause = "WissensBasis.ID=:id";
+		String[] variables = { "id" };
+		Object[] substitutions = { IDWB };
+		List<?> list = getRows(session, fromClause, whereClause, variables,
+				substitutions);
+		if (!list.isEmpty()) {
+			return (WissensBasis) list.get(0);
+		}
+		return null;
+	}
 }

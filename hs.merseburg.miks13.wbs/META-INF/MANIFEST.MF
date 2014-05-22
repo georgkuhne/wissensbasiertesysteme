@@ -8,6 +8,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.draw2d;bundle-version="3.9.0",
  hs.merseburg.miks12.wbs.persistence,
- hs.merseburg.miks12.wbs.model;bundle-version="1.0.0"
+ hs.merseburg.miks12.wbs.model;bundle-version="1.0.0",
+ org.eclipse.emf.teneo.hibernate;bundle-version="2.0.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Import-Package: org.hibernate
