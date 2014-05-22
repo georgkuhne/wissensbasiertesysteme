@@ -38,7 +38,7 @@ public interface Aussage extends EObject {
 	 * @return the value of the '<em>ID</em>' attribute.
 	 * @see #setID(long)
 	 * @see wissensbasismodel.WissensbasismodelPackage#getAussage_ID()
-	 * @model
+	 * @model id="true"
 	 * @generated
 	 */
 	long getID();

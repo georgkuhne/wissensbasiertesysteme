@@ -35,7 +35,7 @@ public interface Regel extends EObject {
 	 * @return the value of the '<em>ID</em>' attribute.
 	 * @see #setID(long)
 	 * @see wissensbasismodel.WissensbasismodelPackage#getRegel_ID()
-	 * @model
+	 * @model id="true"
 	 * @generated
 	 */
 	long getID();

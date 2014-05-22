@@ -8,6 +8,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
@@ -18,6 +19,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
@@ -26,6 +28,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import org.hibernate.Session;
 
 import wissensbasismodel.Aussage;
+import wissensbasismodel.WertebereichTyp;
 
 public class DialogEditAussage extends Dialog {
 	private Text text_Name;
@@ -35,6 +38,7 @@ public class DialogEditAussage extends Dialog {
 	private StyledText styledText;
 	private Combo combo;
 	private Session session;
+	private Aussage aussage;
 
 	/**
 	 * Create the dialog.
@@ -141,7 +145,7 @@ public class DialogEditAussage extends Dialog {
 		lblGebenSieDen
 				.setText("Geben Sie den Wertebereich als Liste von Strings ein. Trennen Sie die Elemente mit einen \",\" (Komma )");
 
-		StyledText styledText = new StyledText(grpWertebereich, SWT.BORDER);
+		styledText = new StyledText(grpWertebereich, SWT.BORDER);
 		FormData fd_styledText = new FormData();
 		fd_styledText.bottom = new FormAttachment(100);
 		fd_styledText.right = new FormAttachment(100, -3);
@@ -161,7 +165,15 @@ public class DialogEditAussage extends Dialog {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (combo.getSelectionIndex() == 3) {
-
+					styledText.setEditable(true);
+					Color bg = Display.getDefault().getSystemColor(
+							SWT.COLOR_WHITE);
+					styledText.setBackground(bg);
+				} else {
+					styledText.setEditable(false);
+					Color bg = Display.getDefault().getSystemColor(
+							SWT.COLOR_GRAY);
+					styledText.setBackground(bg);
 				}
 
 			}
@@ -178,20 +190,34 @@ public class DialogEditAussage extends Dialog {
 	}
 
 	private void init() {
-		Aussage aussage = PersistenceUtility.getAussageByID(IDAussage, session);
+		aussage = PersistenceUtility.getAussageByID(IDAussage, session);
 		text_Diagnose.setText(aussage.getDiagnosetext());
 		text_Fragetext.setText(aussage.getFragetext());
 		text_Name.setText(aussage.getName());
-		StringBuffer buffer = new StringBuffer();
-		for (int i = 0; i < aussage.getListWertebereich().size(); i++) {
-			String wbwert = aussage.getListWertebereich().get(i);
-			buffer.append(wbwert);
-			if (i < aussage.getListWertebereich().size() - 1)
-				buffer.append(",");
 
+		if (!aussage.getListWertebereich().isEmpty()) {
+			StringBuffer buffer = new StringBuffer();
+			for (int i = 0; i < aussage.getListWertebereich().size(); i++) {
+				String wbwert = aussage.getListWertebereich().get(i);
+				buffer.append(wbwert);
+				if (i < aussage.getListWertebereich().size() - 1)
+					buffer.append(",");
+
+			}
+			styledText.setText(buffer.toString());
 		}
-		styledText.setText(buffer.toString());
 		combo.select(aussage.getWertebereich().getValue());
+		aussage.setWertebereich(WertebereichTyp.STRINGLIST);
+
+		if (combo.getSelectionIndex() == 3) {
+			styledText.setEditable(true);
+			Color bg = Display.getDefault().getSystemColor(SWT.COLOR_WHITE);
+			styledText.setBackground(bg);
+		} else {
+			styledText.setEditable(false);
+			Color bg = Display.getDefault().getSystemColor(SWT.COLOR_GRAY);
+			styledText.setBackground(bg);
+		}
 
 	}
 
@@ -217,13 +243,48 @@ public class DialogEditAussage extends Dialog {
 	}
 
 	private void save() {
-		// TODO Auto-generated method stub
 
+		String Name = text_Name.getText().trim();
+		String FrageText = text_Fragetext.getText().trim();
+		String DiagnoseText = text_Diagnose.getText().trim();
+		String Wertebereich = combo.getText().trim();
+
+		switch (combo.getSelectionIndex()) {
+		case 0:
+			aussage.setWertebereich(WertebereichTyp.BOOLEAN);
+			break;
+		case 1:
+			aussage.setWertebereich(WertebereichTyp.INTEGER);
+			break;
+		case 2:
+			aussage.setWertebereich(WertebereichTyp.REAL);
+			break;
+
+		case 3:
+			aussage.setWertebereich(WertebereichTyp.STRINGLIST);
+			String s = styledText.getText();
+			String stringarray[] = s.split(",");
+			for (int i = 0; i < stringarray.length; i++) {
+				aussage.getListWertebereich().add(stringarray[i]);
+			}
+			break;
+		default:
+			break;
+		}
+		aussage.setName(Name);
+		aussage.setFragetext(FrageText);
+		aussage.setDiagnosetext(DiagnoseText);
+		session.flush();
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private boolean validateInput() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	/**

@@ -205,6 +205,8 @@ public class DialogCreateNewAussage extends Dialog {
 
 	@Override
 	protected void okPressed() {
+		if (!validateInput())
+			return;
 		String Name = text_Name.getText().trim();
 		String FrageText = text_Fragetext.getText().trim();
 		String DiagnoseText = text_Diagnose.getText().trim();
@@ -224,6 +226,11 @@ public class DialogCreateNewAussage extends Dialog {
 
 		case 3:
 			aussage.setWertebereich(WertebereichTyp.STRINGLIST);
+			String s = styledText.getText();
+			String stringarray[] = s.split(",");
+			for (int i = 0; i < stringarray.length; i++) {
+				aussage.getListWertebereich().add(stringarray[i]);
+			}
 			break;
 		default:
 			break;
@@ -240,6 +247,11 @@ public class DialogCreateNewAussage extends Dialog {
 		session.flush();
 		session.close();
 		super.okPressed();
+	}
+
+	private boolean validateInput() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	/**

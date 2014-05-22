@@ -115,9 +115,12 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 		DialogEditAussage dialog = new DialogEditAussage(Display.getCurrent()
 				.getActiveShell(), aussage.getID(), session);
 		if (dialog.open() == Dialog.OK) {
+			session.close();
 			refreshTable();
+		} else {
+			session.close();
+
 		}
-		session.close();
 	}
 
 	public void refreshTable() {
@@ -130,7 +133,7 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 	}
 
 	private void createColumns(TableViewer viewer) {
-		TableViewerColumn col = createTableViewerColumn("ID", 100, 0);
+		TableViewerColumn col = createTableViewerColumn("ID", 50, 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
@@ -150,7 +153,7 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 			}
 		});
 
-		col = createTableViewerColumn("Fragetext", 100, 0);
+		col = createTableViewerColumn("Fragetext", 300, 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
@@ -159,12 +162,43 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 
 			}
 		});
-		col = createTableViewerColumn("Diagnosetext", 100, 0);
+		col = createTableViewerColumn("Diagnosetext", 300, 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				Aussage wb = (Aussage) element;
 				return wb.getDiagnosetext();
+
+			}
+		});
+		col = createTableViewerColumn("WertebereichTyp", 100, 0);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Aussage wb = (Aussage) element;
+				return wb.getWertebereich().getName();
+
+			}
+		});
+
+		col = createTableViewerColumn("WertebereichList", 500, 0);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Aussage aussage = (Aussage) element;
+
+				if (!aussage.getListWertebereich().isEmpty()) {
+					StringBuffer buffer = new StringBuffer();
+					for (int i = 0; i < aussage.getListWertebereich().size(); i++) {
+						String wbwert = aussage.getListWertebereich().get(i);
+						buffer.append(wbwert);
+						if (i < aussage.getListWertebereich().size() - 1)
+							buffer.append(",");
+
+					}
+					return buffer.toString();
+				}
+				return "";
 
 			}
 		});
