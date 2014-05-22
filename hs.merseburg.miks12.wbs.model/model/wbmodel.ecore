@@ -48,4 +48,19 @@
     <eLiterals name="REAL" value="2"/>
     <eLiterals name="STRINGLIST" value="3" literal="STRINGLIST"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Literal">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aussage" lowerBound="1"
+        eType="#//Aussage"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wert" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//LiteralOperatoren"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
+        iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LiteralOperatoren">
+    <eLiterals name="gleich" literal="gleich"/>
+    <eLiterals name="kleinerals" value="1"/>
+    <eLiterals name="groeßerals" value="2"/>
+    <eLiterals name="ungleich" value="3"/>
+  </eClassifiers>
 </ecore:EPackage>
