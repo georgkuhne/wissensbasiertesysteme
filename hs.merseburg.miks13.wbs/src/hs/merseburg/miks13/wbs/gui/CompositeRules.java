@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.TableColumn;
 
 import wissensbasismodel.Regel;
 
-public class CompositeRules extends Composite {
+public class CompositeRules extends Composite implements GlobalEditActions {
 
 	private TableViewer viewer;
 	private Table table;
@@ -156,6 +156,12 @@ public class CompositeRules extends Composite {
 		// PersistenceUtility.getINSTANCE().save(regel);
 		//
 		// refreshTable();
+
+	}
+
+	@Override
+	public void setWBSID(long wbsID) {
+		// TODO Auto-generated method stub
 
 	}
 

@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.TableColumn;
 
 import wissensbasismodel.Bauteil;
 
-public class CompositeComponents extends Composite {
+public class CompositeComponents extends Composite implements GlobalEditActions {
 
 	private TableViewer viewer;
 	private Table table;
@@ -194,6 +194,12 @@ public class CompositeComponents extends Composite {
 	public void save() {
 		System.err.println("Components Saved");
 		refreshTable();
+
+	}
+
+	@Override
+	public void setWBSID(long wbsID) {
+		// TODO Auto-generated method stub
 
 	}
 }

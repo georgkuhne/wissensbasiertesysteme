@@ -30,9 +30,11 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.hibernate.Session;
 
 import wissensbasismodel.Aussage;
+import wissensbasismodel.WissensBasis;
 
-public class CompositeStatement extends Composite {
+public class CompositeStatement extends Composite implements GlobalEditActions {
 
+	long wbsID;
 	private TableViewer viewer;
 	private Table table;
 	private Button b_new, b_edit;
@@ -103,7 +105,6 @@ public class CompositeStatement extends Composite {
 				editSelectedStatement();
 			}
 		});
-		refreshTable();
 
 	}
 
@@ -120,9 +121,12 @@ public class CompositeStatement extends Composite {
 	}
 
 	public void refreshTable() {
-		List list = PersistenceUtility.getINSTANCE().getAll("Aussage", null,
-				null);
+		Session session = PersistenceUtility.getINSTANCE().createSession();
+		WissensBasis wb = PersistenceUtility
+				.getWissensBasisById(wbsID, session);
+		List list = wb.getAussagen();
 		viewer.setInput(list);
+		session.close();
 	}
 
 	private void createColumns(TableViewer viewer) {
@@ -191,5 +195,11 @@ public class CompositeStatement extends Composite {
 		if (dialog.open() == DialogCreateNewAussage.OK) {
 			refreshTable();
 		}
+	}
+
+	@Override
+	public void setWBSID(long wbsID) {
+		this.wbsID = wbsID;
+		refreshTable();
 	}
 }

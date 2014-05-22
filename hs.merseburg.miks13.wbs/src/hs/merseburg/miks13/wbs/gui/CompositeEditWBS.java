@@ -17,11 +17,11 @@ import org.eclipse.swt.widgets.TabItem;
 
 public class CompositeEditWBS extends Composite {
 	MainView mainView;
-	private long wbsid;
+	public long wbsid;
 	TabFolder tabfolder;
 
 	private CompositeStatement compositeStatement;
-	private CompositeRules crules;
+	private CompositeRules compositeRules;
 	private CompositeComponents compositeComponents;
 
 	public CompositeEditWBS(Composite parent, int style, MainView mainView1) {
@@ -54,7 +54,7 @@ public class CompositeEditWBS extends Composite {
 			}
 		});
 
-		crules = new CompositeRules(tabfolder, SWT.NONE);
+		compositeRules = new CompositeRules(tabfolder, SWT.NONE);
 		compositeStatement = new CompositeStatement(tabfolder, SWT.NONE);
 		compositeComponents = new CompositeComponents(tabfolder, SWT.NONE);
 		TabItem tab1 = new TabItem(tabfolder, SWT.NONE);
@@ -66,7 +66,7 @@ public class CompositeEditWBS extends Composite {
 		tab2.setText("Regel");
 		tab3.setControl(compositeComponents);
 		tab1.setControl(compositeStatement);
-		tab2.setControl(crules);
+		tab2.setControl(compositeRules);
 	}
 
 	protected void close() {
@@ -88,6 +88,9 @@ public class CompositeEditWBS extends Composite {
 
 	public void openWBS(long wbsid) {
 		this.wbsid = wbsid;
+		this.compositeComponents.setWBSID(wbsid);
+		this.compositeStatement.setWBSID(wbsid);
+		this.compositeRules.setWBSID(wbsid);
 
 	}
 
