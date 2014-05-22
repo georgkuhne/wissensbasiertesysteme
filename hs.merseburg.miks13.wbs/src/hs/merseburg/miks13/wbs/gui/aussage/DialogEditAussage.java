@@ -248,7 +248,7 @@ public class DialogEditAussage extends Dialog {
 		String FrageText = text_Fragetext.getText().trim();
 		String DiagnoseText = text_Diagnose.getText().trim();
 		String Wertebereich = combo.getText().trim();
-
+		aussage.getListWertebereich().clear();
 		switch (combo.getSelectionIndex()) {
 		case 0:
 			aussage.setWertebereich(WertebereichTyp.BOOLEAN);
