@@ -58,6 +58,24 @@ public interface WissensbasismodelFactory extends EFactory {
 	Aussage createAussage();
 
 	/**
+	 * Returns a new object of class '<em>Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Literal</em>'.
+	 * @generated
+	 */
+	Literal createLiteral();
+
+	/**
+	 * Returns a new object of class '<em>Konklusion</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Konklusion</em>'.
+	 * @generated
+	 */
+	Konklusion createKonklusion();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

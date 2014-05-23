@@ -2,13 +2,21 @@
  */
 package wissensbasismodel.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import wissensbasismodel.Konklusion;
+import wissensbasismodel.Literal;
 import wissensbasismodel.Regel;
 import wissensbasismodel.WissensbasismodelPackage;
 
@@ -21,7 +29,7 @@ import wissensbasismodel.WissensbasismodelPackage;
  * <ul>
  *   <li>{@link wissensbasismodel.impl.RegelImpl#getID <em>ID</em>}</li>
  *   <li>{@link wissensbasismodel.impl.RegelImpl#getName <em>Name</em>}</li>
- *   <li>{@link wissensbasismodel.impl.RegelImpl#getPreamisse <em>Preamisse</em>}</li>
+ *   <li>{@link wissensbasismodel.impl.RegelImpl#getPraemisse <em>Praemisse</em>}</li>
  *   <li>{@link wissensbasismodel.impl.RegelImpl#getKonklusion <em>Konklusion</em>}</li>
  * </ul>
  * </p>
@@ -70,44 +78,24 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getPreamisse() <em>Preamisse</em>}' attribute.
+	 * The cached value of the '{@link #getPraemisse() <em>Praemisse</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPreamisse()
+	 * @see #getPraemisse()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PREAMISSE_EDEFAULT = null;
+	protected EList<Literal> praemisse;
 
 	/**
-	 * The cached value of the '{@link #getPreamisse() <em>Preamisse</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPreamisse()
-	 * @generated
-	 * @ordered
-	 */
-	protected String preamisse = PREAMISSE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getKonklusion() <em>Konklusion</em>}' attribute.
+	 * The cached value of the '{@link #getKonklusion() <em>Konklusion</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getKonklusion()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String KONKLUSION_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getKonklusion() <em>Konklusion</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getKonklusion()
-	 * @generated
-	 * @ordered
-	 */
-	protected String konklusion = KONKLUSION_EDEFAULT;
+	protected Konklusion konklusion;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -175,8 +163,11 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getPreamisse() {
-		return preamisse;
+	public EList<Literal> getPraemisse() {
+		if (praemisse == null) {
+			praemisse = new EObjectContainmentEList<Literal>(Literal.class, this, WissensbasismodelPackage.REGEL__PRAEMISSE);
+		}
+		return praemisse;
 	}
 
 	/**
@@ -184,19 +175,7 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPreamisse(String newPreamisse) {
-		String oldPreamisse = preamisse;
-		preamisse = newPreamisse;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.REGEL__PREAMISSE, oldPreamisse, preamisse));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getKonklusion() {
+	public Konklusion getKonklusion() {
 		return konklusion;
 	}
 
@@ -205,11 +184,49 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setKonklusion(String newKonklusion) {
-		String oldKonklusion = konklusion;
+	public NotificationChain basicSetKonklusion(Konklusion newKonklusion, NotificationChain msgs) {
+		Konklusion oldKonklusion = konklusion;
 		konklusion = newKonklusion;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.REGEL__KONKLUSION, oldKonklusion, konklusion));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.REGEL__KONKLUSION, oldKonklusion, newKonklusion);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKonklusion(Konklusion newKonklusion) {
+		if (newKonklusion != konklusion) {
+			NotificationChain msgs = null;
+			if (konklusion != null)
+				msgs = ((InternalEObject)konklusion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WissensbasismodelPackage.REGEL__KONKLUSION, null, msgs);
+			if (newKonklusion != null)
+				msgs = ((InternalEObject)newKonklusion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WissensbasismodelPackage.REGEL__KONKLUSION, null, msgs);
+			msgs = basicSetKonklusion(newKonklusion, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.REGEL__KONKLUSION, newKonklusion, newKonklusion));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case WissensbasismodelPackage.REGEL__PRAEMISSE:
+				return ((InternalEList<?>)getPraemisse()).basicRemove(otherEnd, msgs);
+			case WissensbasismodelPackage.REGEL__KONKLUSION:
+				return basicSetKonklusion(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -224,8 +241,8 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 				return getID();
 			case WissensbasismodelPackage.REGEL__NAME:
 				return getName();
-			case WissensbasismodelPackage.REGEL__PREAMISSE:
-				return getPreamisse();
+			case WissensbasismodelPackage.REGEL__PRAEMISSE:
+				return getPraemisse();
 			case WissensbasismodelPackage.REGEL__KONKLUSION:
 				return getKonklusion();
 		}
@@ -237,6 +254,7 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -246,11 +264,12 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 			case WissensbasismodelPackage.REGEL__NAME:
 				setName((String)newValue);
 				return;
-			case WissensbasismodelPackage.REGEL__PREAMISSE:
-				setPreamisse((String)newValue);
+			case WissensbasismodelPackage.REGEL__PRAEMISSE:
+				getPraemisse().clear();
+				getPraemisse().addAll((Collection<? extends Literal>)newValue);
 				return;
 			case WissensbasismodelPackage.REGEL__KONKLUSION:
-				setKonklusion((String)newValue);
+				setKonklusion((Konklusion)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -270,11 +289,11 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 			case WissensbasismodelPackage.REGEL__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case WissensbasismodelPackage.REGEL__PREAMISSE:
-				setPreamisse(PREAMISSE_EDEFAULT);
+			case WissensbasismodelPackage.REGEL__PRAEMISSE:
+				getPraemisse().clear();
 				return;
 			case WissensbasismodelPackage.REGEL__KONKLUSION:
-				setKonklusion(KONKLUSION_EDEFAULT);
+				setKonklusion((Konklusion)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -292,10 +311,10 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 				return id != ID_EDEFAULT;
 			case WissensbasismodelPackage.REGEL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case WissensbasismodelPackage.REGEL__PREAMISSE:
-				return PREAMISSE_EDEFAULT == null ? preamisse != null : !PREAMISSE_EDEFAULT.equals(preamisse);
+			case WissensbasismodelPackage.REGEL__PRAEMISSE:
+				return praemisse != null && !praemisse.isEmpty();
 			case WissensbasismodelPackage.REGEL__KONKLUSION:
-				return KONKLUSION_EDEFAULT == null ? konklusion != null : !KONKLUSION_EDEFAULT.equals(konklusion);
+				return konklusion != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -314,10 +333,6 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 		result.append(id);
 		result.append(", Name: ");
 		result.append(name);
-		result.append(", Preamisse: ");
-		result.append(preamisse);
-		result.append(", Konklusion: ");
-		result.append(konklusion);
 		result.append(')');
 		return result.toString();
 	}

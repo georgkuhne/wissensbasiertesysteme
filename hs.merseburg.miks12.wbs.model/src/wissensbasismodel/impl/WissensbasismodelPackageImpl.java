@@ -12,6 +12,11 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import wissensbasismodel.Aussage;
 import wissensbasismodel.Bauteil;
+import wissensbasismodel.Konklusion;
+import wissensbasismodel.KonklusionsTyp;
+import wissensbasismodel.Literal;
+import wissensbasismodel.LiteralOperatorenLogik;
+import wissensbasismodel.LiteralOperatorenPraedikat;
 import wissensbasismodel.Regel;
 import wissensbasismodel.WertebereichTyp;
 import wissensbasismodel.WissensBasis;
@@ -58,7 +63,42 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass literalEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass konklusionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum wertebereichTypEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum literalOperatorenPraedikatEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum literalOperatorenLogikEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum konklusionsTypEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -288,8 +328,8 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegel_Preamisse() {
-		return (EAttribute)regelEClass.getEStructuralFeatures().get(2);
+	public EReference getRegel_Praemisse() {
+		return (EReference)regelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -297,8 +337,8 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegel_Konklusion() {
-		return (EAttribute)regelEClass.getEStructuralFeatures().get(3);
+	public EReference getRegel_Konklusion() {
+		return (EReference)regelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -369,8 +409,161 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getLiteral() {
+		return literalEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLiteral_Aussage() {
+		return (EReference)literalEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLiteral_Wert() {
+		return (EAttribute)literalEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLiteral_Praedikat() {
+		return (EAttribute)literalEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLiteral_ID() {
+		return (EAttribute)literalEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLiteral_InnerLogikOperator() {
+		return (EAttribute)literalEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLiteral_OutLogicOperator() {
+		return (EAttribute)literalEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLiteral_NOT() {
+		return (EAttribute)literalEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLiteral_KlammerAuf() {
+		return (EAttribute)literalEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLiteral_KlammerZu() {
+		return (EAttribute)literalEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getKonklusion() {
+		return konklusionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKonklusion_KonklusionTyp() {
+		return (EAttribute)konklusionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getKonklusion_Literal() {
+		return (EReference)konklusionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKonklusion_DiagnoseText() {
+		return (EAttribute)konklusionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getWertebereichTyp() {
 		return wertebereichTypEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getLiteralOperatorenPraedikat() {
+		return literalOperatorenPraedikatEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getLiteralOperatorenLogik() {
+		return literalOperatorenLogikEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getKonklusionsTyp() {
+		return konklusionsTypEEnum;
 	}
 
 	/**
@@ -421,8 +614,8 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 		regelEClass = createEClass(REGEL);
 		createEAttribute(regelEClass, REGEL__ID);
 		createEAttribute(regelEClass, REGEL__NAME);
-		createEAttribute(regelEClass, REGEL__PREAMISSE);
-		createEAttribute(regelEClass, REGEL__KONKLUSION);
+		createEReference(regelEClass, REGEL__PRAEMISSE);
+		createEReference(regelEClass, REGEL__KONKLUSION);
 
 		aussageEClass = createEClass(AUSSAGE);
 		createEAttribute(aussageEClass, AUSSAGE__ID);
@@ -432,8 +625,27 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 		createEAttribute(aussageEClass, AUSSAGE__NAME);
 		createEAttribute(aussageEClass, AUSSAGE__LIST_WERTEBEREICH);
 
+		literalEClass = createEClass(LITERAL);
+		createEReference(literalEClass, LITERAL__AUSSAGE);
+		createEAttribute(literalEClass, LITERAL__WERT);
+		createEAttribute(literalEClass, LITERAL__PRAEDIKAT);
+		createEAttribute(literalEClass, LITERAL__ID);
+		createEAttribute(literalEClass, LITERAL__INNER_LOGIK_OPERATOR);
+		createEAttribute(literalEClass, LITERAL__OUT_LOGIC_OPERATOR);
+		createEAttribute(literalEClass, LITERAL__NOT);
+		createEAttribute(literalEClass, LITERAL__KLAMMER_AUF);
+		createEAttribute(literalEClass, LITERAL__KLAMMER_ZU);
+
+		konklusionEClass = createEClass(KONKLUSION);
+		createEAttribute(konklusionEClass, KONKLUSION__KONKLUSION_TYP);
+		createEAttribute(konklusionEClass, KONKLUSION__DIAGNOSE_TEXT);
+		createEReference(konklusionEClass, KONKLUSION__LITERAL);
+
 		// Create enums
 		wertebereichTypEEnum = createEEnum(WERTEBEREICH_TYP);
+		literalOperatorenPraedikatEEnum = createEEnum(LITERAL_OPERATOREN_PRAEDIKAT);
+		literalOperatorenLogikEEnum = createEEnum(LITERAL_OPERATOREN_LOGIK);
+		konklusionsTypEEnum = createEEnum(KONKLUSIONS_TYP);
 	}
 
 	/**
@@ -486,8 +698,8 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 		initEClass(regelEClass, Regel.class, "Regel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRegel_ID(), ecorePackage.getELong(), "ID", null, 0, 1, Regel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRegel_Name(), ecorePackage.getEString(), "Name", null, 0, 1, Regel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRegel_Preamisse(), ecorePackage.getEString(), "Preamisse", null, 0, 1, Regel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRegel_Konklusion(), ecorePackage.getEString(), "Konklusion", null, 0, 1, Regel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRegel_Praemisse(), this.getLiteral(), null, "praemisse", null, 0, -1, Regel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRegel_Konklusion(), this.getKonklusion(), null, "konklusion", null, 0, 1, Regel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(aussageEClass, Aussage.class, "Aussage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAussage_ID(), ecorePackage.getELong(), "ID", null, 0, 1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -497,12 +709,47 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 		initEAttribute(getAussage_Name(), ecorePackage.getEString(), "Name", null, 0, 1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAussage_ListWertebereich(), ecorePackage.getEString(), "listWertebereich", null, 0, -1, Aussage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(literalEClass, Literal.class, "Literal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLiteral_Aussage(), this.getAussage(), null, "aussage", null, 1, 1, Literal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLiteral_Wert(), ecorePackage.getEString(), "wert", null, 0, 1, Literal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLiteral_Praedikat(), this.getLiteralOperatorenPraedikat(), "praedikat", "NULL", 0, 1, Literal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLiteral_ID(), ecorePackage.getELong(), "ID", null, 0, 1, Literal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLiteral_InnerLogikOperator(), this.getLiteralOperatorenLogik(), "innerLogikOperator", "NULL", 0, 1, Literal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLiteral_OutLogicOperator(), this.getLiteralOperatorenLogik(), "outLogicOperator", "NULL", 0, 1, Literal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLiteral_NOT(), ecorePackage.getEBoolean(), "NOT", "false", 0, 1, Literal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLiteral_KlammerAuf(), ecorePackage.getEBoolean(), "klammerAuf", "false", 0, 1, Literal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLiteral_KlammerZu(), ecorePackage.getEBoolean(), "klammerZu", "false", 0, 1, Literal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(konklusionEClass, Konklusion.class, "Konklusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getKonklusion_KonklusionTyp(), this.getKonklusionsTyp(), "konklusionTyp", null, 0, 1, Konklusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKonklusion_DiagnoseText(), ecorePackage.getEString(), "diagnoseText", null, 0, 1, Konklusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKonklusion_Literal(), this.getLiteral(), null, "literal", null, 0, 1, Konklusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(wertebereichTypEEnum, WertebereichTyp.class, "WertebereichTyp");
 		addEEnumLiteral(wertebereichTypEEnum, WertebereichTyp.BOOLEAN);
 		addEEnumLiteral(wertebereichTypEEnum, WertebereichTyp.INTEGER);
 		addEEnumLiteral(wertebereichTypEEnum, WertebereichTyp.REAL);
 		addEEnumLiteral(wertebereichTypEEnum, WertebereichTyp.STRINGLIST);
+
+		initEEnum(literalOperatorenPraedikatEEnum, LiteralOperatorenPraedikat.class, "LiteralOperatorenPraedikat");
+		addEEnumLiteral(literalOperatorenPraedikatEEnum, LiteralOperatorenPraedikat.GLEICH);
+		addEEnumLiteral(literalOperatorenPraedikatEEnum, LiteralOperatorenPraedikat.KLEINERGLEICH);
+		addEEnumLiteral(literalOperatorenPraedikatEEnum, LiteralOperatorenPraedikat.KLEINERALS);
+		addEEnumLiteral(literalOperatorenPraedikatEEnum, LiteralOperatorenPraedikat.GROESSERGLEICH);
+		addEEnumLiteral(literalOperatorenPraedikatEEnum, LiteralOperatorenPraedikat.GROESSERALS);
+		addEEnumLiteral(literalOperatorenPraedikatEEnum, LiteralOperatorenPraedikat.UNGLEICH);
+		addEEnumLiteral(literalOperatorenPraedikatEEnum, LiteralOperatorenPraedikat.NULL);
+
+		initEEnum(literalOperatorenLogikEEnum, LiteralOperatorenLogik.class, "LiteralOperatorenLogik");
+		addEEnumLiteral(literalOperatorenLogikEEnum, LiteralOperatorenLogik.AND);
+		addEEnumLiteral(literalOperatorenLogikEEnum, LiteralOperatorenLogik.OR);
+		addEEnumLiteral(literalOperatorenLogikEEnum, LiteralOperatorenLogik.NULL);
+
+		initEEnum(konklusionsTypEEnum, KonklusionsTyp.class, "KonklusionsTyp");
+		addEEnumLiteral(konklusionsTypEEnum, KonklusionsTyp.LITERAL);
+		addEEnumLiteral(konklusionsTypEEnum, KonklusionsTyp.TEXTAUSGABE);
+		addEEnumLiteral(konklusionsTypEEnum, KonklusionsTyp.DIAGNOSEAUSGABE);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -84,6 +84,14 @@ public class WissensbasismodelAdapterFactory extends AdapterFactoryImpl {
 				return createAussageAdapter();
 			}
 			@Override
+			public Adapter caseLiteral(Literal object) {
+				return createLiteralAdapter();
+			}
+			@Override
+			public Adapter caseKonklusion(Konklusion object) {
+				return createKonklusionAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -156,6 +164,34 @@ public class WissensbasismodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAussageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link wissensbasismodel.Literal <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see wissensbasismodel.Literal
+	 * @generated
+	 */
+	public Adapter createLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link wissensbasismodel.Konklusion <em>Konklusion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see wissensbasismodel.Konklusion
+	 * @generated
+	 */
+	public Adapter createKonklusionAdapter() {
 		return null;
 	}
 

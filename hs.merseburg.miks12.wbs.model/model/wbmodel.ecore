@@ -29,8 +29,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
         iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Preamisse" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Konklusion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="praemisse" upperBound="-1"
+        eType="#//Literal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="konklusion" eType="#//Konklusion"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Aussage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
@@ -52,15 +54,44 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="aussage" lowerBound="1"
         eType="#//Aussage"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="wert" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//LiteralOperatoren"
-        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="praedikat" eType="#//LiteralOperatorenPraedikat"
+        defaultValueLiteral="NULL"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
         iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="innerLogikOperator" eType="#//LiteralOperatorenLogik"
+        defaultValueLiteral="NULL"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outLogicOperator" eType="#//LiteralOperatorenLogik"
+        defaultValueLiteral="NULL"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="NOT" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="klammerAuf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="klammerZu" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="LiteralOperatoren">
+  <eClassifiers xsi:type="ecore:EEnum" name="LiteralOperatorenPraedikat">
     <eLiterals name="gleich" literal="gleich"/>
-    <eLiterals name="kleinerals" value="1"/>
-    <eLiterals name="groeßerals" value="2"/>
-    <eLiterals name="ungleich" value="3"/>
+    <eLiterals name="kleinergleich" value="1" literal="kleinergleich"/>
+    <eLiterals name="kleinerals" value="2"/>
+    <eLiterals name="groessergleich" value="3" literal=""/>
+    <eLiterals name="groeßerals" value="4"/>
+    <eLiterals name="ungleich" value="5"/>
+    <eLiterals name="NULL"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LiteralOperatorenLogik">
+    <eLiterals name="AND"/>
+    <eLiterals name="OR" value="1"/>
+    <eLiterals name="NULL" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Konklusion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="konklusionTyp" eType="#//KonklusionsTyp"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="diagnoseText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literal" eType="#//Literal"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="KonklusionsTyp">
+    <eLiterals name="Literal" literal="Literal"/>
+    <eLiterals name="Textausgabe" value="1" literal="Textausgabe"/>
+    <eLiterals name="Diagnoseausgabe" value="2"/>
   </eClassifiers>
 </ecore:EPackage>

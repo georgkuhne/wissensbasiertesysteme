@@ -261,16 +261,16 @@ public interface WissensbasismodelPackage extends EPackage {
 	int REGEL__NAME = 1;
 
 	/**
-	 * The feature id for the '<em><b>Preamisse</b></em>' attribute.
+	 * The feature id for the '<em><b>Praemisse</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGEL__PREAMISSE = 2;
+	int REGEL__PRAEMISSE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Konklusion</b></em>' attribute.
+	 * The feature id for the '<em><b>Konklusion</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -380,6 +380,170 @@ public interface WissensbasismodelPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link wissensbasismodel.impl.LiteralImpl <em>Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see wissensbasismodel.impl.LiteralImpl
+	 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getLiteral()
+	 * @generated
+	 */
+	int LITERAL = 4;
+
+	/**
+	 * The feature id for the '<em><b>Aussage</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL__AUSSAGE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Wert</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL__WERT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Praedikat</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL__PRAEDIKAT = 2;
+
+	/**
+	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL__ID = 3;
+
+	/**
+	 * The feature id for the '<em><b>Inner Logik Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL__INNER_LOGIK_OPERATOR = 4;
+
+	/**
+	 * The feature id for the '<em><b>Out Logic Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL__OUT_LOGIC_OPERATOR = 5;
+
+	/**
+	 * The feature id for the '<em><b>NOT</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL__NOT = 6;
+
+	/**
+	 * The feature id for the '<em><b>Klammer Auf</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL__KLAMMER_AUF = 7;
+
+	/**
+	 * The feature id for the '<em><b>Klammer Zu</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL__KLAMMER_ZU = 8;
+
+	/**
+	 * The number of structural features of the '<em>Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_FEATURE_COUNT = 9;
+
+	/**
+	 * The number of operations of the '<em>Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link wissensbasismodel.impl.KonklusionImpl <em>Konklusion</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see wissensbasismodel.impl.KonklusionImpl
+	 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getKonklusion()
+	 * @generated
+	 */
+	int KONKLUSION = 5;
+
+	/**
+	 * The feature id for the '<em><b>Konklusion Typ</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KONKLUSION__KONKLUSION_TYP = 0;
+
+	/**
+	 * The feature id for the '<em><b>Diagnose Text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KONKLUSION__DIAGNOSE_TEXT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Literal</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KONKLUSION__LITERAL = 2;
+
+	/**
+	 * The number of structural features of the '<em>Konklusion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KONKLUSION_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Konklusion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KONKLUSION_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link wissensbasismodel.WertebereichTyp <em>Wertebereich Typ</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -387,7 +551,38 @@ public interface WissensbasismodelPackage extends EPackage {
 	 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getWertebereichTyp()
 	 * @generated
 	 */
-	int WERTEBEREICH_TYP = 4;
+	int WERTEBEREICH_TYP = 6;
+
+
+	/**
+	 * The meta object id for the '{@link wissensbasismodel.LiteralOperatorenPraedikat <em>Literal Operatoren Praedikat</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see wissensbasismodel.LiteralOperatorenPraedikat
+	 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getLiteralOperatorenPraedikat()
+	 * @generated
+	 */
+	int LITERAL_OPERATOREN_PRAEDIKAT = 7;
+
+	/**
+	 * The meta object id for the '{@link wissensbasismodel.LiteralOperatorenLogik <em>Literal Operatoren Logik</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see wissensbasismodel.LiteralOperatorenLogik
+	 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getLiteralOperatorenLogik()
+	 * @generated
+	 */
+	int LITERAL_OPERATOREN_LOGIK = 8;
+
+	/**
+	 * The meta object id for the '{@link wissensbasismodel.KonklusionsTyp <em>Konklusions Typ</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see wissensbasismodel.KonklusionsTyp
+	 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getKonklusionsTyp()
+	 * @generated
+	 */
+	int KONKLUSIONS_TYP = 9;
 
 
 	/**
@@ -586,26 +781,26 @@ public interface WissensbasismodelPackage extends EPackage {
 	EAttribute getRegel_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link wissensbasismodel.Regel#getPreamisse <em>Preamisse</em>}'.
+	 * Returns the meta object for the containment reference list '{@link wissensbasismodel.Regel#getPraemisse <em>Praemisse</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Preamisse</em>'.
-	 * @see wissensbasismodel.Regel#getPreamisse()
+	 * @return the meta object for the containment reference list '<em>Praemisse</em>'.
+	 * @see wissensbasismodel.Regel#getPraemisse()
 	 * @see #getRegel()
 	 * @generated
 	 */
-	EAttribute getRegel_Preamisse();
+	EReference getRegel_Praemisse();
 
 	/**
-	 * Returns the meta object for the attribute '{@link wissensbasismodel.Regel#getKonklusion <em>Konklusion</em>}'.
+	 * Returns the meta object for the containment reference '{@link wissensbasismodel.Regel#getKonklusion <em>Konklusion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Konklusion</em>'.
+	 * @return the meta object for the containment reference '<em>Konklusion</em>'.
 	 * @see wissensbasismodel.Regel#getKonklusion()
 	 * @see #getRegel()
 	 * @generated
 	 */
-	EAttribute getRegel_Konklusion();
+	EReference getRegel_Konklusion();
 
 	/**
 	 * Returns the meta object for class '{@link wissensbasismodel.Aussage <em>Aussage</em>}'.
@@ -684,6 +879,158 @@ public interface WissensbasismodelPackage extends EPackage {
 	EAttribute getAussage_ListWertebereich();
 
 	/**
+	 * Returns the meta object for class '{@link wissensbasismodel.Literal <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Literal</em>'.
+	 * @see wissensbasismodel.Literal
+	 * @generated
+	 */
+	EClass getLiteral();
+
+	/**
+	 * Returns the meta object for the reference '{@link wissensbasismodel.Literal#getAussage <em>Aussage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Aussage</em>'.
+	 * @see wissensbasismodel.Literal#getAussage()
+	 * @see #getLiteral()
+	 * @generated
+	 */
+	EReference getLiteral_Aussage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Literal#getWert <em>Wert</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Wert</em>'.
+	 * @see wissensbasismodel.Literal#getWert()
+	 * @see #getLiteral()
+	 * @generated
+	 */
+	EAttribute getLiteral_Wert();
+
+	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Literal#getPraedikat <em>Praedikat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Praedikat</em>'.
+	 * @see wissensbasismodel.Literal#getPraedikat()
+	 * @see #getLiteral()
+	 * @generated
+	 */
+	EAttribute getLiteral_Praedikat();
+
+	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Literal#getID <em>ID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>ID</em>'.
+	 * @see wissensbasismodel.Literal#getID()
+	 * @see #getLiteral()
+	 * @generated
+	 */
+	EAttribute getLiteral_ID();
+
+	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Literal#getInnerLogikOperator <em>Inner Logik Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Inner Logik Operator</em>'.
+	 * @see wissensbasismodel.Literal#getInnerLogikOperator()
+	 * @see #getLiteral()
+	 * @generated
+	 */
+	EAttribute getLiteral_InnerLogikOperator();
+
+	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Literal#getOutLogicOperator <em>Out Logic Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Out Logic Operator</em>'.
+	 * @see wissensbasismodel.Literal#getOutLogicOperator()
+	 * @see #getLiteral()
+	 * @generated
+	 */
+	EAttribute getLiteral_OutLogicOperator();
+
+	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Literal#isNOT <em>NOT</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>NOT</em>'.
+	 * @see wissensbasismodel.Literal#isNOT()
+	 * @see #getLiteral()
+	 * @generated
+	 */
+	EAttribute getLiteral_NOT();
+
+	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Literal#isKlammerAuf <em>Klammer Auf</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Klammer Auf</em>'.
+	 * @see wissensbasismodel.Literal#isKlammerAuf()
+	 * @see #getLiteral()
+	 * @generated
+	 */
+	EAttribute getLiteral_KlammerAuf();
+
+	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Literal#isKlammerZu <em>Klammer Zu</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Klammer Zu</em>'.
+	 * @see wissensbasismodel.Literal#isKlammerZu()
+	 * @see #getLiteral()
+	 * @generated
+	 */
+	EAttribute getLiteral_KlammerZu();
+
+	/**
+	 * Returns the meta object for class '{@link wissensbasismodel.Konklusion <em>Konklusion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Konklusion</em>'.
+	 * @see wissensbasismodel.Konklusion
+	 * @generated
+	 */
+	EClass getKonklusion();
+
+	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Konklusion#getKonklusionTyp <em>Konklusion Typ</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Konklusion Typ</em>'.
+	 * @see wissensbasismodel.Konklusion#getKonklusionTyp()
+	 * @see #getKonklusion()
+	 * @generated
+	 */
+	EAttribute getKonklusion_KonklusionTyp();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link wissensbasismodel.Konklusion#getLiteral <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Literal</em>'.
+	 * @see wissensbasismodel.Konklusion#getLiteral()
+	 * @see #getKonklusion()
+	 * @generated
+	 */
+	EReference getKonklusion_Literal();
+
+	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Konklusion#getDiagnoseText <em>Diagnose Text</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Diagnose Text</em>'.
+	 * @see wissensbasismodel.Konklusion#getDiagnoseText()
+	 * @see #getKonklusion()
+	 * @generated
+	 */
+	EAttribute getKonklusion_DiagnoseText();
+
+	/**
 	 * Returns the meta object for enum '{@link wissensbasismodel.WertebereichTyp <em>Wertebereich Typ</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -692,6 +1039,36 @@ public interface WissensbasismodelPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getWertebereichTyp();
+
+	/**
+	 * Returns the meta object for enum '{@link wissensbasismodel.LiteralOperatorenPraedikat <em>Literal Operatoren Praedikat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Literal Operatoren Praedikat</em>'.
+	 * @see wissensbasismodel.LiteralOperatorenPraedikat
+	 * @generated
+	 */
+	EEnum getLiteralOperatorenPraedikat();
+
+	/**
+	 * Returns the meta object for enum '{@link wissensbasismodel.LiteralOperatorenLogik <em>Literal Operatoren Logik</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Literal Operatoren Logik</em>'.
+	 * @see wissensbasismodel.LiteralOperatorenLogik
+	 * @generated
+	 */
+	EEnum getLiteralOperatorenLogik();
+
+	/**
+	 * Returns the meta object for enum '{@link wissensbasismodel.KonklusionsTyp <em>Konklusions Typ</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Konklusions Typ</em>'.
+	 * @see wissensbasismodel.KonklusionsTyp
+	 * @generated
+	 */
+	EEnum getKonklusionsTyp();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -849,19 +1226,19 @@ public interface WissensbasismodelPackage extends EPackage {
 		 */
 		EAttribute REGEL__NAME = eINSTANCE.getRegel_Name();
 		/**
-		 * The meta object literal for the '<em><b>Preamisse</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Praemisse</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute REGEL__PREAMISSE = eINSTANCE.getRegel_Preamisse();
+		EReference REGEL__PRAEMISSE = eINSTANCE.getRegel_Praemisse();
 		/**
-		 * The meta object literal for the '<em><b>Konklusion</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Konklusion</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute REGEL__KONKLUSION = eINSTANCE.getRegel_Konklusion();
+		EReference REGEL__KONKLUSION = eINSTANCE.getRegel_Konklusion();
 		/**
 		 * The meta object literal for the '{@link wissensbasismodel.impl.AussageImpl <em>Aussage</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -914,6 +1291,108 @@ public interface WissensbasismodelPackage extends EPackage {
 		 */
 		EAttribute AUSSAGE__LIST_WERTEBEREICH = eINSTANCE.getAussage_ListWertebereich();
 		/**
+		 * The meta object literal for the '{@link wissensbasismodel.impl.LiteralImpl <em>Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see wissensbasismodel.impl.LiteralImpl
+		 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getLiteral()
+		 * @generated
+		 */
+		EClass LITERAL = eINSTANCE.getLiteral();
+		/**
+		 * The meta object literal for the '<em><b>Aussage</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LITERAL__AUSSAGE = eINSTANCE.getLiteral_Aussage();
+		/**
+		 * The meta object literal for the '<em><b>Wert</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LITERAL__WERT = eINSTANCE.getLiteral_Wert();
+		/**
+		 * The meta object literal for the '<em><b>Praedikat</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LITERAL__PRAEDIKAT = eINSTANCE.getLiteral_Praedikat();
+		/**
+		 * The meta object literal for the '<em><b>ID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LITERAL__ID = eINSTANCE.getLiteral_ID();
+		/**
+		 * The meta object literal for the '<em><b>Inner Logik Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LITERAL__INNER_LOGIK_OPERATOR = eINSTANCE.getLiteral_InnerLogikOperator();
+		/**
+		 * The meta object literal for the '<em><b>Out Logic Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LITERAL__OUT_LOGIC_OPERATOR = eINSTANCE.getLiteral_OutLogicOperator();
+		/**
+		 * The meta object literal for the '<em><b>NOT</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LITERAL__NOT = eINSTANCE.getLiteral_NOT();
+		/**
+		 * The meta object literal for the '<em><b>Klammer Auf</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LITERAL__KLAMMER_AUF = eINSTANCE.getLiteral_KlammerAuf();
+		/**
+		 * The meta object literal for the '<em><b>Klammer Zu</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LITERAL__KLAMMER_ZU = eINSTANCE.getLiteral_KlammerZu();
+		/**
+		 * The meta object literal for the '{@link wissensbasismodel.impl.KonklusionImpl <em>Konklusion</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see wissensbasismodel.impl.KonklusionImpl
+		 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getKonklusion()
+		 * @generated
+		 */
+		EClass KONKLUSION = eINSTANCE.getKonklusion();
+		/**
+		 * The meta object literal for the '<em><b>Konklusion Typ</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KONKLUSION__KONKLUSION_TYP = eINSTANCE.getKonklusion_KonklusionTyp();
+		/**
+		 * The meta object literal for the '<em><b>Literal</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KONKLUSION__LITERAL = eINSTANCE.getKonklusion_Literal();
+		/**
+		 * The meta object literal for the '<em><b>Diagnose Text</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KONKLUSION__DIAGNOSE_TEXT = eINSTANCE.getKonklusion_DiagnoseText();
+		/**
 		 * The meta object literal for the '{@link wissensbasismodel.WertebereichTyp <em>Wertebereich Typ</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -922,6 +1401,33 @@ public interface WissensbasismodelPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum WERTEBEREICH_TYP = eINSTANCE.getWertebereichTyp();
+		/**
+		 * The meta object literal for the '{@link wissensbasismodel.LiteralOperatorenPraedikat <em>Literal Operatoren Praedikat</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see wissensbasismodel.LiteralOperatorenPraedikat
+		 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getLiteralOperatorenPraedikat()
+		 * @generated
+		 */
+		EEnum LITERAL_OPERATOREN_PRAEDIKAT = eINSTANCE.getLiteralOperatorenPraedikat();
+		/**
+		 * The meta object literal for the '{@link wissensbasismodel.LiteralOperatorenLogik <em>Literal Operatoren Logik</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see wissensbasismodel.LiteralOperatorenLogik
+		 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getLiteralOperatorenLogik()
+		 * @generated
+		 */
+		EEnum LITERAL_OPERATOREN_LOGIK = eINSTANCE.getLiteralOperatorenLogik();
+		/**
+		 * The meta object literal for the '{@link wissensbasismodel.KonklusionsTyp <em>Konklusions Typ</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see wissensbasismodel.KonklusionsTyp
+		 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getKonklusionsTyp()
+		 * @generated
+		 */
+		EEnum KONKLUSIONS_TYP = eINSTANCE.getKonklusionsTyp();
 
 	}
 

@@ -2,6 +2,7 @@
  */
 package wissensbasismodel;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link wissensbasismodel.Regel#getID <em>ID</em>}</li>
  *   <li>{@link wissensbasismodel.Regel#getName <em>Name</em>}</li>
- *   <li>{@link wissensbasismodel.Regel#getPreamisse <em>Preamisse</em>}</li>
+ *   <li>{@link wissensbasismodel.Regel#getPraemisse <em>Praemisse</em>}</li>
  *   <li>{@link wissensbasismodel.Regel#getKonklusion <em>Konklusion</em>}</li>
  * </ul>
  * </p>
@@ -77,55 +78,45 @@ public interface Regel extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Preamisse</b></em>' attribute.
+	 * Returns the value of the '<em><b>Praemisse</b></em>' containment reference list.
+	 * The list contents are of type {@link wissensbasismodel.Literal}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Preamisse</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Praemisse</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Preamisse</em>' attribute.
-	 * @see #setPreamisse(String)
-	 * @see wissensbasismodel.WissensbasismodelPackage#getRegel_Preamisse()
-	 * @model
+	 * @return the value of the '<em>Praemisse</em>' containment reference list.
+	 * @see wissensbasismodel.WissensbasismodelPackage#getRegel_Praemisse()
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getPreamisse();
+	EList<Literal> getPraemisse();
 
 	/**
-	 * Sets the value of the '{@link wissensbasismodel.Regel#getPreamisse <em>Preamisse</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Preamisse</em>' attribute.
-	 * @see #getPreamisse()
-	 * @generated
-	 */
-	void setPreamisse(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Konklusion</b></em>' attribute.
+	 * Returns the value of the '<em><b>Konklusion</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Konklusion</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Konklusion</em>' attribute.
-	 * @see #setKonklusion(String)
+	 * @return the value of the '<em>Konklusion</em>' containment reference.
+	 * @see #setKonklusion(Konklusion)
 	 * @see wissensbasismodel.WissensbasismodelPackage#getRegel_Konklusion()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getKonklusion();
+	Konklusion getKonklusion();
 
 	/**
-	 * Sets the value of the '{@link wissensbasismodel.Regel#getKonklusion <em>Konklusion</em>}' attribute.
+	 * Sets the value of the '{@link wissensbasismodel.Regel#getKonklusion <em>Konklusion</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Konklusion</em>' attribute.
+	 * @param value the new value of the '<em>Konklusion</em>' containment reference.
 	 * @see #getKonklusion()
 	 * @generated
 	 */
-	void setKonklusion(String value);
+	void setKonklusion(Konklusion value);
 
 } // Regel
