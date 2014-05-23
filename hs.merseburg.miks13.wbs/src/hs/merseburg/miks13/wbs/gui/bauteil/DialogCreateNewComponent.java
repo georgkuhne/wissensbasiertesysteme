@@ -1,5 +1,7 @@
 package hs.merseburg.miks13.wbs.gui.bauteil;
 
+import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
+
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.ListViewer;
@@ -14,12 +16,23 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.hibernate.Session;
+
+import wissensbasismodel.Bauteil;
+import wissensbasismodel.WissensBasis;
+import wissensbasismodel.WissensbasismodelFactory;
 
 public class DialogCreateNewComponent extends Dialog {
 	private Text textName;
 	private Text textAssetID;
 	private Text textKoroutine;
 	private Long wbsID;
+	private ListViewer ListViewerAdded;
+	private ListViewer ListViewerSelect;
+	private Button btnAddAll;
+	private Button btnAdd;
+	private Button btnDelete;
+	private Button btnDeleteAll;
 
 	/**
 	 * Create the dialog.
@@ -61,35 +74,33 @@ public class DialogCreateNewComponent extends Dialog {
 		new Label(container, SWT.NONE);
 		new Label(container, SWT.NONE);
 
-		ListViewer listViewer_1 = new ListViewer(container, SWT.BORDER
-				| SWT.V_SCROLL);
-		List listvieweradded = listViewer_1.getList();
-		listvieweradded.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
+		ListViewerSelect = new ListViewer(container, SWT.BORDER | SWT.V_SCROLL);
+		List listviewerSelect = ListViewerSelect.getList();
+		listviewerSelect.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
 				false, 1, 6));
 		new Label(container, SWT.NONE);
 
-		ListViewer listViewer = new ListViewer(container, SWT.BORDER
-				| SWT.V_SCROLL);
-		List listviewerSelect = listViewer.getList();
-		listviewerSelect.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
+		ListViewerAdded = new ListViewer(container, SWT.BORDER | SWT.V_SCROLL);
+		List listvieweradded = ListViewerAdded.getList();
+		listvieweradded.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
 				false, 1, 6));
 
-		Button btnAddAll = new Button(container, SWT.NONE);
+		btnAddAll = new Button(container, SWT.NONE);
 		btnAddAll.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false,
 				false, 1, 1));
 		btnAddAll.setText("Alle Hinzufügen >>");
 
-		Button btnAdd = new Button(container, SWT.NONE);
+		btnAdd = new Button(container, SWT.NONE);
 		btnAdd.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false,
 				1, 1));
 		btnAdd.setText("Hinzufügen >");
 
-		Button btnDelete = new Button(container, SWT.NONE);
+		btnDelete = new Button(container, SWT.NONE);
 		btnDelete.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false,
 				false, 1, 1));
 		btnDelete.setText("< Entfernen");
 
-		Button btnDeleteAll = new Button(container, SWT.NONE);
+		btnDeleteAll = new Button(container, SWT.NONE);
 		btnDeleteAll.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false,
 				false, 1, 1));
 		btnDeleteAll.setText("<< Alle Entfernen");
@@ -116,6 +127,35 @@ public class DialogCreateNewComponent extends Dialog {
 				true);
 		createButton(parent, IDialogConstants.CANCEL_ID,
 				IDialogConstants.CANCEL_LABEL, false);
+	}
+
+	@Override
+	protected void okPressed() {
+		if (!validateInput())
+			return;
+		String Name = textName.getText().trim();
+		String AssetID = textAssetID.getText().trim();
+		String Koroutine = textKoroutine.getText().trim();
+
+		Bauteil bauteil = WissensbasismodelFactory.eINSTANCE.createBauteil();
+
+		bauteil.setName(Name);
+		bauteil.setAsset_ID(AssetID);
+		bauteil.setKoroutine(Koroutine);
+
+		Session session = PersistenceUtility.getINSTANCE().createSession();
+		WissensBasis wbs = PersistenceUtility.getWissensBasisById(wbsID,
+				session);
+		wbs.getBauteile().add(bauteil);
+
+		session.flush();
+		session.close();
+		super.okPressed();
+	}
+
+	private boolean validateInput() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	/**
