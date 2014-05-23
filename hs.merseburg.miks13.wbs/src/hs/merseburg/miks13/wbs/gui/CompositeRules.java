@@ -124,25 +124,6 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 			}
 		});
 
-		col = createTableViewerColumn("Praemisse", 100, 0);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Regel wb = (Regel) element;
-				return wb.getPreamisse();
-
-			}
-		});
-		col = createTableViewerColumn("Konklusion", 100, 0);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Regel wb = (Regel) element;
-				return wb.getKonklusion();
-
-			}
-		});
-
 	}
 
 	private TableViewerColumn createTableViewerColumn(String title, int bound,
