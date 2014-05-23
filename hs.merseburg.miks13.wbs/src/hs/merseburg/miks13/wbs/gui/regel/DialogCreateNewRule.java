@@ -71,7 +71,7 @@ public class DialogCreateNewRule extends Dialog {
 		composite_1.setLayout(new GridLayout(4, false));
 
 		Label lblPraefix = new Label(composite_1, SWT.NONE);
-		lblPraefix.setText("Präfix:");
+		lblPraefix.setText("Pr\u00E4fix:");
 
 		Label lblAussage_1 = new Label(composite_1, SWT.NONE);
 		lblAussage_1.setText("Aussage:");
