@@ -4,10 +4,18 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowData;
+import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -17,10 +25,13 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class DialogCreateNewRule extends Dialog {
 	private Text text;
 	private Long wbsID;
+	private ContainerTableviewerRegelPraemisse praemisseContainer;
+	private long wbsId;
 
 	/**
 	 * Create the dialog.
@@ -29,7 +40,7 @@ public class DialogCreateNewRule extends Dialog {
 	 */
 	public DialogCreateNewRule(Shell parentShell, Long WBSID) {
 		super(parentShell);
-		setShellStyle(SWT.RESIZE);
+		setShellStyle(SWT.BORDER | SWT.RESIZE | SWT.TITLE);
 		wbsID = WBSID;
 	}
 
@@ -58,7 +69,7 @@ public class DialogCreateNewRule extends Dialog {
 		groupkonklusion.setLayout(new FillLayout(SWT.VERTICAL));
 		GridData gd_groupkonklusion = new GridData(SWT.FILL, SWT.CENTER, false,
 				false, 2, 1);
-		gd_groupkonklusion.heightHint = 156;
+		gd_groupkonklusion.heightHint = 100;
 		groupkonklusion.setLayoutData(gd_groupkonklusion);
 
 		TabFolder tabFolder = new TabFolder(groupkonklusion, SWT.NONE);
@@ -129,6 +140,67 @@ public class DialogCreateNewRule extends Dialog {
 		StyledText styledTextTextausgabe = new StyledText(tabFolder, SWT.BORDER);
 		tbtmTextausgabe.setControl(styledTextTextausgabe);
 
+		Group grpPrmisse = new Group(container, SWT.NONE);
+		grpPrmisse.setLayout(new FormLayout());
+		GridData gd_grpPrmisse = new GridData(SWT.FILL, SWT.FILL, false, false,
+				2, 1);
+		gd_grpPrmisse.heightHint = 250;
+		gd_grpPrmisse.minimumHeight = 500;
+		grpPrmisse.setLayoutData(gd_grpPrmisse);
+		grpPrmisse.setText("Pr\u00E4misse");
+
+		StyledText styledText = new StyledText(grpPrmisse, SWT.BORDER
+				| SWT.READ_ONLY);
+		styledText.setAlignment(SWT.CENTER);
+		styledText.setText("asdasdasd");
+		styledText.setBackground(SWTResourceManager
+				.getColor(SWT.COLOR_TITLE_INACTIVE_FOREGROUND));
+		styledText.setSelectionForeground(SWTResourceManager
+				.getColor(SWT.COLOR_TITLE_INACTIVE_FOREGROUND));
+		styledText.setMarginColor(SWTResourceManager
+				.getColor(SWT.COLOR_TITLE_INACTIVE_FOREGROUND));
+		styledText.setSelectionBackground(SWTResourceManager
+				.getColor(SWT.COLOR_GRAY));
+		styledText.setEditable(false);
+		FormData fd_styledText = new FormData();
+		fd_styledText.bottom = new FormAttachment(100);
+		fd_styledText.right = new FormAttachment(100);
+		fd_styledText.left = new FormAttachment(0);
+		fd_styledText.height = 50;
+		styledText.setLayoutData(fd_styledText);
+
+		Composite compTableviewer = new Composite(grpPrmisse, SWT.NONE);
+		compTableviewer.setLayout(new FillLayout(SWT.HORIZONTAL));
+		FormData fd_compTableviewer = new FormData();
+		fd_compTableviewer.top = new FormAttachment(0);
+		fd_compTableviewer.left = new FormAttachment(0);
+		fd_compTableviewer.bottom = new FormAttachment(styledText);
+		fd_compTableviewer.right = new FormAttachment(80);
+		compTableviewer.setLayoutData(fd_compTableviewer);
+
+		Composite cmpPraemisseButtons = new Composite(grpPrmisse, SWT.NONE);
+		cmpPraemisseButtons.setLayout(new RowLayout(SWT.VERTICAL));
+		FormData fd_cmpPraemisseButtons = new FormData();
+		fd_cmpPraemisseButtons.top = new FormAttachment(0);
+		fd_cmpPraemisseButtons.left = new FormAttachment(compTableviewer);
+		fd_cmpPraemisseButtons.right = new FormAttachment(100);
+
+		fd_cmpPraemisseButtons.bottom = new FormAttachment(styledText);
+		cmpPraemisseButtons.setLayoutData(fd_cmpPraemisseButtons);
+		praemisseContainer = new ContainerTableviewerRegelPraemisse(
+				compTableviewer, wbsId);
+		Button btnNewLiteral = new Button(cmpPraemisseButtons, SWT.NONE);
+		btnNewLiteral.setText("New Literal");
+
+		Button btnDelete = new Button(cmpPraemisseButtons, SWT.NONE);
+		btnDelete.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
+		btnDelete.setLayoutData(new RowData(66, SWT.DEFAULT));
+		btnDelete.setText("Delete");
+
 		return container;
 	}
 
@@ -150,6 +222,6 @@ public class DialogCreateNewRule extends Dialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(633, 411);
+		return new Point(633, 531);
 	}
 }
