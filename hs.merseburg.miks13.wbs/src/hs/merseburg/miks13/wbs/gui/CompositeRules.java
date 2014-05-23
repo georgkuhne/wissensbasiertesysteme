@@ -1,6 +1,8 @@
 package hs.merseburg.miks13.wbs.gui;
 
 import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
+import hs.merseburg.miks13.wbs.gui.aussage.DialogCreateNewAussage;
+import hs.merseburg.miks13.wbs.gui.regel.DialogCreateNewRule;
 
 import java.util.List;
 
@@ -17,6 +19,7 @@ import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
@@ -27,6 +30,7 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 	private TableViewer viewer;
 	private Table table;
 	private Button b_new, b_edit;
+	private long wbsID;
 
 	public CompositeRules(Composite parent, int style) {
 		super(parent, style);
@@ -75,6 +79,19 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				// TODO Auto-generated method stub
+
+			}
+		});
+		b_new.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				createnewRule();
+
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
 
 			}
 		});
@@ -161,8 +178,17 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 
 	@Override
 	public void setWBSID(long wbsID) {
-		// TODO Auto-generated method stub
+		this.wbsID = wbsID;
+		refreshTable();
 
+	}
+
+	private void createnewRule() {
+		DialogCreateNewRule dialog = new DialogCreateNewRule(Display
+				.getCurrent().getActiveShell(), wbsID);
+		if (dialog.open() == DialogCreateNewAussage.OK) {
+			refreshTable();
+		}
 	}
 
 }
