@@ -49,6 +49,7 @@ public class DialogEditAussage extends Dialog {
 	public DialogEditAussage(Shell parentShell, long IDAussage, Session session) {
 		super(parentShell);
 		this.IDAussage = IDAussage;
+		setShellStyle(SWT.RESIZE);
 		this.session = session;
 	}
 

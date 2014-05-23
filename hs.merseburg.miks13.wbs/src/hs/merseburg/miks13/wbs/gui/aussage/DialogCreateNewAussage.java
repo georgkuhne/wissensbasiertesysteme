@@ -47,6 +47,7 @@ public class DialogCreateNewAussage extends Dialog {
 	 */
 	public DialogCreateNewAussage(Shell parentShell, Long WBSID) {
 		super(parentShell);
+		setShellStyle(SWT.RESIZE);
 		wbsID = WBSID;
 
 	}
