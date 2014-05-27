@@ -31,6 +31,7 @@ public class ContainerTableviewerRegelPraemisse {
 		viewer.setContentProvider(ArrayContentProvider.getInstance());
 		this.wbsID = wbsID;
 		createColumns();
+
 	}
 
 	private void createColumns() {
@@ -43,7 +44,11 @@ public class ContainerTableviewerRegelPraemisse {
 
 			}
 		});
+
 		col = createTableViewerColumn("(", 20, 0);
+		EdditingSupportPraemisseViewer editingSupport = new EdditingSupportPraemisseViewer(
+				viewer);
+		col.setEditingSupport(editingSupport);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
@@ -128,11 +133,11 @@ public class ContainerTableviewerRegelPraemisse {
 		value1, value2, value3;
 	}
 
-	public final class ExampleEditingSupport extends EditingSupport {
+	public final class EdditingSupportPraemisseViewer extends EditingSupport {
 
 		private ComboBoxViewerCellEditor cellEditor = null;
 
-		private ExampleEditingSupport(ColumnViewer viewer) {
+		private EdditingSupportPraemisseViewer(ColumnViewer viewer) {
 			super(viewer);
 			cellEditor = new ComboBoxViewerCellEditor((Composite) getViewer()
 					.getControl(), SWT.READ_ONLY);

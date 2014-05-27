@@ -88,12 +88,12 @@ public class DialogCreateNewComponent extends Dialog {
 		btnAddAll = new Button(container, SWT.NONE);
 		btnAddAll.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false,
 				false, 1, 1));
-		btnAddAll.setText("Alle Hinzufügen >>");
+		btnAddAll.setText("Alle Hinzuf\u00FCgen >>");
 
 		btnAdd = new Button(container, SWT.NONE);
 		btnAdd.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false,
 				1, 1));
-		btnAdd.setText("Hinzufügen >");
+		btnAdd.setText("Hinzuf\u00FCgen >");
 
 		btnDelete = new Button(container, SWT.NONE);
 		btnDelete.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false,
