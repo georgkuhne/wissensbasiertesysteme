@@ -76,7 +76,7 @@
     <eLiterals name="groessergleich" value="3" literal=""/>
     <eLiterals name="groeßerals" value="4"/>
     <eLiterals name="ungleich" value="5"/>
-    <eLiterals name="NULL"/>
+    <eLiterals name="NULL" value="6"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="LiteralOperatorenLogik">
     <eLiterals name="AND"/>
@@ -85,13 +85,21 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Konklusion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="konklusionTyp" eType="#//KonklusionsTyp"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="diagnoseText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Textausgabe" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="literal" eType="#//Literal"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Diagnoseaussage" eType="#//Aussage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="KonklusionsTyp">
     <eLiterals name="Literal" literal="Literal"/>
     <eLiterals name="Textausgabe" value="1" literal="Textausgabe"/>
     <eLiterals name="Diagnoseausgabe" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Regelgruppe">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Regeln" upperBound="-1"
+        eType="#//Regel"/>
   </eClassifiers>
 </ecore:EPackage>

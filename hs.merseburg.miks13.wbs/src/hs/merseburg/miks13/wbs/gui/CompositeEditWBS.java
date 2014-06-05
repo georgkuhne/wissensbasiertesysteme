@@ -22,7 +22,9 @@ public class CompositeEditWBS extends Composite {
 
 	private CompositeStatement compositeStatement;
 	private CompositeRules compositeRules;
-	private CompositeComponents compositeComponents;
+	private CompositeRuleGroup compositeRuleGroup;
+
+	// private CompositeComponents compositeComponents;
 
 	public CompositeEditWBS(Composite parent, int style, MainView mainView1) {
 		super(parent, style);
@@ -56,17 +58,18 @@ public class CompositeEditWBS extends Composite {
 
 		compositeRules = new CompositeRules(tabfolder, SWT.NONE);
 		compositeStatement = new CompositeStatement(tabfolder, SWT.NONE);
-		compositeComponents = new CompositeComponents(tabfolder, SWT.NONE);
+		compositeRuleGroup = new CompositeRuleGroup(tabfolder, SWT.NONE);
 		TabItem tab1 = new TabItem(tabfolder, SWT.NONE);
 		TabItem tab2 = new TabItem(tabfolder, SWT.NONE);
 		TabItem tab3 = new TabItem(tabfolder, SWT.NONE);
 
-		tab3.setText("Bauteil");
 		tab1.setText("Aussage");
 		tab2.setText("Regel");
-		tab3.setControl(compositeComponents);
+		tab3.setText("Regelgruppe");
+
 		tab1.setControl(compositeStatement);
 		tab2.setControl(compositeRules);
+		tab3.setControl(compositeRuleGroup);
 	}
 
 	protected void close() {
@@ -88,7 +91,7 @@ public class CompositeEditWBS extends Composite {
 
 	public void openWBS(long wbsid) {
 		this.wbsid = wbsid;
-		this.compositeComponents.setWBSID(wbsid);
+		this.compositeRuleGroup.setWBSID(wbsid);
 		this.compositeStatement.setWBSID(wbsid);
 		this.compositeRules.setWBSID(wbsid);
 

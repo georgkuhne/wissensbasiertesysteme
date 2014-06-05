@@ -18,6 +18,7 @@ import wissensbasismodel.Literal;
 import wissensbasismodel.LiteralOperatorenLogik;
 import wissensbasismodel.LiteralOperatorenPraedikat;
 import wissensbasismodel.Regel;
+import wissensbasismodel.Regelgruppe;
 import wissensbasismodel.WertebereichTyp;
 import wissensbasismodel.WissensBasis;
 import wissensbasismodel.WissensbasismodelFactory;
@@ -71,6 +72,13 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 	 * @generated
 	 */
 	private EClass konklusionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass regelgruppeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -517,6 +525,15 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getKonklusion_Textausgabe() {
+		return (EAttribute)konklusionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getKonklusion_Literal() {
 		return (EReference)konklusionEClass.getEStructuralFeatures().get(2);
 	}
@@ -526,8 +543,44 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKonklusion_DiagnoseText() {
-		return (EAttribute)konklusionEClass.getEStructuralFeatures().get(1);
+	public EReference getKonklusion_Diagnoseaussage() {
+		return (EReference)konklusionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRegelgruppe() {
+		return regelgruppeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegelgruppe_ID() {
+		return (EAttribute)regelgruppeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegelgruppe_Name() {
+		return (EAttribute)regelgruppeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRegelgruppe_Regeln() {
+		return (EReference)regelgruppeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -638,8 +691,14 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 
 		konklusionEClass = createEClass(KONKLUSION);
 		createEAttribute(konklusionEClass, KONKLUSION__KONKLUSION_TYP);
-		createEAttribute(konklusionEClass, KONKLUSION__DIAGNOSE_TEXT);
+		createEAttribute(konklusionEClass, KONKLUSION__TEXTAUSGABE);
 		createEReference(konklusionEClass, KONKLUSION__LITERAL);
+		createEReference(konklusionEClass, KONKLUSION__DIAGNOSEAUSSAGE);
+
+		regelgruppeEClass = createEClass(REGELGRUPPE);
+		createEAttribute(regelgruppeEClass, REGELGRUPPE__ID);
+		createEAttribute(regelgruppeEClass, REGELGRUPPE__NAME);
+		createEReference(regelgruppeEClass, REGELGRUPPE__REGELN);
 
 		// Create enums
 		wertebereichTypEEnum = createEEnum(WERTEBEREICH_TYP);
@@ -722,8 +781,14 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 
 		initEClass(konklusionEClass, Konklusion.class, "Konklusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getKonklusion_KonklusionTyp(), this.getKonklusionsTyp(), "konklusionTyp", null, 0, 1, Konklusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKonklusion_DiagnoseText(), ecorePackage.getEString(), "diagnoseText", null, 0, 1, Konklusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKonklusion_Textausgabe(), ecorePackage.getEString(), "Textausgabe", null, 0, 1, Konklusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKonklusion_Literal(), this.getLiteral(), null, "literal", null, 0, 1, Konklusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKonklusion_Diagnoseaussage(), this.getAussage(), null, "Diagnoseaussage", null, 0, 1, Konklusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(regelgruppeEClass, Regelgruppe.class, "Regelgruppe", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRegelgruppe_ID(), ecorePackage.getELong(), "ID", null, 0, 1, Regelgruppe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegelgruppe_Name(), ecorePackage.getEString(), "Name", null, 0, 1, Regelgruppe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRegelgruppe_Regeln(), this.getRegel(), null, "Regeln", null, 0, -1, Regelgruppe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(wertebereichTypEEnum, WertebereichTyp.class, "WertebereichTyp");

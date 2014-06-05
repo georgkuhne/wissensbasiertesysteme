@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import wissensbasismodel.Aussage;
 import wissensbasismodel.Konklusion;
 import wissensbasismodel.KonklusionsTyp;
 import wissensbasismodel.Literal;
@@ -24,8 +25,9 @@ import wissensbasismodel.WissensbasismodelPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link wissensbasismodel.impl.KonklusionImpl#getKonklusionTyp <em>Konklusion Typ</em>}</li>
- *   <li>{@link wissensbasismodel.impl.KonklusionImpl#getDiagnoseText <em>Diagnose Text</em>}</li>
+ *   <li>{@link wissensbasismodel.impl.KonklusionImpl#getTextausgabe <em>Textausgabe</em>}</li>
  *   <li>{@link wissensbasismodel.impl.KonklusionImpl#getLiteral <em>Literal</em>}</li>
+ *   <li>{@link wissensbasismodel.impl.KonklusionImpl#getDiagnoseaussage <em>Diagnoseaussage</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,24 +55,24 @@ public class KonklusionImpl extends MinimalEObjectImpl.Container implements Konk
 	protected KonklusionsTyp konklusionTyp = KONKLUSION_TYP_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getDiagnoseText() <em>Diagnose Text</em>}' attribute.
+	 * The default value of the '{@link #getTextausgabe() <em>Textausgabe</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDiagnoseText()
+	 * @see #getTextausgabe()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DIAGNOSE_TEXT_EDEFAULT = null;
+	protected static final String TEXTAUSGABE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getDiagnoseText() <em>Diagnose Text</em>}' attribute.
+	 * The cached value of the '{@link #getTextausgabe() <em>Textausgabe</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDiagnoseText()
+	 * @see #getTextausgabe()
 	 * @generated
 	 * @ordered
 	 */
-	protected String diagnoseText = DIAGNOSE_TEXT_EDEFAULT;
+	protected String textausgabe = TEXTAUSGABE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getLiteral() <em>Literal</em>}' containment reference.
@@ -81,6 +83,16 @@ public class KonklusionImpl extends MinimalEObjectImpl.Container implements Konk
 	 * @ordered
 	 */
 	protected Literal literal;
+
+	/**
+	 * The cached value of the '{@link #getDiagnoseaussage() <em>Diagnoseaussage</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDiagnoseaussage()
+	 * @generated
+	 * @ordered
+	 */
+	protected Aussage diagnoseaussage;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -120,6 +132,27 @@ public class KonklusionImpl extends MinimalEObjectImpl.Container implements Konk
 		konklusionTyp = newKonklusionTyp == null ? KONKLUSION_TYP_EDEFAULT : newKonklusionTyp;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.KONKLUSION__KONKLUSION_TYP, oldKonklusionTyp, konklusionTyp));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getTextausgabe() {
+		return textausgabe;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTextausgabe(String newTextausgabe) {
+		String oldTextausgabe = textausgabe;
+		textausgabe = newTextausgabe;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.KONKLUSION__TEXTAUSGABE, oldTextausgabe, textausgabe));
 	}
 
 	/**
@@ -170,8 +203,16 @@ public class KonklusionImpl extends MinimalEObjectImpl.Container implements Konk
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getDiagnoseText() {
-		return diagnoseText;
+	public Aussage getDiagnoseaussage() {
+		if (diagnoseaussage != null && diagnoseaussage.eIsProxy()) {
+			InternalEObject oldDiagnoseaussage = (InternalEObject)diagnoseaussage;
+			diagnoseaussage = (Aussage)eResolveProxy(oldDiagnoseaussage);
+			if (diagnoseaussage != oldDiagnoseaussage) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, WissensbasismodelPackage.KONKLUSION__DIAGNOSEAUSSAGE, oldDiagnoseaussage, diagnoseaussage));
+			}
+		}
+		return diagnoseaussage;
 	}
 
 	/**
@@ -179,11 +220,20 @@ public class KonklusionImpl extends MinimalEObjectImpl.Container implements Konk
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDiagnoseText(String newDiagnoseText) {
-		String oldDiagnoseText = diagnoseText;
-		diagnoseText = newDiagnoseText;
+	public Aussage basicGetDiagnoseaussage() {
+		return diagnoseaussage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDiagnoseaussage(Aussage newDiagnoseaussage) {
+		Aussage oldDiagnoseaussage = diagnoseaussage;
+		diagnoseaussage = newDiagnoseaussage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.KONKLUSION__DIAGNOSE_TEXT, oldDiagnoseText, diagnoseText));
+			eNotify(new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.KONKLUSION__DIAGNOSEAUSSAGE, oldDiagnoseaussage, diagnoseaussage));
 	}
 
 	/**
@@ -210,10 +260,13 @@ public class KonklusionImpl extends MinimalEObjectImpl.Container implements Konk
 		switch (featureID) {
 			case WissensbasismodelPackage.KONKLUSION__KONKLUSION_TYP:
 				return getKonklusionTyp();
-			case WissensbasismodelPackage.KONKLUSION__DIAGNOSE_TEXT:
-				return getDiagnoseText();
+			case WissensbasismodelPackage.KONKLUSION__TEXTAUSGABE:
+				return getTextausgabe();
 			case WissensbasismodelPackage.KONKLUSION__LITERAL:
 				return getLiteral();
+			case WissensbasismodelPackage.KONKLUSION__DIAGNOSEAUSSAGE:
+				if (resolve) return getDiagnoseaussage();
+				return basicGetDiagnoseaussage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -229,11 +282,14 @@ public class KonklusionImpl extends MinimalEObjectImpl.Container implements Konk
 			case WissensbasismodelPackage.KONKLUSION__KONKLUSION_TYP:
 				setKonklusionTyp((KonklusionsTyp)newValue);
 				return;
-			case WissensbasismodelPackage.KONKLUSION__DIAGNOSE_TEXT:
-				setDiagnoseText((String)newValue);
+			case WissensbasismodelPackage.KONKLUSION__TEXTAUSGABE:
+				setTextausgabe((String)newValue);
 				return;
 			case WissensbasismodelPackage.KONKLUSION__LITERAL:
 				setLiteral((Literal)newValue);
+				return;
+			case WissensbasismodelPackage.KONKLUSION__DIAGNOSEAUSSAGE:
+				setDiagnoseaussage((Aussage)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -250,11 +306,14 @@ public class KonklusionImpl extends MinimalEObjectImpl.Container implements Konk
 			case WissensbasismodelPackage.KONKLUSION__KONKLUSION_TYP:
 				setKonklusionTyp(KONKLUSION_TYP_EDEFAULT);
 				return;
-			case WissensbasismodelPackage.KONKLUSION__DIAGNOSE_TEXT:
-				setDiagnoseText(DIAGNOSE_TEXT_EDEFAULT);
+			case WissensbasismodelPackage.KONKLUSION__TEXTAUSGABE:
+				setTextausgabe(TEXTAUSGABE_EDEFAULT);
 				return;
 			case WissensbasismodelPackage.KONKLUSION__LITERAL:
 				setLiteral((Literal)null);
+				return;
+			case WissensbasismodelPackage.KONKLUSION__DIAGNOSEAUSSAGE:
+				setDiagnoseaussage((Aussage)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -270,10 +329,12 @@ public class KonklusionImpl extends MinimalEObjectImpl.Container implements Konk
 		switch (featureID) {
 			case WissensbasismodelPackage.KONKLUSION__KONKLUSION_TYP:
 				return konklusionTyp != KONKLUSION_TYP_EDEFAULT;
-			case WissensbasismodelPackage.KONKLUSION__DIAGNOSE_TEXT:
-				return DIAGNOSE_TEXT_EDEFAULT == null ? diagnoseText != null : !DIAGNOSE_TEXT_EDEFAULT.equals(diagnoseText);
+			case WissensbasismodelPackage.KONKLUSION__TEXTAUSGABE:
+				return TEXTAUSGABE_EDEFAULT == null ? textausgabe != null : !TEXTAUSGABE_EDEFAULT.equals(textausgabe);
 			case WissensbasismodelPackage.KONKLUSION__LITERAL:
 				return literal != null;
+			case WissensbasismodelPackage.KONKLUSION__DIAGNOSEAUSSAGE:
+				return diagnoseaussage != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -290,8 +351,8 @@ public class KonklusionImpl extends MinimalEObjectImpl.Container implements Konk
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (konklusionTyp: ");
 		result.append(konklusionTyp);
-		result.append(", diagnoseText: ");
-		result.append(diagnoseText);
+		result.append(", Textausgabe: ");
+		result.append(textausgabe);
 		result.append(')');
 		return result.toString();
 	}

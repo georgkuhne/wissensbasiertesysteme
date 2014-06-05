@@ -1,7 +1,17 @@
 package hs.merseburg.miks13.wbs.gui.regel;
 
+import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -19,6 +29,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
@@ -26,12 +37,31 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.hibernate.Session;
+
+import wissensbasismodel.Aussage;
+import wissensbasismodel.Konklusion;
+import wissensbasismodel.KonklusionsTyp;
+import wissensbasismodel.Literal;
+import wissensbasismodel.LiteralOperatorenPraedikat;
+import wissensbasismodel.Regel;
+import wissensbasismodel.WertebereichTyp;
+import wissensbasismodel.WissensBasis;
+import wissensbasismodel.WissensbasismodelFactory;
 
 public class DialogCreateNewRule extends Dialog {
-	private Text text;
+	private Text text_name;
 	private Long wbsID;
 	private ContainerTableviewerRegelPraemisse praemisseContainer;
 	private long wbsId;
+	protected Session session;
+	private TabFolder tabFolder;
+	private StyledText styledText;
+	private ComboViewer comboviewerstatement_2;
+	private Combo combo_wert;
+	private Combo combo_operator;
+	private Combo combo_prefix;
+	private ComboViewer comboviewerstatement;
 
 	/**
 	 * Create the dialog.
@@ -54,6 +84,8 @@ public class DialogCreateNewRule extends Dialog {
 		Composite container = (Composite) super.createDialogArea(parent);
 		container.setLayout(new GridLayout(2, true));
 
+		session = PersistenceUtility.getINSTANCE().createSession();
+
 		Label lblName = new Label(container, SWT.NONE);
 		GridData gd_lblName = new GridData(SWT.LEFT, SWT.CENTER, false, false,
 				1, 1);
@@ -61,18 +93,19 @@ public class DialogCreateNewRule extends Dialog {
 		lblName.setLayoutData(gd_lblName);
 		lblName.setText("Name:");
 
-		text = new Text(container, SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		text_name = new Text(container, SWT.BORDER);
+		text_name.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
+				1, 1));
 
 		Group groupkonklusion = new Group(container, SWT.NONE);
 		groupkonklusion.setText("Konklusion:");
 		groupkonklusion.setLayout(new FillLayout(SWT.VERTICAL));
 		GridData gd_groupkonklusion = new GridData(SWT.FILL, SWT.CENTER, false,
 				false, 2, 1);
-		gd_groupkonklusion.heightHint = 100;
+		gd_groupkonklusion.heightHint = 150;
 		groupkonklusion.setLayoutData(gd_groupkonklusion);
 
-		TabFolder tabFolder = new TabFolder(groupkonklusion, SWT.NONE);
+		tabFolder = new TabFolder(groupkonklusion, SWT.NONE);
 
 		TabItem tbtmLiteral = new TabItem(tabFolder, SWT.NONE);
 		tbtmLiteral.setText("Literal");
@@ -93,22 +126,96 @@ public class DialogCreateNewRule extends Dialog {
 		Label lblWert = new Label(composite_1, SWT.NONE);
 		lblWert.setText("Wert:");
 
-		Combo combo_1 = new Combo(composite_1, SWT.NONE);
-		combo_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
+		combo_prefix = new Combo(composite_1, SWT.NONE);
+		combo_prefix.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1));
+		combo_prefix.add("NOT");
 
-		Combo combo_2 = new Combo(composite_1, SWT.NONE);
-		combo_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
+		Combo combo_statement = new Combo(composite_1, SWT.NONE);
+		combo_statement.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1));
+		comboviewerstatement = new ComboViewer(combo_statement);
 
-		Combo combo_3 = new Combo(composite_1, SWT.NONE);
-		combo_3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
+		comboviewerstatement.setContentProvider(ArrayContentProvider
+				.getInstance());
 
-		Combo combo_4 = new Combo(composite_1, SWT.NONE);
-		combo_4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
+		comboviewerstatement.setLabelProvider(new LabelProvider() {
+			@Override
+			public String getText(Object element) {
+				// TODO Auto-generated method stub
+				Aussage aussage = (Aussage) element;
+				return aussage.getName();
+			}
+		});
 
+		WissensBasis wbs = PersistenceUtility.getWissensBasisById(wbsID,
+				session);
+		EList<Aussage> wert = wbs.getAussagen();
+		comboviewerstatement.setInput(wert);
+
+		combo_operator = new Combo(composite_1, SWT.NONE);
+		combo_operator.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1));
+
+		combo_wert = new Combo(composite_1, SWT.NONE);
+		combo_wert.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1));
+
+		comboviewerstatement
+				.addSelectionChangedListener(new ISelectionChangedListener() {
+
+					@Override
+					public void selectionChanged(SelectionChangedEvent event) {
+						// TODO Auto-generated method stub
+						IStructuredSelection selection = (IStructuredSelection) event
+								.getSelection();
+						if (selection.size() > 0) {
+							WertebereichTyp wertebereich = ((Aussage) selection
+									.getFirstElement()).getWertebereich();
+							if (wertebereich == WertebereichTyp.BOOLEAN) {
+								combo_operator.setEnabled(false);
+								combo_wert.setEnabled(false);
+								combo_operator.removeAll();
+								combo_wert.removeAll();
+							} else if (wertebereich == WertebereichTyp.INTEGER) {
+								combo_operator.setEnabled(true);
+								combo_wert.setEnabled(true);
+								combo_operator.removeAll();
+								combo_wert.removeAll();
+								combo_operator.add("==");
+								combo_operator.add("<>");
+								combo_operator.add("<=");
+								combo_operator.add(">=");
+								combo_operator.add("<");
+								combo_operator.add(">");
+							} else if (wertebereich == WertebereichTyp.REAL) {
+								combo_operator.setEnabled(true);
+								combo_wert.setEnabled(true);
+								combo_operator.removeAll();
+								combo_wert.removeAll();
+								combo_operator.add("==");
+								combo_operator.add("<>");
+								combo_operator.add("<=");
+								combo_operator.add(">=");
+								combo_operator.add("<");
+								combo_operator.add(">");
+							} else if (wertebereich == WertebereichTyp.STRINGLIST) {
+								combo_operator.setEnabled(true);
+								combo_wert.setEnabled(true);
+								combo_operator.removeAll();
+								combo_wert.removeAll();
+								combo_operator.add("==");
+								combo_operator.add("<>");
+								EList<String> werteliste = ((Aussage) selection
+										.getFirstElement())
+										.getListWertebereich();
+								for (int i = 0; i < werteliste.size(); i++) {
+									combo_wert.add(werteliste.get(i));
+								}
+							}
+						}
+					}
+				});
 		TabItem tbtmDiagnosausgabe = new TabItem(tabFolder, SWT.NONE);
 		tbtmDiagnosausgabe.setText("Diagnoseausgabe");
 
@@ -119,20 +226,50 @@ public class DialogCreateNewRule extends Dialog {
 		Label lblAussage = new Label(composite, SWT.NONE);
 		lblAussage.setText("Aussage:");
 
-		Combo combo = new Combo(composite, SWT.NONE);
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
-				1));
+		Combo combo_statement_2 = new Combo(composite, SWT.NONE);
+		combo_statement_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+				true, false, 1, 1));
 		new Label(composite, SWT.NONE);
 		new Label(composite, SWT.NONE);
 
-		Label lblAussageinhalt = new Label(composite, SWT.CENTER);
+		final Label lblAussageinhalt = new Label(composite, SWT.NONE);
+		lblAussageinhalt.setText("Diagnoseausgabe der Aussage");
 		GridData gd_lblAussageinhalt = new GridData(SWT.CENTER, SWT.CENTER,
 				false, false, 2, 1);
 		gd_lblAussageinhalt.heightHint = 58;
 		lblAussageinhalt.setLayoutData(gd_lblAussageinhalt);
-		lblAussageinhalt.setText("neuer text zum testen");
 		new Label(composite, SWT.NONE);
 		new Label(composite, SWT.NONE);
+
+		comboviewerstatement_2 = new ComboViewer(combo_statement_2);
+		comboviewerstatement_2.setContentProvider(ArrayContentProvider
+				.getInstance());
+		comboviewerstatement_2.setLabelProvider(new LabelProvider() {
+			@Override
+			public String getText(Object element) {
+				// TODO Auto-generated method stub
+				Aussage aussage = (Aussage) element;
+				return aussage.getName();
+			}
+		});
+
+		comboviewerstatement_2.setInput(wert);
+
+		comboviewerstatement_2
+				.addSelectionChangedListener(new ISelectionChangedListener() {
+
+					@Override
+					public void selectionChanged(SelectionChangedEvent event) {
+
+						IStructuredSelection selection = (IStructuredSelection) event
+								.getSelection();
+						if (selection.size() > 0) {
+							String diagnoseText = ((Aussage) selection
+									.getFirstElement()).getDiagnosetext();
+							lblAussageinhalt.setText(diagnoseText);
+						}
+					}
+				});
 
 		TabItem tbtmTextausgabe = new TabItem(tabFolder, SWT.NONE);
 		tbtmTextausgabe.setText("Textausgabe");
@@ -149,8 +286,7 @@ public class DialogCreateNewRule extends Dialog {
 		grpPrmisse.setLayoutData(gd_grpPrmisse);
 		grpPrmisse.setText("Pr\u00E4misse");
 
-		StyledText styledText = new StyledText(grpPrmisse, SWT.BORDER
-				| SWT.READ_ONLY);
+		styledText = new StyledText(grpPrmisse, SWT.BORDER | SWT.READ_ONLY);
 		styledText.setAlignment(SWT.CENTER);
 		styledText.setText("asdasdasd");
 		styledText.setBackground(SWTResourceManager
@@ -223,5 +359,112 @@ public class DialogCreateNewRule extends Dialog {
 	@Override
 	protected Point getInitialSize() {
 		return new Point(633, 531);
+	}
+
+	@Override
+	protected void okPressed() {
+		String wert;
+		if (!validateInput())
+			return;
+		String Name = text_name.getText().trim();
+		Regel regel = WissensbasismodelFactory.eINSTANCE.createRegel();
+		Konklusion konklusion = WissensbasismodelFactory.eINSTANCE
+				.createKonklusion();
+		regel.setName(Name);
+		WissensBasis wbs = PersistenceUtility.getWissensBasisById(wbsID,
+				session);
+		int index = tabFolder.getSelectionIndex();
+
+		switch (index) {
+		case 0:
+			konklusion.setKonklusionTyp(KonklusionsTyp.LITERAL);
+			Literal literal = WissensbasismodelFactory.eINSTANCE
+					.createLiteral();
+			if (combo_wert.getText() != null) {
+				wert = combo_wert.getText();
+			} else {
+				wert = "";
+			}
+			String prefix = combo_prefix.getText();
+
+			IStructuredSelection statementselection = (IStructuredSelection) comboviewerstatement
+					.getSelection();
+			Aussage aussage = ((Aussage) statementselection.getFirstElement());
+			if (aussage == null) {
+				MessageDialog.openWarning(
+						Display.getCurrent().getActiveShell(), "Warnung",
+						"Keine Aussage gewählt.");
+				return;
+			} else {
+				literal.setAussage(aussage);
+			}
+			if (prefix.equals("")) {
+				literal.setNOT(false);
+			} else {
+				literal.setNOT(true);
+			}
+			int operator = combo_operator.getSelectionIndex();
+
+			switch (operator) {
+			case 0:
+				literal.setPraedikat(LiteralOperatorenPraedikat.GLEICH);
+				break;
+			case 1:
+				literal.setPraedikat(LiteralOperatorenPraedikat.UNGLEICH);
+				break;
+			case 2:
+				literal.setPraedikat(LiteralOperatorenPraedikat.KLEINERGLEICH);
+				break;
+			case 3:
+				literal.setPraedikat(LiteralOperatorenPraedikat.GROESSERGLEICH);
+				break;
+			case 4:
+				literal.setPraedikat(LiteralOperatorenPraedikat.KLEINERALS);
+				break;
+			case 5:
+				literal.setPraedikat(LiteralOperatorenPraedikat.GROESSERALS);
+				break;
+			default:
+				literal.setPraedikat(null);
+				break;
+			}
+
+			literal.setWert(wert);
+			konklusion.setLiteral(literal);
+			break;
+		case 1:
+			konklusion.setKonklusionTyp(KonklusionsTyp.DIAGNOSEAUSGABE);
+			IStructuredSelection selection = (IStructuredSelection) comboviewerstatement_2
+					.getSelection();
+			Aussage diagnoseaussage = ((Aussage) selection.getFirstElement());
+			if (diagnoseaussage == null) {
+				MessageDialog.openWarning(
+						Display.getCurrent().getActiveShell(), "Warnung",
+						"Keine Aussage gewählt.");
+				return;
+			} else {
+				konklusion.setDiagnoseaussage(diagnoseaussage);
+			}
+
+			break;
+		case 2:
+			konklusion.setKonklusionTyp(KonklusionsTyp.TEXTAUSGABE);
+			String text = styledText.getText().trim();
+			konklusion.setTextausgabe(text);
+			break;
+		default:
+			break;
+		}
+		regel.setKonklusion(konklusion);
+
+		wbs.getRegeln().add(regel);
+		session.flush();
+		session.close();
+		super.okPressed();
+	}
+
+	private boolean validateInput() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

@@ -76,6 +76,15 @@ public interface WissensbasismodelFactory extends EFactory {
 	Konklusion createKonklusion();
 
 	/**
+	 * Returns a new object of class '<em>Regelgruppe</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Regelgruppe</em>'.
+	 * @generated
+	 */
+	Regelgruppe createRegelgruppe();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

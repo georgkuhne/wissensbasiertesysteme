@@ -59,14 +59,14 @@ public enum LiteralOperatorenPraedikat implements Enumerator {
 	GROESSERGLEICH(3, "groessergleich", ""),
 
 	/**
-	 * The '<em><b>Groeﬂerals</b></em>' literal object.
+	 * The '<em><b>Groe√üerals</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #GROESSERALS_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	GROESSERALS(4, "groeﬂerals", "groe\u00dferals"),
+	GROESSERALS(4, "groe√üerals", "groe\u00dferals"),
 
 	/**
 	 * The '<em><b>Ungleich</b></em>' literal object.
@@ -84,7 +84,7 @@ public enum LiteralOperatorenPraedikat implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NULL(0, "NULL", "NULL");
+	NULL(6, "NULL", "NULL");
 
 	/**
 	 * The '<em><b>Gleich</b></em>' literal value.
@@ -147,15 +147,15 @@ public enum LiteralOperatorenPraedikat implements Enumerator {
 	public static final int GROESSERGLEICH_VALUE = 3;
 
 	/**
-	 * The '<em><b>Groeﬂerals</b></em>' literal value.
+	 * The '<em><b>Groe√üerals</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Groeﬂerals</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>GroeÔøΩerals</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #GROESSERALS
-	 * @model name="groeﬂerals"
+	 * @model name="groe√üerals"
 	 * @generated
 	 * @ordered
 	 */
@@ -189,7 +189,7 @@ public enum LiteralOperatorenPraedikat implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NULL_VALUE = 0;
+	public static final int NULL_VALUE = 6;
 
 	/**
 	 * An array of all the '<em><b>Literal Operatoren Praedikat</b></em>' enumerators.
@@ -262,6 +262,7 @@ public enum LiteralOperatorenPraedikat implements Enumerator {
 			case GROESSERGLEICH_VALUE: return GROESSERGLEICH;
 			case GROESSERALS_VALUE: return GROESSERALS;
 			case UNGLEICH_VALUE: return UNGLEICH;
+			case NULL_VALUE: return NULL;
 		}
 		return null;
 	}

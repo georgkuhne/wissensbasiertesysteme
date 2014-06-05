@@ -508,13 +508,13 @@ public interface WissensbasismodelPackage extends EPackage {
 	int KONKLUSION__KONKLUSION_TYP = 0;
 
 	/**
-	 * The feature id for the '<em><b>Diagnose Text</b></em>' attribute.
+	 * The feature id for the '<em><b>Textausgabe</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KONKLUSION__DIAGNOSE_TEXT = 1;
+	int KONKLUSION__TEXTAUSGABE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Literal</b></em>' containment reference.
@@ -526,13 +526,22 @@ public interface WissensbasismodelPackage extends EPackage {
 	int KONKLUSION__LITERAL = 2;
 
 	/**
+	 * The feature id for the '<em><b>Diagnoseaussage</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KONKLUSION__DIAGNOSEAUSSAGE = 3;
+
+	/**
 	 * The number of structural features of the '<em>Konklusion</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KONKLUSION_FEATURE_COUNT = 3;
+	int KONKLUSION_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Konklusion</em>' class.
@@ -544,6 +553,61 @@ public interface WissensbasismodelPackage extends EPackage {
 	int KONKLUSION_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link wissensbasismodel.impl.RegelgruppeImpl <em>Regelgruppe</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see wissensbasismodel.impl.RegelgruppeImpl
+	 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getRegelgruppe()
+	 * @generated
+	 */
+	int REGELGRUPPE = 6;
+
+	/**
+	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGELGRUPPE__ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGELGRUPPE__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Regeln</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGELGRUPPE__REGELN = 2;
+
+	/**
+	 * The number of structural features of the '<em>Regelgruppe</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGELGRUPPE_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Regelgruppe</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGELGRUPPE_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link wissensbasismodel.WertebereichTyp <em>Wertebereich Typ</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -551,7 +615,7 @@ public interface WissensbasismodelPackage extends EPackage {
 	 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getWertebereichTyp()
 	 * @generated
 	 */
-	int WERTEBEREICH_TYP = 6;
+	int WERTEBEREICH_TYP = 7;
 
 
 	/**
@@ -562,7 +626,7 @@ public interface WissensbasismodelPackage extends EPackage {
 	 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getLiteralOperatorenPraedikat()
 	 * @generated
 	 */
-	int LITERAL_OPERATOREN_PRAEDIKAT = 7;
+	int LITERAL_OPERATOREN_PRAEDIKAT = 8;
 
 	/**
 	 * The meta object id for the '{@link wissensbasismodel.LiteralOperatorenLogik <em>Literal Operatoren Logik</em>}' enum.
@@ -572,7 +636,7 @@ public interface WissensbasismodelPackage extends EPackage {
 	 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getLiteralOperatorenLogik()
 	 * @generated
 	 */
-	int LITERAL_OPERATOREN_LOGIK = 8;
+	int LITERAL_OPERATOREN_LOGIK = 9;
 
 	/**
 	 * The meta object id for the '{@link wissensbasismodel.KonklusionsTyp <em>Konklusions Typ</em>}' enum.
@@ -582,7 +646,7 @@ public interface WissensbasismodelPackage extends EPackage {
 	 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getKonklusionsTyp()
 	 * @generated
 	 */
-	int KONKLUSIONS_TYP = 9;
+	int KONKLUSIONS_TYP = 10;
 
 
 	/**
@@ -1009,6 +1073,17 @@ public interface WissensbasismodelPackage extends EPackage {
 	EAttribute getKonklusion_KonklusionTyp();
 
 	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Konklusion#getTextausgabe <em>Textausgabe</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Textausgabe</em>'.
+	 * @see wissensbasismodel.Konklusion#getTextausgabe()
+	 * @see #getKonklusion()
+	 * @generated
+	 */
+	EAttribute getKonklusion_Textausgabe();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link wissensbasismodel.Konklusion#getLiteral <em>Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1020,15 +1095,58 @@ public interface WissensbasismodelPackage extends EPackage {
 	EReference getKonklusion_Literal();
 
 	/**
-	 * Returns the meta object for the attribute '{@link wissensbasismodel.Konklusion#getDiagnoseText <em>Diagnose Text</em>}'.
+	 * Returns the meta object for the reference '{@link wissensbasismodel.Konklusion#getDiagnoseaussage <em>Diagnoseaussage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Diagnose Text</em>'.
-	 * @see wissensbasismodel.Konklusion#getDiagnoseText()
+	 * @return the meta object for the reference '<em>Diagnoseaussage</em>'.
+	 * @see wissensbasismodel.Konklusion#getDiagnoseaussage()
 	 * @see #getKonklusion()
 	 * @generated
 	 */
-	EAttribute getKonklusion_DiagnoseText();
+	EReference getKonklusion_Diagnoseaussage();
+
+	/**
+	 * Returns the meta object for class '{@link wissensbasismodel.Regelgruppe <em>Regelgruppe</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Regelgruppe</em>'.
+	 * @see wissensbasismodel.Regelgruppe
+	 * @generated
+	 */
+	EClass getRegelgruppe();
+
+	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Regelgruppe#getID <em>ID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>ID</em>'.
+	 * @see wissensbasismodel.Regelgruppe#getID()
+	 * @see #getRegelgruppe()
+	 * @generated
+	 */
+	EAttribute getRegelgruppe_ID();
+
+	/**
+	 * Returns the meta object for the attribute '{@link wissensbasismodel.Regelgruppe#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see wissensbasismodel.Regelgruppe#getName()
+	 * @see #getRegelgruppe()
+	 * @generated
+	 */
+	EAttribute getRegelgruppe_Name();
+
+	/**
+	 * Returns the meta object for the reference list '{@link wissensbasismodel.Regelgruppe#getRegeln <em>Regeln</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Regeln</em>'.
+	 * @see wissensbasismodel.Regelgruppe#getRegeln()
+	 * @see #getRegelgruppe()
+	 * @generated
+	 */
+	EReference getRegelgruppe_Regeln();
 
 	/**
 	 * Returns the meta object for enum '{@link wissensbasismodel.WertebereichTyp <em>Wertebereich Typ</em>}'.
@@ -1379,6 +1497,13 @@ public interface WissensbasismodelPackage extends EPackage {
 		 */
 		EAttribute KONKLUSION__KONKLUSION_TYP = eINSTANCE.getKonklusion_KonklusionTyp();
 		/**
+		 * The meta object literal for the '<em><b>Textausgabe</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KONKLUSION__TEXTAUSGABE = eINSTANCE.getKonklusion_Textausgabe();
+		/**
 		 * The meta object literal for the '<em><b>Literal</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1386,12 +1511,42 @@ public interface WissensbasismodelPackage extends EPackage {
 		 */
 		EReference KONKLUSION__LITERAL = eINSTANCE.getKonklusion_Literal();
 		/**
-		 * The meta object literal for the '<em><b>Diagnose Text</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Diagnoseaussage</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute KONKLUSION__DIAGNOSE_TEXT = eINSTANCE.getKonklusion_DiagnoseText();
+		EReference KONKLUSION__DIAGNOSEAUSSAGE = eINSTANCE.getKonklusion_Diagnoseaussage();
+		/**
+		 * The meta object literal for the '{@link wissensbasismodel.impl.RegelgruppeImpl <em>Regelgruppe</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see wissensbasismodel.impl.RegelgruppeImpl
+		 * @see wissensbasismodel.impl.WissensbasismodelPackageImpl#getRegelgruppe()
+		 * @generated
+		 */
+		EClass REGELGRUPPE = eINSTANCE.getRegelgruppe();
+		/**
+		 * The meta object literal for the '<em><b>ID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGELGRUPPE__ID = eINSTANCE.getRegelgruppe_ID();
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGELGRUPPE__NAME = eINSTANCE.getRegelgruppe_Name();
+		/**
+		 * The meta object literal for the '<em><b>Regeln</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REGELGRUPPE__REGELN = eINSTANCE.getRegelgruppe_Regeln();
 		/**
 		 * The meta object literal for the '{@link wissensbasismodel.WertebereichTyp <em>Wertebereich Typ</em>}' enum.
 		 * <!-- begin-user-doc -->

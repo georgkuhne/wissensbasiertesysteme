@@ -590,6 +590,33 @@ public class PersistenceUtility {
 		return results;
 	}
 
+	@SuppressWarnings("rawtypes")
+	public static List<?> getAll(Session session, String fromClause,
+			String[] variables, Object[] substitutions) {
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("FROM " + fromClause); //$NON-NLS-1$
+
+			if (variables != null)
+				for (int i = 0; i < variables.length; i++) {
+					if (substitutions[i] instanceof Collection)
+						query.setParameterList(variables[i],
+								(Collection) substitutions[i]);
+					else
+						query.setParameter(variables[i], substitutions[i]);
+				}
+
+			session.getTransaction().commit();
+			List<?> results = query.list();
+			session.flush();
+			return results;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+		}
+	}
+
 	/**
 	 * Queries the database and returns all Objects specified. The Query has to
 	 * be supplied in it's entirety. No keywords are added. This is the more

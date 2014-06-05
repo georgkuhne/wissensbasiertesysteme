@@ -63,6 +63,7 @@ public class WissensbasismodelFactoryImpl extends EFactoryImpl implements Wissen
 			case WissensbasismodelPackage.AUSSAGE: return createAussage();
 			case WissensbasismodelPackage.LITERAL: return createLiteral();
 			case WissensbasismodelPackage.KONKLUSION: return createKonklusion();
+			case WissensbasismodelPackage.REGELGRUPPE: return createRegelgruppe();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -168,6 +169,16 @@ public class WissensbasismodelFactoryImpl extends EFactoryImpl implements Wissen
 	public Konklusion createKonklusion() {
 		KonklusionImpl konklusion = new KonklusionImpl();
 		return konklusion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Regelgruppe createRegelgruppe() {
+		RegelgruppeImpl regelgruppe = new RegelgruppeImpl();
+		return regelgruppe;
 	}
 
 	/**

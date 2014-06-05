@@ -1,11 +1,12 @@
 package hs.merseburg.miks13.wbs.gui;
 
 import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
-import hs.merseburg.miks13.wbs.gui.aussage.DialogCreateNewAussage;
-import hs.merseburg.miks13.wbs.gui.regel.DialogCreateNewRule;
+import hs.merseburg.miks13.wbs.gui.regelgruppe.DialogCreateNewRuleGroup;
 
+import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
@@ -22,23 +23,19 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-import org.hibernate.Session;
 
-import wissensbasismodel.Konklusion;
-import wissensbasismodel.KonklusionsTyp;
-import wissensbasismodel.LiteralOperatorenPraedikat;
 import wissensbasismodel.Regel;
+import wissensbasismodel.Regelgruppe;
 
-public class CompositeRules extends Composite implements GlobalEditActions {
+public class CompositeRuleGroup extends Composite {
 
+	private Object wbsID;
 	private TableViewer viewer;
 	private Table table;
 	private Button b_new, b_edit;
-	private long wbsID;
 
-	public CompositeRules(Composite parent, int style) {
+	public CompositeRuleGroup(Composite parent, int style) {
 		super(parent, style);
-
 		this.setLayout(new FormLayout());
 
 		viewer = new TableViewer(this, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
@@ -86,24 +83,32 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 
 			}
 		});
+
 		b_new.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				createnewRule();
-
+				createnewRuleGroup();
 			}
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
 
 			}
 		});
+		refreshTable();
 	}
 
-	public void refreshTable() {
-		Session session = PersistenceUtility.getINSTANCE().createSession();
-		List list = PersistenceUtility.getAll(session, "Regel", null, null);
+	public void setWBSID(long wbsid) {
+		// TODO Auto-generated method stub
+		this.wbsID = wbsID;
+		refreshTable();
+	}
+
+	private void refreshTable() {
+		List list = PersistenceUtility.getINSTANCE().getAll("Regelgruppe",
+				null, null);
 		viewer.setInput(list);
 	}
 
@@ -112,8 +117,8 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				Regel wb = (Regel) element;
-				return "" + wb.getID();
+				Regelgruppe rg = (Regelgruppe) element;
+				return "" + rg.getID();
 
 			}
 		});
@@ -122,63 +127,26 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				Regel wb = (Regel) element;
-				return wb.getName();
+				Regelgruppe rg = (Regelgruppe) element;
+				return rg.getName();
 
 			}
 		});
 
-		col = createTableViewerColumn("Konklusion", 100, 0);
+		col = createTableViewerColumn("Regeln", 100, 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				String returnwert = null;
-				String not;
-				String praedikat = null;
-				String wert = null;
-				Regel wb = (Regel) element;
-				Konklusion konklusion = wb.getKonklusion();
-				KonklusionsTyp typ = konklusion.getKonklusionTyp();
-				String result = "";
-				switch (typ) {
-				case LITERAL:
-					String name = konklusion.getLiteral().getAussage()
-							.getName();
-					if (konklusion.getLiteral().getPraedikat() != LiteralOperatorenPraedikat.NULL) {
-						praedikat = konklusion.getLiteral().getPraedikat()
-								.getName();
-					} else {
-						praedikat = "";
-					}
-
-					if (konklusion.getLiteral().getWert() != null) {
-						wert = konklusion.getLiteral().getWert();
-					} else {
-						wert = "";
-					}
-
-					if (konklusion.getLiteral().isNOT()) {
-						not = "NOT";
-					} else {
-						not = "";
-					}
-
-					result = not + " " + name + " " + praedikat + " " + wert;
-
-					returnwert = result;
-
-					break;
-				case DIAGNOSEAUSGABE:
-					returnwert = konklusion.getDiagnoseaussage()
-							.getDiagnosetext();
-					break;
-				case TEXTAUSGABE:
-					returnwert = konklusion.getTextausgabe().toString();
-					break;
-				default:
-					break;
+				Regelgruppe rg = (Regelgruppe) element;
+				EList<Regel> regeln = rg.getRegeln();
+				StringBuffer buffer = new StringBuffer();
+				for (Iterator iterator = regeln.iterator(); iterator.hasNext();) {
+					Regel regel = (Regel) iterator.next();
+					buffer.append(regel.getName());
+					if (iterator.hasNext())
+						buffer.append(", ");
 				}
-				return returnwert;
+				return buffer.toString();
 
 			}
 		});
@@ -197,25 +165,12 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 		return viewerColumn;
 	}
 
-	@Override
-	public void setWBSID(long wbsID) {
-		this.wbsID = wbsID;
-		refreshTable();
-
-	}
-
-	private void createnewRule() {
-		DialogCreateNewRule dialog = new DialogCreateNewRule(Display
+	private void createnewRuleGroup() {
+		DialogCreateNewRuleGroup dialog = new DialogCreateNewRuleGroup(Display
 				.getCurrent().getActiveShell(), wbsID);
-		if (dialog.open() == DialogCreateNewAussage.OK) {
+		if (dialog.open() == DialogCreateNewRuleGroup.OK) {
 			refreshTable();
 		}
-	}
-
-	@Override
-	public void save() {
-		// TODO Auto-generated method stub
 
 	}
-
 }
