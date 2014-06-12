@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link wissensbasismodel.WissensBasis#getBauteile <em>Bauteile</em>}</li>
  *   <li>{@link wissensbasismodel.WissensBasis#getRegeln <em>Regeln</em>}</li>
  *   <li>{@link wissensbasismodel.WissensBasis#getAussagen <em>Aussagen</em>}</li>
+ *   <li>{@link wissensbasismodel.WissensBasis#getRegelGruppen <em>Regel Gruppen</em>}</li>
  * </ul>
  * </p>
  *
@@ -126,4 +127,20 @@ public interface WissensBasis extends EObject {
 	 * @generated
 	 */
 	EList<Aussage> getAussagen();
+
+	/**
+	 * Returns the value of the '<em><b>Regel Gruppen</b></em>' containment reference list.
+	 * The list contents are of type {@link wissensbasismodel.Regelgruppe}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Regel Gruppen</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Regel Gruppen</em>' containment reference list.
+	 * @see wissensbasismodel.WissensbasismodelPackage#getWissensBasis_RegelGruppen()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Regelgruppe> getRegelGruppen();
 } // WissensBasis

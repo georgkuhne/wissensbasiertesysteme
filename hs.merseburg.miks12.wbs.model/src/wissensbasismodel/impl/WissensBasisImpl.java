@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import wissensbasismodel.Aussage;
 import wissensbasismodel.Bauteil;
 import wissensbasismodel.Regel;
+import wissensbasismodel.Regelgruppe;
 import wissensbasismodel.WissensBasis;
 import wissensbasismodel.WissensbasismodelPackage;
 
@@ -30,6 +31,7 @@ import wissensbasismodel.WissensbasismodelPackage;
  *   <li>{@link wissensbasismodel.impl.WissensBasisImpl#getBauteile <em>Bauteile</em>}</li>
  *   <li>{@link wissensbasismodel.impl.WissensBasisImpl#getRegeln <em>Regeln</em>}</li>
  *   <li>{@link wissensbasismodel.impl.WissensBasisImpl#getAussagen <em>Aussagen</em>}</li>
+ *   <li>{@link wissensbasismodel.impl.WissensBasisImpl#getRegelGruppen <em>Regel Gruppen</em>}</li>
  * </ul>
  * </p>
  *
@@ -102,6 +104,16 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 	 * @ordered
 	 */
 	protected EList<Aussage> aussagen;
+
+	/**
+	 * The cached value of the '{@link #getRegelGruppen() <em>Regel Gruppen</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRegelGruppen()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Regelgruppe> regelGruppen;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -205,6 +217,18 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Regelgruppe> getRegelGruppen() {
+		if (regelGruppen == null) {
+			regelGruppen = new EObjectContainmentEList<Regelgruppe>(Regelgruppe.class, this, WissensbasismodelPackage.WISSENS_BASIS__REGEL_GRUPPEN);
+		}
+		return regelGruppen;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -214,6 +238,8 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 				return ((InternalEList<?>)getRegeln()).basicRemove(otherEnd, msgs);
 			case WissensbasismodelPackage.WISSENS_BASIS__AUSSAGEN:
 				return ((InternalEList<?>)getAussagen()).basicRemove(otherEnd, msgs);
+			case WissensbasismodelPackage.WISSENS_BASIS__REGEL_GRUPPEN:
+				return ((InternalEList<?>)getRegelGruppen()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -236,6 +262,8 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 				return getRegeln();
 			case WissensbasismodelPackage.WISSENS_BASIS__AUSSAGEN:
 				return getAussagen();
+			case WissensbasismodelPackage.WISSENS_BASIS__REGEL_GRUPPEN:
+				return getRegelGruppen();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -267,6 +295,10 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 				getAussagen().clear();
 				getAussagen().addAll((Collection<? extends Aussage>)newValue);
 				return;
+			case WissensbasismodelPackage.WISSENS_BASIS__REGEL_GRUPPEN:
+				getRegelGruppen().clear();
+				getRegelGruppen().addAll((Collection<? extends Regelgruppe>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -294,6 +326,9 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 			case WissensbasismodelPackage.WISSENS_BASIS__AUSSAGEN:
 				getAussagen().clear();
 				return;
+			case WissensbasismodelPackage.WISSENS_BASIS__REGEL_GRUPPEN:
+				getRegelGruppen().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -316,6 +351,8 @@ public class WissensBasisImpl extends MinimalEObjectImpl.Container implements Wi
 				return regeln != null && !regeln.isEmpty();
 			case WissensbasismodelPackage.WISSENS_BASIS__AUSSAGEN:
 				return aussagen != null && !aussagen.isEmpty();
+			case WissensbasismodelPackage.WISSENS_BASIS__REGEL_GRUPPEN:
+				return regelGruppen != null && !regelGruppen.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

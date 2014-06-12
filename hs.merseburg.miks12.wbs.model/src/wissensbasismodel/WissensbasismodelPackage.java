@@ -113,13 +113,22 @@ public interface WissensbasismodelPackage extends EPackage {
 	int WISSENS_BASIS__AUSSAGEN = 4;
 
 	/**
+	 * The feature id for the '<em><b>Regel Gruppen</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WISSENS_BASIS__REGEL_GRUPPEN = 5;
+
+	/**
 	 * The number of structural features of the '<em>Wissens Basis</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WISSENS_BASIS_FEATURE_COUNT = 5;
+	int WISSENS_BASIS_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Wissens Basis</em>' class.
@@ -715,6 +724,17 @@ public interface WissensbasismodelPackage extends EPackage {
 	EReference getWissensBasis_Aussagen();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link wissensbasismodel.WissensBasis#getRegelGruppen <em>Regel Gruppen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Regel Gruppen</em>'.
+	 * @see wissensbasismodel.WissensBasis#getRegelGruppen()
+	 * @see #getWissensBasis()
+	 * @generated
+	 */
+	EReference getWissensBasis_RegelGruppen();
+
+	/**
 	 * Returns the meta object for class '{@link wissensbasismodel.Bauteil <em>Bauteil</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1255,6 +1275,13 @@ public interface WissensbasismodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference WISSENS_BASIS__AUSSAGEN = eINSTANCE.getWissensBasis_Aussagen();
+		/**
+		 * The meta object literal for the '<em><b>Regel Gruppen</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WISSENS_BASIS__REGEL_GRUPPEN = eINSTANCE.getWissensBasis_RegelGruppen();
 		/**
 		 * The meta object literal for the '{@link wissensbasismodel.impl.BauteilImpl <em>Bauteil</em>}' class.
 		 * <!-- begin-user-doc -->

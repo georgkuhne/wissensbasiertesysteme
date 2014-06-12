@@ -9,6 +9,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -23,16 +25,17 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.hibernate.Session;
 
 import wissensbasismodel.Regel;
 import wissensbasismodel.Regelgruppe;
 
 public class CompositeRuleGroup extends Composite {
 
-	private Object wbsID;
+	private long wbsID;
 	private TableViewer viewer;
 	private Table table;
-	private Button b_new, b_edit;
+	private Button b_new, b_edit, b_delete;
 
 	public CompositeRuleGroup(Composite parent, int style) {
 		super(parent, style);
@@ -65,15 +68,19 @@ public class CompositeRuleGroup extends Composite {
 		cbuttons.setLayout(new RowLayout(SWT.HORIZONTAL));
 		b_new = new Button(cbuttons, SWT.PUSH);
 		b_edit = new Button(cbuttons, SWT.None);
+		b_delete = new Button(cbuttons, SWT.None);
+		b_delete.setText("Löschen");
 		b_new.setText("Anlegen");
 		b_edit.setText("Bearbeiten");
 		b_edit.setEnabled(false);
+		b_delete.setEnabled(false);
 
 		table.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				b_edit.setEnabled(true);
+				b_delete.setEnabled(true);
 
 			}
 
@@ -97,19 +104,36 @@ public class CompositeRuleGroup extends Composite {
 
 			}
 		});
+
+		b_delete.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				deleteRulegroup();
+
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 		refreshTable();
 	}
 
 	public void setWBSID(long wbsid) {
 		// TODO Auto-generated method stub
-		this.wbsID = wbsID;
+		this.wbsID = wbsid;
 		refreshTable();
 	}
 
 	private void refreshTable() {
-		List list = PersistenceUtility.getINSTANCE().getAll("Regelgruppe",
-				null, null);
+		Session session = PersistenceUtility.getINSTANCE().createSession();
+		List list = PersistenceUtility.getAll(session, "Regelgruppe", null,
+				null);
 		viewer.setInput(list);
+		session.close();
 	}
 
 	private void createColumns(TableViewer viewer) {
@@ -172,5 +196,20 @@ public class CompositeRuleGroup extends Composite {
 			refreshTable();
 		}
 
+	}
+
+	private void deleteRulegroup() {
+		// TODO Auto-generated method stub
+		ISelection selected = viewer.getSelection();
+		Session session = PersistenceUtility.getINSTANCE().createSession();
+		StructuredSelection structuredSelection = (StructuredSelection) selected;
+
+		Regelgruppe regelgruppe = ((Regelgruppe) structuredSelection
+				.getFirstElement());
+
+		session.delete(regelgruppe);
+		session.flush();
+		session.close();
+		refreshTable();
 	}
 }
