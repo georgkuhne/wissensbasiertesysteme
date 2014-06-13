@@ -228,6 +228,15 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getWissensBasis_RegelGruppen() {
+		return (EReference)wissensBasisEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBauteil() {
 		return bauteilEClass;
 	}
@@ -653,6 +662,7 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 		createEReference(wissensBasisEClass, WISSENS_BASIS__BAUTEILE);
 		createEReference(wissensBasisEClass, WISSENS_BASIS__REGELN);
 		createEReference(wissensBasisEClass, WISSENS_BASIS__AUSSAGEN);
+		createEReference(wissensBasisEClass, WISSENS_BASIS__REGEL_GRUPPEN);
 
 		bauteilEClass = createEClass(BAUTEIL);
 		createEAttribute(bauteilEClass, BAUTEIL__ID);
@@ -743,6 +753,7 @@ public class WissensbasismodelPackageImpl extends EPackageImpl implements Wissen
 		initEReference(getWissensBasis_Bauteile(), this.getBauteil(), null, "bauteile", null, 0, -1, WissensBasis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getWissensBasis_Regeln(), this.getRegel(), null, "regeln", null, 0, -1, WissensBasis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getWissensBasis_Aussagen(), this.getAussage(), null, "aussagen", null, 0, -1, WissensBasis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWissensBasis_RegelGruppen(), this.getRegelgruppe(), null, "regelGruppen", null, 0, -1, WissensBasis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bauteilEClass, Bauteil.class, "Bauteil", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBauteil_ID(), ecorePackage.getELong(), "ID", null, 0, 1, Bauteil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

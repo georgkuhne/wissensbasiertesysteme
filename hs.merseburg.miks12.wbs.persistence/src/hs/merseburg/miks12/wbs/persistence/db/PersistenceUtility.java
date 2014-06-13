@@ -3,9 +3,11 @@ package hs.merseburg.miks12.wbs.persistence.db;
 import hs.merseburg.miks12.wbs.persistence.ConstantsPersistence;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
@@ -14,6 +16,8 @@ import org.hibernate.QueryParameterException;
 import org.hibernate.Session;
 
 import wissensbasismodel.Aussage;
+import wissensbasismodel.Regel;
+import wissensbasismodel.Regelgruppe;
 import wissensbasismodel.WissensBasis;
 import wissensbasismodel.impl.WissensbasismodelPackageImpl;
 
@@ -686,5 +690,70 @@ public class PersistenceUtility {
 			return (WissensBasis) list.get(0);
 		}
 		return null;
+	}
+
+	public static void deleteRuleGroup(Session session, Regelgruppe regelgruppe) {
+
+		session.delete(regelgruppe);
+		session.flush();
+
+	}
+
+	public static void deleteRule(Session session, Regel regel, long wbsID) {
+
+		WissensBasis wbs = PersistenceUtility.getWissensBasisById(wbsID,
+				session);
+
+		EList<Regelgruppe> regelgruppen = wbs.getRegelGruppen();
+		session.update(regel);
+		for (Iterator iterator = regelgruppen.iterator(); iterator.hasNext();) {
+			Regelgruppe regelgruppe = (Regelgruppe) iterator.next();
+			if (regelgruppe == null) {
+				System.err.println("regelgeruppe ist: " + regelgruppe);
+			} else {
+				boolean drin = regelgruppe.getRegeln().contains(regel);
+
+				if (drin) {
+					System.err.println("regelgeruppe ist: " + regelgruppe);
+					regelgruppe.getRegeln().remove(regel);
+					// session.flush();
+				}
+			}
+		}
+		session.delete(regel);
+		session.flush();
+	}
+
+	public static void deleteStatement(Session session, Aussage aussage,
+			long wbsID) {
+
+		WissensBasis wbs = PersistenceUtility.getWissensBasisById(wbsID,
+				session);
+
+		EList<Regel> regeln = wbs.getRegeln();
+		session.update(aussage);
+
+		Regel regel;
+		for (Iterator iterator = regeln.iterator(); iterator.hasNext();) {
+			regel = (Regel) iterator.next();
+			if (regel == null) {
+				System.err.println("regel ist: " + regel);
+			} else {
+				boolean drin = regel.getKonklusion().getLiteral().getAussage()
+						.getName().equals(aussage.getName());
+
+				if (drin) {
+					System.err.println("regel ist: " + regel);
+
+					deleteRule(session, regel, wbsID);
+
+				}
+			}
+
+		}
+		session.delete(aussage);
+
+		session.flush();
+
 	}
 }
