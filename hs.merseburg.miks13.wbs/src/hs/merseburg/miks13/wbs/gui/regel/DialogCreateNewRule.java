@@ -62,6 +62,7 @@ public class DialogCreateNewRule extends Dialog {
 	private Combo combo_operator;
 	private Combo combo_prefix;
 	private ComboViewer comboviewerstatement;
+	private EList<Aussage> aussagen;
 
 	/**
 	 * Create the dialog.
@@ -129,8 +130,8 @@ public class DialogCreateNewRule extends Dialog {
 		combo_prefix = new Combo(composite_1, SWT.NONE);
 		combo_prefix.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
-		combo_prefix.add("NOT");
 
+		combo_prefix.setItems(LiteralRepresentation.getNegation());
 		Combo combo_statement = new Combo(composite_1, SWT.NONE);
 		combo_statement.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
@@ -150,8 +151,8 @@ public class DialogCreateNewRule extends Dialog {
 
 		WissensBasis wbs = PersistenceUtility.getWissensBasisById(wbsID,
 				session);
-		EList<Aussage> wert = wbs.getAussagen();
-		comboviewerstatement.setInput(wert);
+		aussagen = wbs.getAussagen();
+		comboviewerstatement.setInput(aussagen);
 
 		combo_operator = new Combo(composite_1, SWT.NONE);
 		combo_operator.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
@@ -182,30 +183,26 @@ public class DialogCreateNewRule extends Dialog {
 								combo_wert.setEnabled(true);
 								combo_operator.removeAll();
 								combo_wert.removeAll();
-								combo_operator.add("==");
-								combo_operator.add("<>");
-								combo_operator.add("<=");
-								combo_operator.add(">=");
-								combo_operator.add("<");
-								combo_operator.add(">");
+								String op[] = LiteralRepresentation
+										.getPraedikatFunktionen();
+								combo_wert.setItems(op);
+
 							} else if (wertebereich == WertebereichTyp.REAL) {
 								combo_operator.setEnabled(true);
 								combo_wert.setEnabled(true);
 								combo_operator.removeAll();
 								combo_wert.removeAll();
-								combo_operator.add("==");
-								combo_operator.add("<>");
-								combo_operator.add("<=");
-								combo_operator.add(">=");
-								combo_operator.add("<");
-								combo_operator.add(">");
+								String op[] = LiteralRepresentation
+										.getPraedikatFunktionen();
+								combo_wert.setItems(op);
 							} else if (wertebereich == WertebereichTyp.STRINGLIST) {
 								combo_operator.setEnabled(true);
 								combo_wert.setEnabled(true);
 								combo_operator.removeAll();
 								combo_wert.removeAll();
-								combo_operator.add("==");
-								combo_operator.add("<>");
+								String op[] = LiteralRepresentation
+										.getBinaerePraedikatFunktionen();
+								combo_wert.setItems(op);
 								EList<String> werteliste = ((Aussage) selection
 										.getFirstElement())
 										.getListWertebereich();
@@ -253,7 +250,7 @@ public class DialogCreateNewRule extends Dialog {
 			}
 		});
 
-		comboviewerstatement_2.setInput(wert);
+		comboviewerstatement_2.setInput(aussagen);
 
 		comboviewerstatement_2
 				.addSelectionChangedListener(new ISelectionChangedListener() {
@@ -324,7 +321,7 @@ public class DialogCreateNewRule extends Dialog {
 		fd_cmpPraemisseButtons.bottom = new FormAttachment(styledText);
 		cmpPraemisseButtons.setLayoutData(fd_cmpPraemisseButtons);
 		praemisseContainer = new ContainerTableviewerRegelPraemisse(
-				compTableviewer, wbsId);
+				compTableviewer, wbsId, aussagen);
 		Button btnNewLiteral = new Button(cmpPraemisseButtons, SWT.NONE);
 		btnNewLiteral.setText("New Literal");
 
