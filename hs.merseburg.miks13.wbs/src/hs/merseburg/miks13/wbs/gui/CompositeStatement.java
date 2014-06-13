@@ -9,9 +9,11 @@ import java.util.List;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -37,7 +39,7 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 	long wbsID;
 	private TableViewer viewer;
 	private Table table;
-	private Button b_new, b_edit;
+	private Button b_new, b_edit, b_delete;
 
 	public CompositeStatement(Composite parent, int style) {
 		super(parent, style);
@@ -69,9 +71,12 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 		cbuttons.setLayout(new RowLayout(SWT.HORIZONTAL));
 		b_new = new Button(cbuttons, SWT.PUSH);
 		b_edit = new Button(cbuttons, SWT.None);
+		b_delete = new Button(cbuttons, SWT.None);
 		b_new.setText("Anlegen");
 		b_edit.setText("Bearbeiten");
+		b_delete.setText("Löschen");
 		b_edit.setEnabled(false);
+		b_delete.setEnabled(false);
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			@Override
@@ -80,8 +85,10 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 						.getSelection();
 				if (S.getFirstElement() != null) {
 					b_edit.setEnabled(true);
+					b_delete.setEnabled(true);
 				} else {
 					b_edit.setEnabled(false);
+					b_delete.setEnabled(false);
 				}
 			}
 		});
@@ -104,6 +111,13 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 			public void widgetSelected(SelectionEvent e) {
 				editSelectedStatement();
 			}
+		});
+		b_delete.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				deleteStatement();
+			}
+
 		});
 
 	}
@@ -235,5 +249,19 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 	public void setWBSID(long wbsID) {
 		this.wbsID = wbsID;
 		refreshTable();
+	}
+
+	private void deleteStatement() {
+
+		ISelection selected = viewer.getSelection();
+		StructuredSelection structuredSelection = (StructuredSelection) selected;
+		Aussage Aussage = ((Aussage) structuredSelection.getFirstElement());
+		Session session = PersistenceUtility.getINSTANCE().createSession();
+		PersistenceUtility.deleteStatement(session, Aussage, wbsID);
+
+		session.close();
+		refreshTable();
+		CompositeRules.refreshTable();
+
 	}
 }

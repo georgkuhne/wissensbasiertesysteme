@@ -4,10 +4,8 @@ import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
 import hs.merseburg.miks13.wbs.gui.aussage.DialogCreateNewAussage;
 import hs.merseburg.miks13.wbs.gui.regel.DialogCreateNewRule;
 
-import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
@@ -33,14 +31,14 @@ import wissensbasismodel.KonklusionsTyp;
 import wissensbasismodel.LiteralOperatorenPraedikat;
 import wissensbasismodel.Regel;
 import wissensbasismodel.Regelgruppe;
-import wissensbasismodel.WissensBasis;
 
 public class CompositeRules extends Composite implements GlobalEditActions {
 
-	private TableViewer viewer;
+	private static TableViewer viewer;
 	private Table table;
 	private Button b_new, b_edit, b_delete;
 	private long wbsID;
+	private Regelgruppe regelgruppe;
 
 	public CompositeRules(Composite parent, int style) {
 		super(parent, style);
@@ -122,7 +120,7 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 		});
 	}
 
-	public void refreshTable() {
+	public static void refreshTable() {
 		Session session = PersistenceUtility.getINSTANCE().createSession();
 		List list = PersistenceUtility.getAll(session, "Regel", null, null);
 		viewer.setInput(list);
@@ -243,30 +241,14 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 	private void deleteRule() {
 		// TODO Auto-generated method stub
 		ISelection selected = viewer.getSelection();
-		Session session = PersistenceUtility.getINSTANCE().createSession();
 		StructuredSelection structuredSelection = (StructuredSelection) selected;
-		WissensBasis wbs = PersistenceUtility.getWissensBasisById(wbsID,
-				session);
 		Regel regel = ((Regel) structuredSelection.getFirstElement());
-		EList<Regelgruppe> regelgruppen = wbs.getRegelGruppen();
-		for (Iterator iterator = regelgruppen.iterator(); iterator.hasNext();) {
-			Regelgruppe regelgruppe = (Regelgruppe) iterator.next();
-			if (regelgruppe == null) {
-				System.err.println("regelgeruppe ist: " + regelgruppe);
-			} else {
-				boolean drin = regelgruppe.getRegeln().contains(regel);
+		Session session = PersistenceUtility.getINSTANCE().createSession();
 
-				if (drin) {
-					System.err.println("regelgeruppe ist: " + regelgruppe);
-					regelgruppe.getRegeln().remove(regel);
-
-				}
-			}
-		}
-
-		session.delete(regel);
-		session.flush();
+		PersistenceUtility.deleteRule(session, regel, wbsID);
 		session.close();
 		refreshTable();
+		CompositeRuleGroup.refreshTable();
+
 	}
 }

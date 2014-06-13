@@ -33,7 +33,7 @@ import wissensbasismodel.Regelgruppe;
 public class CompositeRuleGroup extends Composite {
 
 	private long wbsID;
-	private TableViewer viewer;
+	private static TableViewer viewer;
 	private Table table;
 	private Button b_new, b_edit, b_delete;
 
@@ -128,7 +128,7 @@ public class CompositeRuleGroup extends Composite {
 		refreshTable();
 	}
 
-	private void refreshTable() {
+	static void refreshTable() {
 		Session session = PersistenceUtility.getINSTANCE().createSession();
 		List list = PersistenceUtility.getAll(session, "Regelgruppe", null,
 				null);
@@ -200,16 +200,16 @@ public class CompositeRuleGroup extends Composite {
 
 	private void deleteRulegroup() {
 		// TODO Auto-generated method stub
-		ISelection selected = viewer.getSelection();
 		Session session = PersistenceUtility.getINSTANCE().createSession();
+		ISelection selected = viewer.getSelection();
 		StructuredSelection structuredSelection = (StructuredSelection) selected;
 
 		Regelgruppe regelgruppe = ((Regelgruppe) structuredSelection
 				.getFirstElement());
 
-		session.delete(regelgruppe);
-		session.flush();
+		PersistenceUtility.deleteRuleGroup(session, regelgruppe);
 		session.close();
 		refreshTable();
 	}
+
 }
