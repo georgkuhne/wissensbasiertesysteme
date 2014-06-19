@@ -1,10 +1,11 @@
 package hs.merseburg.miks13.wbs.gui.regel;
 
 import wissensbasismodel.LiteralOperatorenLogik;
+import wissensbasismodel.LiteralOperatorenPraedikat;
 
 public class LiteralRepresentation {
-	private final static String[] binaerePraedikatFunktionen = { "==", "<>" };
-	private final static String[] praedikatFunktionen = { "==", "<>", "<=",
+	private final static String[] binaerePraedikatFunktionen = { "", "==", "<>" };
+	private final static String[] praedikatFunktionen = { "", "==", "<>", "<=",
 			">=", "<", ">" };
 	private final static String[] klammerAuf = { "", "(" };
 	private final static String[] klammerZU = { "", ")" };
@@ -93,5 +94,49 @@ public class LiteralRepresentation {
 		if (value.equals(NEGATION[1]))
 			return true;
 		return false;
+	}
+
+	public static LiteralOperatorenPraedikat getPraedikatByName(String v) {
+		if (v == null || v.equals(binaerePraedikatFunktionen[0]))
+			return LiteralOperatorenPraedikat.NULL;
+
+		if (v.equals(praedikatFunktionen[1]))
+			return LiteralOperatorenPraedikat.GLEICH;
+		if (v.equals(praedikatFunktionen[2]))
+			return LiteralOperatorenPraedikat.UNGLEICH;
+		if (v.equals(praedikatFunktionen[3]))
+			return LiteralOperatorenPraedikat.KLEINERGLEICH;
+		if (v.equals(praedikatFunktionen[4]))
+			return LiteralOperatorenPraedikat.GROESSERGLEICH;
+		if (v.equals(praedikatFunktionen[5]))
+			return LiteralOperatorenPraedikat.KLEINERALS;
+		if (v.equals(praedikatFunktionen[6]))
+			return LiteralOperatorenPraedikat.GROESSERALS;
+
+		return LiteralOperatorenPraedikat.NULL;
+
+	}
+
+	public static String getPraedikatName(LiteralOperatorenPraedikat praedikat) {
+		if (praedikat == null)
+			return praedikatFunktionen[0];
+		switch (praedikat) {
+		case NULL:
+			return praedikatFunktionen[0];
+		case GLEICH:
+			return praedikatFunktionen[1];
+		case UNGLEICH:
+			return praedikatFunktionen[2];
+		case KLEINERGLEICH:
+			return praedikatFunktionen[3];
+		case GROESSERGLEICH:
+			return praedikatFunktionen[4];
+		case KLEINERALS:
+			return praedikatFunktionen[5];
+		case GROESSERALS:
+			return praedikatFunktionen[6];
+		default:
+			return praedikatFunktionen[0];
+		}
 	}
 }

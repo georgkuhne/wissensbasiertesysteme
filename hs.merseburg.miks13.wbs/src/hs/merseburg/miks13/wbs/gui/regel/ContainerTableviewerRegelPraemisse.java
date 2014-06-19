@@ -9,9 +9,11 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.ComboBoxViewerCellEditor;
 import org.eclipse.jface.viewers.EditingSupport;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -32,6 +34,7 @@ public class ContainerTableviewerRegelPraemisse {
 	private Table table;
 	Collection<Aussage> aussagen;
 	ArrayList<Literal> literale = new ArrayList<Literal>();
+	private EdditingSupportAussage edditinSupportAussage;
 
 	public ContainerTableviewerRegelPraemisse(Composite parent, long wbsID,
 			Collection<Aussage> aussagen) {
@@ -53,7 +56,14 @@ public class ContainerTableviewerRegelPraemisse {
 	}
 
 	public void deleteLiteral() {
+		viewer.getSelection();
+		IStructuredSelection s = (IStructuredSelection) viewer.getSelection();
+		if (s.getFirstElement() == null)
+			return;
+		Literal lit = (Literal) s.getFirstElement();
 
+		literale.remove(lit);
+		viewer.refresh();
 	}
 
 	private void createColumns() {
@@ -131,24 +141,31 @@ public class ContainerTableviewerRegelPraemisse {
 
 			}
 		});
-		col.setEditingSupport(new EdditingSupportAussage(viewer));
+		edditinSupportAussage = new EdditingSupportAussage(viewer);
+		col.setEditingSupport(edditinSupportAussage);
+
 		col = createTableViewerColumn("OP", 50, 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return "";
+				Literal lit = (Literal) element;
+				return LiteralRepresentation.getPraedikatName(lit
+						.getPraedikat());
 
 			}
 		});
+		col.setEditingSupport(new EdditingSupportPraedikat(viewer));
 
 		col = createTableViewerColumn("Wert", 100, 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return "";
+				Literal lit = (Literal) element;
+				return lit.getWert();
 
 			}
 		});
+		col.setEditingSupport(new EdditingSupportWert(viewer));
 
 		col = createTableViewerColumn(")", 20, 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
@@ -202,7 +219,11 @@ public class ContainerTableviewerRegelPraemisse {
 
 		@Override
 		protected boolean canEdit(Object element) {
-			return true;
+			if (element instanceof Literal) {
+				Literal lit = (Literal) element;
+				return lit.isKlammerAuf();
+			}
+			return false;
 		}
 
 		@Override
@@ -210,6 +231,8 @@ public class ContainerTableviewerRegelPraemisse {
 			Literal lit;
 			if (element instanceof Literal) {
 				lit = (Literal) element;
+				if (!lit.isKlammerAuf())
+					return 0;
 				LiteralOperatorenLogik op = lit.getOutLogicOperator();
 				return LiteralRepresentation.getIndexOfLogicOperator(op);
 			}
@@ -330,6 +353,8 @@ public class ContainerTableviewerRegelPraemisse {
 						.getLogicKlammeraufByName(v);
 				if (klammerauf != lit.isKlammerAuf()) {
 					lit.setKlammerAuf(klammerauf);
+					if (!klammerauf)
+						lit.setOutLogicOperator(LiteralOperatorenLogik.NULL);
 					viewer.refresh();
 				}
 			}
@@ -496,6 +521,232 @@ public class ContainerTableviewerRegelPraemisse {
 				Literal lit = (Literal) element;
 				Aussage v = (Aussage) value;
 				lit.setAussage(v);
+
+				viewer.refresh();
+			}
+		}
+
+	}
+
+	public final class EdditingSupportPraedikat extends EditingSupport {
+		private ComboBoxViewerCellEditor cellEditor = null;
+
+		private EdditingSupportPraedikat(ColumnViewer viewer) {
+			super(viewer);
+			cellEditor = new ComboBoxViewerCellEditor((Composite) getViewer()
+					.getControl(), SWT.READ_ONLY);
+			cellEditor.setLabelProvider(new LabelProvider() {
+				@Override
+				public String getText(Object element) {
+					if (element == null)
+						return "";
+					String s = (String) element;
+					return s;
+				}
+			});
+			cellEditor.setContenProvider(new ArrayContentProvider());
+			cellEditor.getControl().pack();
+
+		}
+
+		@Override
+		protected CellEditor getCellEditor(Object element) {
+			if (element instanceof Literal) {
+
+				Literal lit = (Literal) element;
+				Aussage aussage = lit.getAussage();
+				if (aussage != null) {
+					WertebereichTyp typ = aussage.getWertebereich();
+					switch (typ) {
+					case BOOLEAN:
+						cellEditor.getViewer().getCCombo().setEnabled(false);
+						break;
+					case INTEGER:
+						cellEditor.getViewer().getCCombo().setEnabled(true);
+						cellEditor.getViewer().setInput(
+								LiteralRepresentation.getPraedikatFunktionen());
+						break;
+					case REAL:
+						cellEditor.getViewer().getCCombo().setEnabled(true);
+						cellEditor.getViewer().setInput(
+								LiteralRepresentation.getPraedikatFunktionen());
+						break;
+
+					case STRINGLIST:
+						cellEditor.getViewer().getCCombo().setEnabled(true);
+						cellEditor.getViewer().setInput(
+								LiteralRepresentation
+										.getBinaerePraedikatFunktionen());
+						break;
+					default:
+						break;
+					}
+				}
+
+			}
+			return cellEditor;
+		}
+
+		@Override
+		protected boolean canEdit(Object element) {
+			if (element instanceof Literal) {
+
+				Literal lit = (Literal) element;
+				Aussage aussage = lit.getAussage();
+				if (aussage != null) {
+					WertebereichTyp typ = aussage.getWertebereich();
+					switch (typ) {
+					case BOOLEAN:
+						return false;
+					case INTEGER:
+						return true;
+					case REAL:
+						return true;
+					case STRINGLIST:
+						return true;
+
+					default:
+						break;
+					}
+				}
+
+			}
+			return false;
+		}
+
+		@Override
+		protected Object getValue(Object element) {
+			Literal lit;
+			if (element instanceof Literal) {
+
+				lit = (Literal) element;
+				return lit.getPraedikat();
+			}
+			return null;
+
+		}
+
+		@Override
+		protected void setValue(Object element, Object value) {
+			if (element instanceof Literal) {
+				Literal lit = (Literal) element;
+				String v = (String) value;
+				lit.setPraedikat(LiteralRepresentation.getPraedikatByName(v));
+				viewer.refresh();
+			}
+		}
+
+	}
+
+	public final class EdditingSupportWert extends EditingSupport {
+		private ComboBoxViewerCellEditor combocellEditor = null;
+		private TextCellEditor textcellEditor = null;
+
+		private EdditingSupportWert(ColumnViewer viewer) {
+			super(viewer);
+			combocellEditor = new ComboBoxViewerCellEditor(
+					(Composite) getViewer().getControl(), SWT.READ_ONLY);
+			combocellEditor.setLabelProvider(new LabelProvider() {
+				@Override
+				public String getText(Object element) {
+					if (element == null)
+						return "";
+					String s = (String) element;
+					return s;
+				}
+			});
+			combocellEditor.setContenProvider(new ArrayContentProvider());
+			combocellEditor.getControl().pack();
+			textcellEditor = new TextCellEditor((Composite) getViewer()
+					.getControl(), SWT.None);
+			textcellEditor.setValue("");
+		}
+
+		@Override
+		protected CellEditor getCellEditor(Object element) {
+			if (element instanceof Literal) {
+
+				Literal lit = (Literal) element;
+				Aussage aussage = lit.getAussage();
+				if (aussage != null) {
+					WertebereichTyp typ = aussage.getWertebereich();
+					switch (typ) {
+					case BOOLEAN:
+						combocellEditor.getViewer().getCCombo()
+								.setEnabled(false);
+						return combocellEditor;
+					case INTEGER:
+						return textcellEditor;
+					case REAL:
+						return textcellEditor;
+
+					case STRINGLIST:
+						combocellEditor.getViewer().getCCombo()
+								.setEnabled(true);
+						combocellEditor.getViewer().setInput(
+								lit.getAussage().getListWertebereich()
+										.toArray());
+						return combocellEditor;
+					default:
+						combocellEditor.getViewer().getCCombo()
+								.setEnabled(false);
+						return combocellEditor;
+					}
+				}
+
+			}
+			combocellEditor.getViewer().getCCombo().setEnabled(false);
+			return combocellEditor;
+		}
+
+		@Override
+		protected boolean canEdit(Object element) {
+			if (element instanceof Literal) {
+
+				Literal lit = (Literal) element;
+				Aussage aussage = lit.getAussage();
+				if (aussage != null) {
+					WertebereichTyp typ = aussage.getWertebereich();
+					switch (typ) {
+					case BOOLEAN:
+						return false;
+					case INTEGER:
+						return true;
+					case REAL:
+						return true;
+					case STRINGLIST:
+						return true;
+
+					default:
+						break;
+					}
+				}
+
+			}
+			return false;
+		}
+
+		@Override
+		protected Object getValue(Object element) {
+			Literal lit;
+			if (element instanceof Literal) {
+
+				lit = (Literal) element;
+				String s = lit.getWert();
+				if (s == null)
+					s = "";
+				return s;
+			}
+			return "";
+
+		}
+
+		@Override
+		protected void setValue(Object element, Object value) {
+			if (element instanceof Literal) {
+				Literal lit = (Literal) element;
+				String v = (String) value;
+				lit.setWert(v);
 				viewer.refresh();
 			}
 		}

@@ -16,6 +16,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
@@ -323,18 +324,41 @@ public class DialogCreateNewRule extends Dialog {
 		praemisseContainer = new ContainerTableviewerRegelPraemisse(
 				compTableviewer, wbsId, aussagen);
 		Button btnNewLiteral = new Button(cmpPraemisseButtons, SWT.NONE);
+		btnNewLiteral.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				createNewPraemisseLiteral();
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 		btnNewLiteral.setText("New Literal");
 
 		Button btnDelete = new Button(cmpPraemisseButtons, SWT.NONE);
 		btnDelete.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				deleteSelectedLiteralPraemisse();
 			}
 		});
 		btnDelete.setLayoutData(new RowData(66, SWT.DEFAULT));
 		btnDelete.setText("Delete");
 
 		return container;
+	}
+
+	protected void createNewPraemisseLiteral() {
+		praemisseContainer.createNewLiteral();
+	}
+
+	protected void deleteSelectedLiteralPraemisse() {
+		praemisseContainer.deleteLiteral();
+
 	}
 
 	/**
@@ -453,6 +477,8 @@ public class DialogCreateNewRule extends Dialog {
 			break;
 		}
 		regel.setKonklusion(konklusion);
+		regel.getPraemisse().clear();
+		regel.getPraemisse().addAll(praemisseContainer.literale);
 
 		wbs.getRegeln().add(regel);
 		session.flush();
