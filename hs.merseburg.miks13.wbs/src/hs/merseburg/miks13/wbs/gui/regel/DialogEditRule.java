@@ -9,6 +9,7 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -73,11 +74,10 @@ public class DialogEditRule extends Dialog {
 	 * 
 	 * @param parentShell
 	 */
-	public DialogEditRule(Shell parentShell, Regel regel, Session session,
-			long wbsID) {
+	public DialogEditRule(Shell parentShell, Regel regel, long wbsID) {
 		super(parentShell);
 		setShellStyle(SWT.BORDER | SWT.RESIZE | SWT.TITLE);
-		this.session = session;
+		this.session = PersistenceUtility.getINSTANCE().createSession();
 		this.wbsID = wbsID;
 		this.regel = regel;
 	}
@@ -132,7 +132,7 @@ public class DialogEditRule extends Dialog {
 		Label lblWert = new Label(composite_1, SWT.NONE);
 		lblWert.setText("Wert:");
 
-		combo_prefix = new Combo(composite_1, SWT.NONE);
+		combo_prefix = new Combo(composite_1, SWT.READ_ONLY);
 		combo_prefix.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
 
@@ -158,8 +158,8 @@ public class DialogEditRule extends Dialog {
 				session);
 		aussagen = wbs.getAussagen();
 		comboviewerstatement.setInput(aussagen);
-
-		combo_operator = new Combo(composite_1, SWT.NONE);
+		comboviewerstatement.refresh();
+		combo_operator = new Combo(composite_1, SWT.READ_ONLY);
 		combo_operator.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
 
@@ -190,7 +190,7 @@ public class DialogEditRule extends Dialog {
 								combo_wert.removeAll();
 								String op[] = LiteralRepresentation
 										.getPraedikatFunktionen();
-								combo_wert.setItems(op);
+								combo_operator.setItems(op);
 
 							} else if (wertebereich == WertebereichTyp.REAL) {
 								combo_operator.setEnabled(true);
@@ -199,7 +199,7 @@ public class DialogEditRule extends Dialog {
 								combo_wert.removeAll();
 								String op[] = LiteralRepresentation
 										.getPraedikatFunktionen();
-								combo_wert.setItems(op);
+								combo_operator.setItems(op);
 							} else if (wertebereich == WertebereichTyp.STRINGLIST) {
 								combo_operator.setEnabled(true);
 								combo_wert.setEnabled(true);
@@ -207,7 +207,7 @@ public class DialogEditRule extends Dialog {
 								combo_wert.removeAll();
 								String op[] = LiteralRepresentation
 										.getBinaerePraedikatFunktionen();
-								combo_wert.setItems(op);
+								combo_operator.setItems(op);
 								EList<String> werteliste = ((Aussage) selection
 										.getFirstElement())
 										.getListWertebereich();
@@ -243,7 +243,8 @@ public class DialogEditRule extends Dialog {
 		new Label(composite, SWT.NONE);
 		new Label(composite, SWT.NONE);
 
-		comboviewerstatement_2 = new ComboViewer(combo_statement_2);
+		comboviewerstatement_2 = new ComboViewer(combo_statement_2,
+				SWT.READ_ONLY);
 		comboviewerstatement_2.setContentProvider(ArrayContentProvider
 				.getInstance());
 		comboviewerstatement_2.setLabelProvider(new LabelProvider() {
@@ -359,7 +360,9 @@ public class DialogEditRule extends Dialog {
 	}
 
 	private void initContent() {
-		session.update(regel);
+
+		regel = (Regel) session.merge(regel);
+
 		text_name.setText(regel.getName());
 		KonklusionsTyp typ = regel.getKonklusion().getKonklusionTyp();
 		switch (typ) {
@@ -380,23 +383,24 @@ public class DialogEditRule extends Dialog {
 
 				break;
 			case GLEICH:
+				combo_operator.select(1);
 
 				break;
 			case UNGLEICH:
-				combo_operator.select(1);
+				combo_operator.select(2);
 				break;
 			case KLEINERGLEICH:
-				combo_operator.select(2);
+				combo_operator.select(3);
 
 				break;
 			case GROESSERGLEICH:
-				combo_operator.select(3);
-				break;
-			case KLEINERALS:
 				combo_operator.select(4);
 				break;
-			case GROESSERALS:
+			case KLEINERALS:
 				combo_operator.select(5);
+				break;
+			case GROESSERALS:
+				combo_operator.select(6);
 				break;
 			default:
 				combo_operator.select(0);
@@ -409,6 +413,8 @@ public class DialogEditRule extends Dialog {
 
 			comboviewerstatement_2.setSelection(new StructuredSelection(regel
 					.getKonklusion().getDiagnoseaussage()));
+			ISelection selection = comboviewerstatement_2.getSelection();
+
 			lblAussageinhalt.setText(regel.getKonklusion().getDiagnoseaussage()
 					.getDiagnosetext());
 			break;
@@ -554,12 +560,18 @@ public class DialogEditRule extends Dialog {
 		regel.getPraemisse().addAll(praemisseContainer.literale);
 
 		session.flush();
-		session.close();
 		super.okPressed();
 	}
 
 	private boolean validateInput() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public boolean close() {
+		session.close();
+		return super.close();
+
 	}
 }

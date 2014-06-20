@@ -3,6 +3,7 @@ package hs.merseburg.miks13.wbs.gui;
 import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
 import hs.merseburg.miks13.wbs.gui.aussage.DialogCreateNewAussage;
 import hs.merseburg.miks13.wbs.gui.regel.DialogCreateNewRule;
+import hs.merseburg.miks13.wbs.gui.regel.DialogEditRule;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FormAttachment;
@@ -30,7 +32,6 @@ import wissensbasismodel.Konklusion;
 import wissensbasismodel.KonklusionsTyp;
 import wissensbasismodel.LiteralOperatorenPraedikat;
 import wissensbasismodel.Regel;
-import wissensbasismodel.Regelgruppe;
 
 public class CompositeRules extends Composite implements GlobalEditActions {
 
@@ -38,7 +39,6 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 	private Table table;
 	private Button b_new, b_edit, b_delete;
 	private long wbsID;
-	private Regelgruppe regelgruppe;
 
 	public CompositeRules(Composite parent, int style) {
 		super(parent, style);
@@ -105,6 +105,15 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 
 			}
 		});
+
+		b_edit.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				editRule();
+			}
+
+		});
+
 		b_delete.addSelectionListener(new SelectionListener() {
 
 			@Override
@@ -118,6 +127,18 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 
 			}
 		});
+
+	}
+
+	protected void editRule() {
+		ISelection selected = viewer.getSelection();
+		StructuredSelection structuredSelection = (StructuredSelection) selected;
+		Regel regel = ((Regel) structuredSelection.getFirstElement());
+		DialogEditRule dialog = new DialogEditRule(Display.getCurrent()
+				.getActiveShell(), regel, wbsID);
+		if (dialog.open() == DialogEditRule.OK) {
+			refreshTable();
+		}
 	}
 
 	public static void refreshTable() {

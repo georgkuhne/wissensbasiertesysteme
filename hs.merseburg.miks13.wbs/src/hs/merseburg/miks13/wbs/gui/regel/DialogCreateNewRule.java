@@ -186,7 +186,7 @@ public class DialogCreateNewRule extends Dialog {
 								combo_wert.removeAll();
 								String op[] = LiteralRepresentation
 										.getPraedikatFunktionen();
-								combo_wert.setItems(op);
+								combo_operator.setItems(op);
 
 							} else if (wertebereich == WertebereichTyp.REAL) {
 								combo_operator.setEnabled(true);
@@ -195,7 +195,7 @@ public class DialogCreateNewRule extends Dialog {
 								combo_wert.removeAll();
 								String op[] = LiteralRepresentation
 										.getPraedikatFunktionen();
-								combo_wert.setItems(op);
+								combo_operator.setItems(op);
 							} else if (wertebereich == WertebereichTyp.STRINGLIST) {
 								combo_operator.setEnabled(true);
 								combo_wert.setEnabled(true);
@@ -203,7 +203,7 @@ public class DialogCreateNewRule extends Dialog {
 								combo_wert.removeAll();
 								String op[] = LiteralRepresentation
 										.getBinaerePraedikatFunktionen();
-								combo_wert.setItems(op);
+								combo_operator.setItems(op);
 								EList<String> werteliste = ((Aussage) selection
 										.getFirstElement())
 										.getListWertebereich();

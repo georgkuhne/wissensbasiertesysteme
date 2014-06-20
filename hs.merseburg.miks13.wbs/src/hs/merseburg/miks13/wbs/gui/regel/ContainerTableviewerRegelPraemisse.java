@@ -795,8 +795,8 @@ public class ContainerTableviewerRegelPraemisse {
 	}
 
 	public void setLiterale(Collection<Literal> literale) {
-		literale.clear();
-		literale.addAll(literale);
+		this.literale.clear();
+		this.literale.addAll(literale);
 		viewer.setInput(literale);
 		viewer.refresh();
 	}
