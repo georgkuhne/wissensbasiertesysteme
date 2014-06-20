@@ -2,6 +2,7 @@ package hs.merseburg.miks13.wbs.gui;
 
 import hs.merseburg.miks12.wbs.persistence.db.PersistenceUtility;
 import hs.merseburg.miks13.wbs.gui.regelgruppe.DialogCreateNewRuleGroup;
+import hs.merseburg.miks13.wbs.gui.regelgruppe.DialogEditRuleGroup;
 
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FormAttachment;
@@ -119,7 +121,27 @@ public class CompositeRuleGroup extends Composite {
 
 			}
 		});
+		b_edit.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				editRuleGroup();
+			}
+		});
 		refreshTable();
+	}
+
+	protected void editRuleGroup() {
+		ISelection selected = viewer.getSelection();
+		StructuredSelection structuredSelection = (StructuredSelection) selected;
+
+		Regelgruppe regelgruppe = ((Regelgruppe) structuredSelection
+				.getFirstElement());
+
+		DialogEditRuleGroup dialog = new DialogEditRuleGroup(Display
+				.getCurrent().getActiveShell(), wbsID, regelgruppe);
+		if (dialog.open() == DialogEditRuleGroup.OK)
+			refreshTable();
 	}
 
 	public void setWBSID(long wbsid) {
