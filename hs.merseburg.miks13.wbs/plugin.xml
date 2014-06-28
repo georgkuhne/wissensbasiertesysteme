@@ -39,6 +39,21 @@
                   label="Exit">
             </command>
          </menu>
+         <menu
+               label="Export/Import">
+            <command
+                  commandId="hs.merseburg.miks13.wbs.export"
+                  id="hs.merseburg.miks13.wbs.export"
+                  label="export Wissensbasis"
+                  style="push">
+            </command>
+            <command
+                  commandId="hs.merseburg.miks13.wbs.import"
+                  id="hs.merseburg.miks13.wbs.import"
+                  label="import Wissensbasis"
+                  style="push">
+            </command>
+         </menu>
       </menuContribution>
    </extension>
    <extension
@@ -52,6 +67,27 @@
                value="icons/alt_window_16.gif,icons/alt_window_32.gif">
          </property>
       </product>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="hs.merseburg.miks13.wbs.PropertyTesterWBSActive"
+            id="hs.merseburg.miks13.wbs.iswbsaktivea"
+            namespace="hs.merseburg.miks13.wbs"
+            properties="iswbsaktive"
+            type="java.lang.Object">
+      </propertyTester>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="hs.merseburg.miks13.wbs.exportimport.CommandHandlerExport"
+            commandId="hs.merseburg.miks13.wbs.export">
+      </handler>
+      <handler
+            class="hs.merseburg.miks13.wbs.exportimport.CommandHandlerImport"
+            commandId="hs.merseburg.miks13.wbs.import">
+      </handler>
    </extension>
 
 </plugin>

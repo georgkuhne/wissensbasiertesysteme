@@ -139,4 +139,9 @@ public class LiteralRepresentation {
 			return praedikatFunktionen[0];
 		}
 	}
+
+	public static String getLogicOperatorName(LiteralOperatorenLogik op) {
+
+		return logicOperatoren[getIndexOfLogicOperator(op)];
+	}
 }

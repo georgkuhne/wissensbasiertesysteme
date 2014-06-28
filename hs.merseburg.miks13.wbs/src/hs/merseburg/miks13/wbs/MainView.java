@@ -10,11 +10,21 @@ import org.eclipse.ui.part.ViewPart;
 
 public class MainView extends ViewPart {
 
+	private static MainView instance;
 	public static final String ID = "hs.merseburg.miks13.wbs.view";
-
 	CompositeBrowseWBS cBrowseWBS;
 	CompositeEditWBS ceEditWBS;
 	StackLayout stacklayout = new StackLayout();
+	private boolean isWBSActive = false;
+	long wbsid;
+
+	public MainView() {
+		instance = this;
+	}
+
+	public static MainView getInstance() {
+		return instance;
+	}
 
 	private Composite parent;
 
@@ -23,7 +33,7 @@ public class MainView extends ViewPart {
 	 * it.
 	 */
 	public void createPartControl(Composite parent) {
-		this.parent=parent;
+		this.parent = parent;
 		parent.setLayout(stacklayout);
 		cBrowseWBS = new CompositeBrowseWBS(parent, SWT.None, this);
 		ceEditWBS = new CompositeEditWBS(parent, SWT.None, this);
@@ -38,16 +48,27 @@ public class MainView extends ViewPart {
 	}
 
 	public void openWBS(long wbsid) {
+		this.wbsid = wbsid;
 		ceEditWBS.openWBS(wbsid);
 		stacklayout.topControl = ceEditWBS;
 		parent.layout();
+		this.isWBSActive = true;
 
 	}
 
 	public void closeWBS() {
 		stacklayout.topControl = cBrowseWBS;
 		parent.layout();
+		this.isWBSActive = false;
 
+	}
 
+	public boolean isWBSActive() {
+		return isWBSActive;
+	}
+
+	public long getWBSID() {
+		// TODO Auto-generated method stub
+		return wbsid;
 	}
 }
