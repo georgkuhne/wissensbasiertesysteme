@@ -86,8 +86,8 @@ public class ExportWissensBasis {
 		writer.write("Regel:" + System.getProperty("line.separator"));
 		writer.write("\tName\t" + InternExternRepresenationMapping.bezeichner
 				+ regel.getName() + "," + System.getProperty("line.separator"));
-		writer.write("\tPr\u00E4misse\t{"
-				+ InternExternRepresenationMapping.bezeichner);
+		writer.write("\tPr\u00E4misse\t"
+				+ InternExternRepresenationMapping.bezeichner + "{");
 		ArrayList<Literal> prämisse = new ArrayList<>(regel.getPraemisse());
 		for (int i = 0; i < prämisse.size(); i++) {
 			Literal literal = prämisse.get(i);
@@ -195,13 +195,13 @@ public class ExportWissensBasis {
 		String diagnosetext = aussage.getDiagnosetext();
 		if (fragetext != null && !"".equals(fragetext.trim())) {
 			writer.write("\tFragetext\t"
-					+ InternExternRepresenationMapping.bezeichner + "\""
-					+ fragetext + "\",\n");
+					+ InternExternRepresenationMapping.bezeichner + "{\""
+					+ fragetext + "\"},\n");
 		}
 		if (diagnosetext != null && !"".equals(diagnosetext.trim())) {
 			writer.write("\tDiagnosetext\t"
-					+ InternExternRepresenationMapping.bezeichner + "\""
-					+ diagnosetext + "\",");
+					+ InternExternRepresenationMapping.bezeichner + "{\""
+					+ diagnosetext + "\"},");
 		}
 		writer.write(System.getProperty("line.separator"));
 
