@@ -61,14 +61,14 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="hs.merseburg.miks13.wbs.application"
-            name="wissensaAcquisition">
+            name="wbs">
          <property
                name="windowImages"
-               value="icons/alt_window_16.gif,icons/alt_window_32.gif">
+               value="icons/logo16.bmp,icons/logo32.bmp,icons/logo128.bmp">
          </property>
          <property
                name="appName"
-               value="wissensaAcquisition">
+               value="wbs">
          </property>
       </product>
    </extension>

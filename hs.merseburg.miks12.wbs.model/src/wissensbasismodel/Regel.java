@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface Regel extends EObject {
 	/**
 	 * Returns the value of the '<em><b>ID</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>ID</em>' attribute isn't clear,
@@ -36,7 +37,7 @@ public interface Regel extends EObject {
 	 * @return the value of the '<em>ID</em>' attribute.
 	 * @see #setID(long)
 	 * @see wissensbasismodel.WissensbasismodelPackage#getRegel_ID()
-	 * @model id="true"
+	 * @model default="0" id="true"
 	 * @generated
 	 */
 	long getID();
@@ -94,26 +95,26 @@ public interface Regel extends EObject {
 	EList<Literal> getPraemisse();
 
 	/**
-	 * Returns the value of the '<em><b>Konklusion</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Konklusion</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Konklusion</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Konklusion</em>' containment reference.
+	 * @return the value of the '<em>Konklusion</em>' reference.
 	 * @see #setKonklusion(Konklusion)
 	 * @see wissensbasismodel.WissensbasismodelPackage#getRegel_Konklusion()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
 	Konklusion getKonklusion();
 
 	/**
-	 * Sets the value of the '{@link wissensbasismodel.Regel#getKonklusion <em>Konklusion</em>}' containment reference.
+	 * Sets the value of the '{@link wissensbasismodel.Regel#getKonklusion <em>Konklusion</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Konklusion</em>' containment reference.
+	 * @param value the new value of the '<em>Konklusion</em>' reference.
 	 * @see #getKonklusion()
 	 * @generated
 	 */

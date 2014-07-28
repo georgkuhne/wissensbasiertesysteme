@@ -15,15 +15,16 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-public class DiaLogCreateNewWBS extends MessageDialog{
+public class DiaLogCreateNewWBS extends MessageDialog {
 
 	private Text tNewWBS;
 	private Label tInfo;
 	private String wbsName;
 
-	public String getWBSName(){
+	public String getWBSName() {
 		return wbsName.trim();
 	}
+
 	private DiaLogCreateNewWBS(Shell parentShell, String dialogTitle,
 			Image dialogTitleImage, String dialogMessage, int dialogImageType,
 			String[] dialogButtonLabels, int defaultIndex) {
@@ -31,19 +32,22 @@ public class DiaLogCreateNewWBS extends MessageDialog{
 				dialogImageType, dialogButtonLabels, defaultIndex);
 		// TODO Auto-generated constructor stub
 	}
-	
-	public DiaLogCreateNewWBS(){
-		super(Display.getCurrent().getActiveShell(), "Create New WBS", null, "Create New WBS",
-				0, new String[] { IDialogConstants.OK_LABEL,
+
+	public DiaLogCreateNewWBS() {
+		super(Display.getCurrent().getActiveShell(),
+				"Erstelle neue Wissensbasis", null, "", 0, new String[] {
+						IDialogConstants.OK_LABEL,
 						IDialogConstants.CANCEL_LABEL }, 0);
-		
+
 	}
-@Override
-public void create() {
-	super.create();
-	checkWBSName();
-	
-}
+
+	@Override
+	public void create() {
+		super.create();
+		checkWBSName();
+
+	}
+
 	@Override
 	protected Control createCustomArea(Composite parent) {
 		GridData gd = new GridData();
@@ -66,34 +70,28 @@ public void create() {
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;
 
-		
-
 		tInfo = new Label(parent, SWT.NONE);
 		tInfo.setForeground(ColorConstants.red);
 		tInfo.setLayoutData(gd);
 		return super.createCustomArea(parent);
 
 	}
-	
-	
+
 	private void checkWBSName() {
 		String sNewDbName = tNewWBS.getText();
-		
 
 		if (sNewDbName.length() == 0) {
-			tInfo
-					.setText("The knowkedgebase name must not be empty! Choose a database name.");
+			tInfo.setText("The knowkedgebase name must not be empty!");
 			tInfo.pack();
 			getButton(OK).setEnabled(false);
 			return;
 		} else if (sNewDbName.startsWith(" ")) { //$NON-NLS-1$
-			tInfo
-					.setText("The knowkedgebase name must not be empty! Choose a database name.");
+			tInfo.setText("The knowkedgebase name must not be empty!");
 			tInfo.pack();
 			getButton(OK).setEnabled(false);
 			return;
 		}
 		getButton(OK).setEnabled(true);
-		wbsName=tNewWBS.getText();
-}
+		wbsName = tNewWBS.getText();
 	}
+}

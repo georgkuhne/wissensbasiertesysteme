@@ -71,7 +71,7 @@ public class CompositeRuleGroup extends Composite {
 		b_new = new Button(cbuttons, SWT.PUSH);
 		b_edit = new Button(cbuttons, SWT.None);
 		b_delete = new Button(cbuttons, SWT.None);
-		b_delete.setText("LÃ¶schen");
+		b_delete.setText("Löschen");
 		b_new.setText("Anlegen");
 		b_edit.setText("Bearbeiten");
 		b_edit.setEnabled(false);

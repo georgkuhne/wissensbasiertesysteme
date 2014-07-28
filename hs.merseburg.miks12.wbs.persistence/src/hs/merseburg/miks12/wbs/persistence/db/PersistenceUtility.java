@@ -197,6 +197,7 @@ public class PersistenceUtility {
 			return results;
 		} catch (Exception e) {
 			e.printStackTrace();
+
 			return null;
 		} finally {
 			session.close();

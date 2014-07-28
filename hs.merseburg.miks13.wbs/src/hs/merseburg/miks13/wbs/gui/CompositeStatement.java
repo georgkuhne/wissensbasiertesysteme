@@ -74,7 +74,7 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 		b_delete = new Button(cbuttons, SWT.None);
 		b_new.setText("Anlegen");
 		b_edit.setText("Bearbeiten");
-		b_delete.setText("LÃ¶schen");
+		b_delete.setText("Löschen");
 		b_edit.setEnabled(false);
 		b_delete.setEnabled(false);
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {

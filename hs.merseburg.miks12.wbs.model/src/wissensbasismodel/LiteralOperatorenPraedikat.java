@@ -59,14 +59,14 @@ public enum LiteralOperatorenPraedikat implements Enumerator {
 	GROESSERGLEICH(3, "groessergleich", ""),
 
 	/**
-	 * The '<em><b>Groe√üerals</b></em>' literal object.
+	 * The '<em><b>Groeﬂerals</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #GROESSERALS_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	GROESSERALS(4, "groe√üerals", "groe\u00dferals"),
+	GROESSERALS(4, "groeﬂerals", "groe\u00dferals"),
 
 	/**
 	 * The '<em><b>Ungleich</b></em>' literal object.
@@ -147,7 +147,7 @@ public enum LiteralOperatorenPraedikat implements Enumerator {
 	public static final int GROESSERGLEICH_VALUE = 3;
 
 	/**
-	 * The '<em><b>Groe√üerals</b></em>' literal value.
+	 * The '<em><b>Groeﬂerals</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>GroeÔøΩerals</b></em>' literal object isn't clear,
@@ -155,7 +155,7 @@ public enum LiteralOperatorenPraedikat implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #GROESSERALS
-	 * @model name="groe√üerals"
+	 * @model name="groeﬂerals"
 	 * @generated
 	 * @ordered
 	 */

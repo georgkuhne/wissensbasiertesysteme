@@ -48,7 +48,7 @@ public class CompositeEditWBS extends Composite {
 		cbuttons.setLayout(new RowLayout(SWT.HORIZONTAL));
 
 		Button b_close = new Button(cbuttons, SWT.PUSH);
-		b_close.setText("Schlieï¿½en");
+		b_close.setText("Schließen");
 		b_close.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {

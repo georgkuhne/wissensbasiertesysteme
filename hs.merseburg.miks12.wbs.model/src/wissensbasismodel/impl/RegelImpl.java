@@ -88,7 +88,7 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 	protected EList<Literal> praemisse;
 
 	/**
-	 * The cached value of the '{@link #getKonklusion() <em>Konklusion</em>}' containment reference.
+	 * The cached value of the '{@link #getKonklusion() <em>Konklusion</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getKonklusion()
@@ -176,6 +176,14 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 	 * @generated
 	 */
 	public Konklusion getKonklusion() {
+		if (konklusion != null && konklusion.eIsProxy()) {
+			InternalEObject oldKonklusion = (InternalEObject)konklusion;
+			konklusion = (Konklusion)eResolveProxy(oldKonklusion);
+			if (konklusion != oldKonklusion) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, WissensbasismodelPackage.REGEL__KONKLUSION, oldKonklusion, konklusion));
+			}
+		}
 		return konklusion;
 	}
 
@@ -184,14 +192,8 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetKonklusion(Konklusion newKonklusion, NotificationChain msgs) {
-		Konklusion oldKonklusion = konklusion;
-		konklusion = newKonklusion;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.REGEL__KONKLUSION, oldKonklusion, newKonklusion);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public Konklusion basicGetKonklusion() {
+		return konklusion;
 	}
 
 	/**
@@ -200,17 +202,10 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 	 * @generated
 	 */
 	public void setKonklusion(Konklusion newKonklusion) {
-		if (newKonklusion != konklusion) {
-			NotificationChain msgs = null;
-			if (konklusion != null)
-				msgs = ((InternalEObject)konklusion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WissensbasismodelPackage.REGEL__KONKLUSION, null, msgs);
-			if (newKonklusion != null)
-				msgs = ((InternalEObject)newKonklusion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WissensbasismodelPackage.REGEL__KONKLUSION, null, msgs);
-			msgs = basicSetKonklusion(newKonklusion, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.REGEL__KONKLUSION, newKonklusion, newKonklusion));
+		Konklusion oldKonklusion = konklusion;
+		konklusion = newKonklusion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WissensbasismodelPackage.REGEL__KONKLUSION, oldKonklusion, konklusion));
 	}
 
 	/**
@@ -223,8 +218,6 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 		switch (featureID) {
 			case WissensbasismodelPackage.REGEL__PRAEMISSE:
 				return ((InternalEList<?>)getPraemisse()).basicRemove(otherEnd, msgs);
-			case WissensbasismodelPackage.REGEL__KONKLUSION:
-				return basicSetKonklusion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -244,7 +237,8 @@ public class RegelImpl extends MinimalEObjectImpl.Container implements Regel {
 			case WissensbasismodelPackage.REGEL__PRAEMISSE:
 				return getPraemisse();
 			case WissensbasismodelPackage.REGEL__KONKLUSION:
-				return getKonklusion();
+				if (resolve) return getKonklusion();
+				return basicGetKonklusion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

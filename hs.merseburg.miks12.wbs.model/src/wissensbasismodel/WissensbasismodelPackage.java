@@ -279,7 +279,7 @@ public interface WissensbasismodelPackage extends EPackage {
 	int REGEL__PRAEMISSE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Konklusion</b></em>' containment reference.
+	 * The feature id for the '<em><b>Konklusion</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -876,10 +876,10 @@ public interface WissensbasismodelPackage extends EPackage {
 	EReference getRegel_Praemisse();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link wissensbasismodel.Regel#getKonklusion <em>Konklusion</em>}'.
+	 * Returns the meta object for the reference '{@link wissensbasismodel.Regel#getKonklusion <em>Konklusion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Konklusion</em>'.
+	 * @return the meta object for the reference '<em>Konklusion</em>'.
 	 * @see wissensbasismodel.Regel#getKonklusion()
 	 * @see #getRegel()
 	 * @generated
@@ -1378,7 +1378,7 @@ public interface WissensbasismodelPackage extends EPackage {
 		 */
 		EReference REGEL__PRAEMISSE = eINSTANCE.getRegel_Praemisse();
 		/**
-		 * The meta object literal for the '<em><b>Konklusion</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Konklusion</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

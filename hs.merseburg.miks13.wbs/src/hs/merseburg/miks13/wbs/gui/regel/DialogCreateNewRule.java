@@ -37,7 +37,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.SWTResourceManager;
 import org.hibernate.Session;
 
 import wissensbasismodel.Aussage;
@@ -286,15 +285,8 @@ public class DialogCreateNewRule extends Dialog {
 
 		styledText = new StyledText(grpPrmisse, SWT.BORDER | SWT.READ_ONLY);
 		styledText.setAlignment(SWT.CENTER);
-		styledText.setText("asdasdasd");
-		styledText.setBackground(SWTResourceManager
-				.getColor(SWT.COLOR_TITLE_INACTIVE_FOREGROUND));
-		styledText.setSelectionForeground(SWTResourceManager
-				.getColor(SWT.COLOR_TITLE_INACTIVE_FOREGROUND));
-		styledText.setMarginColor(SWTResourceManager
-				.getColor(SWT.COLOR_TITLE_INACTIVE_FOREGROUND));
-		styledText.setSelectionBackground(SWTResourceManager
-				.getColor(SWT.COLOR_GRAY));
+		styledText.setText("");
+
 		styledText.setEditable(false);
 		FormData fd_styledText = new FormData();
 		fd_styledText.bottom = new FormAttachment(100);
@@ -414,7 +406,7 @@ public class DialogCreateNewRule extends Dialog {
 			if (aussage == null) {
 				MessageDialog.openWarning(
 						Display.getCurrent().getActiveShell(), "Warnung",
-						"Keine Aussage gew√§hlt.");
+						"Keine Aussage gew‰hlt.");
 				return;
 			} else {
 				literal.setAussage(aussage);
@@ -461,7 +453,7 @@ public class DialogCreateNewRule extends Dialog {
 			if (diagnoseaussage == null) {
 				MessageDialog.openWarning(
 						Display.getCurrent().getActiveShell(), "Warnung",
-						"Keine Aussage gew√§hlt.");
+						"Keine Aussage gew‰hlt.");
 				return;
 			} else {
 				konklusion.setDiagnoseaussage(diagnoseaussage);
@@ -476,6 +468,7 @@ public class DialogCreateNewRule extends Dialog {
 		default:
 			break;
 		}
+		session.saveOrUpdate(konklusion);
 		regel.setKonklusion(konklusion);
 		regel.getPraemisse().clear();
 		regel.getPraemisse().addAll(praemisseContainer.literale);

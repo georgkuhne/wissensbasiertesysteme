@@ -5,7 +5,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="WissensBasis">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
-        iD="true"/>
+        defaultValueLiteral="0" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bauteile" upperBound="-1"
         eType="#//Bauteil" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="regeln" upperBound="-1"
@@ -17,7 +17,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Bauteil">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
-        iD="true"/>
+        defaultValueLiteral="0" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Asset_ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
@@ -29,7 +29,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Regel">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
-        iD="true"/>
+        defaultValueLiteral="0" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="praemisse" upperBound="-1"
         eType="#//Literal" containment="true"/>
@@ -37,7 +37,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Aussage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
-        iD="true"/>
+        defaultValueLiteral="0" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="wertebereich" eType="#//WertebereichTyp"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Fragetext" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Diagnosetext" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -58,7 +58,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="praedikat" eType="#//LiteralOperatorenPraedikat"
         defaultValueLiteral="NULL"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
-        iD="true"/>
+        defaultValueLiteral="0" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="innerLogikOperator" eType="#//LiteralOperatorenLogik"
         defaultValueLiteral="NULL"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="outLogicOperator" eType="#//LiteralOperatorenLogik"
@@ -98,7 +98,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Regelgruppe">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
-        iD="true"/>
+        defaultValueLiteral="0" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="Regeln" upperBound="-1"
         eType="#//Regel"/>
