@@ -66,9 +66,11 @@ public class ExportWissensBasis {
 				+ InternExternRepresenationMapping.bezeichner + "Liste{");
 		ArrayList<Regel> regeln = new ArrayList<Regel>(regelgruppe.getRegeln());
 		for (int i = 0; i < regeln.size(); i++) {
-			writer.write("\"" + regeln.get(i).getName() + "\"");
+			if (i != 0)
+				writer.write(", ");
+			writer.write(regeln.get(i).getName());
 		}
-		writer.write("}," + System.getProperty("line.separator"));
+		writer.write("};" + System.getProperty("line.separator"));
 
 	}
 
@@ -121,9 +123,9 @@ public class ExportWissensBasis {
 		KonklusionsTyp type = regel.getKonklusion().getKonklusionTyp();
 		switch (type) {
 		case DIAGNOSEAUSGABE:
-			writer.write("{Diagnoseausgabe \""
+			writer.write("{Diagnoseausgabe "
 					+ regel.getKonklusion().getDiagnoseaussage().getName()
-					+ "\"},");
+					+ "}");
 			break;
 		case LITERAL:
 			writer.write("{");
@@ -138,14 +140,14 @@ public class ExportWissensBasis {
 								.getKonklusion().getLiteral().getPraedikat())
 						+ " " + regel.getKonklusion().getLiteral().getWert());
 			}
-			writer.write("},");
+			writer.write("}");
 			break;
 		case TEXTAUSGABE:
 			writer.write("{Textausgabe \""
-					+ regel.getKonklusion().getTextausgabe() + "\"},");
+					+ regel.getKonklusion().getTextausgabe() + "\"}");
 			break;
 		}
-		writer.write(System.getProperty("line.separator"));
+		writer.write(";" + System.getProperty("line.separator"));
 	}
 
 	private void writeAussagen() throws IOException {
@@ -184,7 +186,9 @@ public class ExportWissensBasis {
 			ArrayList<String> werte = new ArrayList<String>(
 					aussage.getListWertebereich());
 			for (int i = 0; i < werte.size(); i++) {
-				writer.write("\"" + werte.get(i) + "\"");
+				if (i != 0)
+					writer.write(", ");
+				writer.write(werte.get(i));
 			}
 			writer.write("}," + System.getProperty("line.separator"));
 			break;
@@ -202,7 +206,7 @@ public class ExportWissensBasis {
 		if (diagnosetext != null && !"".equals(diagnosetext.trim())) {
 			writer.write("\tDiagnosetext\t"
 					+ InternExternRepresenationMapping.bezeichner + "{\""
-					+ diagnosetext + "\"},");
+					+ diagnosetext + "\"};");
 		}
 		writer.write(System.getProperty("line.separator"));
 

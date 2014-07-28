@@ -91,12 +91,12 @@ public class DialogCreateNewRuleGroup extends Dialog {
 		Button btnAddAll = new Button(container, SWT.NONE);
 		btnAddAll.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false,
 				false, 1, 1));
-		btnAddAll.setText("Alle HinzufÃ¼gen >>");
+		btnAddAll.setText("Alle Hinzufügen >>");
 
 		Button btnAdd = new Button(container, SWT.NONE);
 		btnAdd.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false,
 				1, 1));
-		btnAdd.setText("HinzufÃ¼gen >");
+		btnAdd.setText("Hinzufügen >");
 
 		Button btnRemove = new Button(container, SWT.NONE);
 		btnRemove.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false,

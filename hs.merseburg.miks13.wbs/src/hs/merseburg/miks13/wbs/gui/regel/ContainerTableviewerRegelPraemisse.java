@@ -15,6 +15,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -35,10 +36,12 @@ public class ContainerTableviewerRegelPraemisse {
 	Collection<Aussage> aussagen;
 	ArrayList<Literal> literale = new ArrayList<Literal>();
 	private EdditingSupportAussage edditinSupportAussage;
+	Image image;
 
 	public ContainerTableviewerRegelPraemisse(Composite parent, long wbsID,
 			Collection<Aussage> aussagen) {
-		viewer = new TableViewer(parent);
+
+		viewer = new TableViewer(parent, SWT.FULL_SELECTION);
 		this.aussagen = aussagen;
 		table = viewer.getTable();
 		table.setHeaderVisible(true);
@@ -67,7 +70,16 @@ public class ContainerTableviewerRegelPraemisse {
 	}
 
 	private void createColumns() {
-		TableViewerColumn col = createTableViewerColumn("OP", 50, 0);
+		TableViewerColumn col = createTableViewerColumn("", 20, 0);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				// TODO Auto-generated method stub
+				return "+";
+			}
+		});
+
+		col = createTableViewerColumn("OP", 50, 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
