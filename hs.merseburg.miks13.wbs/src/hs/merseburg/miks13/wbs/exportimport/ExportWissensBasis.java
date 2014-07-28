@@ -196,7 +196,8 @@ public class ExportWissensBasis {
 		if (fragetext != null && !"".equals(fragetext.trim())) {
 			writer.write("\tFragetext\t"
 					+ InternExternRepresenationMapping.bezeichner + "{\""
-					+ fragetext + "\"},\n");
+					+ fragetext + "\"}," + System.getProperty("line.separator"));
+
 		}
 		if (diagnosetext != null && !"".equals(diagnosetext.trim())) {
 			writer.write("\tDiagnosetext\t"

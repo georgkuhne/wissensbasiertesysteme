@@ -73,9 +73,9 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 		b_new = new Button(cbuttons, SWT.PUSH);
 		b_edit = new Button(cbuttons, SWT.None);
 		b_delete = new Button(cbuttons, SWT.None);
-		b_new.setText("Anlegen");
-		b_edit.setText("Bearbeiten");
-		b_delete.setText("Löschen");
+		b_new.setText("Anlegen"); //$NON-NLS-1$
+		b_edit.setText("Bearbeiten"); //$NON-NLS-1$
+		b_delete.setText("Löschen"); //$NON-NLS-1$
 		b_edit.setEnabled(false);
 		b_delete.setEnabled(false);
 		table.addSelectionListener(new SelectionListener() {
@@ -143,23 +143,23 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 
 	public static void refreshTable() {
 		Session session = PersistenceUtility.getINSTANCE().createSession();
-		List list = PersistenceUtility.getAll(session, "Regel", null, null);
+		List list = PersistenceUtility.getAll(session, "Regel", null, null); //$NON-NLS-1$
 		viewer.setInput(list);
 		session.close();
 	}
 
 	private void createColumns(TableViewer viewer) {
-		TableViewerColumn col = createTableViewerColumn("ID", 100, 0);
+		TableViewerColumn col = createTableViewerColumn("ID", 100, 0); //$NON-NLS-1$
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				Regel wb = (Regel) element;
-				return "" + wb.getID();
+				return "" + wb.getID(); //$NON-NLS-1$
 
 			}
 		});
 
-		col = createTableViewerColumn("Name", 100, 0);
+		col = createTableViewerColumn("Name", 100, 0); //$NON-NLS-1$
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
@@ -169,7 +169,7 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 			}
 		});
 
-		col = createTableViewerColumn("Konklusion", 100, 0);
+		col = createTableViewerColumn("Konklusion", 100, 0); //$NON-NLS-1$
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
@@ -180,7 +180,7 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 				Regel wb = (Regel) element;
 				Konklusion konklusion = wb.getKonklusion();
 				KonklusionsTyp typ = konklusion.getKonklusionTyp();
-				String result = "";
+				String result = ""; //$NON-NLS-1$
 				switch (typ) {
 				case LITERAL:
 					String name = konklusion.getLiteral().getAussage()
@@ -189,22 +189,22 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 						praedikat = konklusion.getLiteral().getPraedikat()
 								.getName();
 					} else {
-						praedikat = "";
+						praedikat = ""; //$NON-NLS-1$
 					}
 
 					if (konklusion.getLiteral().getWert() != null) {
 						wert = konklusion.getLiteral().getWert();
 					} else {
-						wert = "";
+						wert = ""; //$NON-NLS-1$
 					}
 
 					if (konklusion.getLiteral().isNOT()) {
-						not = "NOT";
+						not = "NOT"; //$NON-NLS-1$
 					} else {
-						not = "";
+						not = ""; //$NON-NLS-1$
 					}
 
-					result = not + " " + name + " " + praedikat + " " + wert;
+					result = not + " " + name + " " + praedikat + " " + wert; //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 
 					returnwert = result;
 

@@ -126,14 +126,14 @@ public class DatabaseConfigurator {
 
 	public LIDbStateType canConnectToDB(String path) {
 		String url = getDatabaseURL(path,
-				ConstantsPersistence.PREFERENCESTORE_DATABASENAME);
+				ConstantsPersistence.PREFERENCESTORE_DATABASENAME)
+				+ ";IFEXISTS=TRUE";
 		int dbErrorCode = 0;
 		Connection dbConnection = null;
 		try {
 			String user = ConstantsPersistence.PREFERENCESTORE_DATABASEUSERNAME;
 			String password = ConstantsPersistence.PREFERENCESTORE_DATABASEPW;
-			dbConnection = DriverManager.getConnection(
-					url + ";IFEXISTS=TRUE", user, password); //$NON-NLS-1$
+			dbConnection = DriverManager.getConnection(url, user, password); //$NON-NLS-1$
 
 			if (dbConnection != null)
 				dbErrorCode = 0;

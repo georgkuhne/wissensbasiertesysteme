@@ -11,7 +11,7 @@ import org.eclipse.ui.part.ViewPart;
 public class MainView extends ViewPart {
 
 	private static MainView instance;
-	public static final String ID = "hs.merseburg.miks13.wbs.view";
+	public static final String ID = "hs.merseburg.miks13.wbs.view"; //$NON-NLS-1$
 	CompositeBrowseWBS cBrowseWBS;
 	CompositeEditWBS ceEditWBS;
 	StackLayout stacklayout = new StackLayout();
