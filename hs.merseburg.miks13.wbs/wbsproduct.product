@@ -3,7 +3,6 @@
 
 <product name="wbs" uid="wbsproduct" id="hs.merseburg.miks13.wbs.product" application="hs.merseburg.miks13.wbs.application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
-
    <configIni use="default">
    </configIni>
 
@@ -13,7 +12,8 @@
 
    <windowImages i16="/hs.merseburg.miks13.wbs/icons/logo16.bmp" i32="/hs.merseburg.miks13.wbs/icons/logo32.bmp" i128="/hs.merseburg.miks13.wbs/icons/logo128.bmp"/>
 
-
+   <splash
+      location="hs.merseburg.miks13.wbs" />
    <launcher name="WBS">
       <solaris/>
       <win useIco="false">
@@ -22,11 +22,9 @@
       </win>
    </launcher>
 
-
    <vm>
       <windows include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7</windows>
    </vm>
-
 
    <plugins>
       <plugin id="com.ibm.icu"/>

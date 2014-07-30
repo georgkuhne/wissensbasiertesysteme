@@ -32,9 +32,10 @@ import wissensbasismodel.Konklusion;
 import wissensbasismodel.KonklusionsTyp;
 import wissensbasismodel.LiteralOperatorenPraedikat;
 import wissensbasismodel.Regel;
+import wissensbasismodel.WissensBasis;
 
 public class CompositeRules extends Composite implements GlobalEditActions {
-
+private static CompositeRules instance;
 	private static TableViewer viewer;
 	private Table table;
 	private Button b_new, b_edit, b_delete;
@@ -42,7 +43,7 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 
 	public CompositeRules(Composite parent, int style) {
 		super(parent, style);
-
+		instance=this;
 		this.setLayout(new FormLayout());
 
 		viewer = new TableViewer(this, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
@@ -59,8 +60,7 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 		fdviewer.left = new FormAttachment(0);
 		fdviewer.right = new FormAttachment(90);
 		table.setLayoutData(fdviewer);
-		refreshTable();
-
+//
 		FormData fdButtons = new FormData();
 		fdButtons.top = new FormAttachment(0);
 		fdButtons.bottom = new FormAttachment(100);
@@ -75,7 +75,7 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 		b_delete = new Button(cbuttons, SWT.None);
 		b_new.setText("Anlegen"); //$NON-NLS-1$
 		b_edit.setText("Bearbeiten"); //$NON-NLS-1$
-		b_delete.setText("LÃ¶schen"); //$NON-NLS-1$
+		b_delete.setText("Löschen"); //$NON-NLS-1$
 		b_edit.setEnabled(false);
 		b_delete.setEnabled(false);
 		table.addSelectionListener(new SelectionListener() {
@@ -141,9 +141,11 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 		}
 	}
 
-	public static void refreshTable() {
+	public  void refreshTable() {
 		Session session = PersistenceUtility.getINSTANCE().createSession();
-		List list = PersistenceUtility.getAll(session, "Regel", null, null); //$NON-NLS-1$
+		WissensBasis wb = PersistenceUtility
+				.getWissensBasisById(wbsID, session);
+		List list = wb.getRegeln();
 		viewer.setInput(list);
 		session.close();
 	}
@@ -269,7 +271,12 @@ public class CompositeRules extends Composite implements GlobalEditActions {
 		PersistenceUtility.deleteRule(session, regel, wbsID);
 		session.close();
 		refreshTable();
-		CompositeRuleGroup.refreshTable();
+		CompositeRuleGroup.getInstance().refreshTable();
 
+	}
+
+	public static CompositeRules getInstance() {
+		return instance;
+		
 	}
 }

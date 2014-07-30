@@ -8,6 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MessageBox;
 import org.hibernate.Session;
 
 import wissensbasismodel.Aussage;
@@ -41,7 +44,8 @@ public class ExportWissensBasis {
 			writeRegelGruppen();
 			writer.flush();
 		} catch (IOException e) {
-			e.printStackTrace();
+			MessageDialog.openWarning(
+					Display.getCurrent().getActiveShell(),"Fehler",""+e.toString()+" "+ e.getMessage() );	
 		}
 
 	}

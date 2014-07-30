@@ -261,7 +261,7 @@ public class CompositeStatement extends Composite implements GlobalEditActions {
 
 		session.close();
 		refreshTable();
-		CompositeRules.refreshTable();
+		CompositeRules.getInstance().refreshTable();
 
 	}
 }

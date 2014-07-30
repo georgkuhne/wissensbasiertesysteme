@@ -286,7 +286,10 @@ public class DialogCreateNewRule extends Dialog {
 		styledText = new StyledText(grpPrmisse, SWT.BORDER | SWT.READ_ONLY);
 		styledText.setAlignment(SWT.CENTER);
 		styledText.setText("");
-
+		styledText.setBackground(Display.getCurrent().getSystemColor(
+				SWT.COLOR_WHITE));
+		styledText.setForeground(Display.getCurrent().getSystemColor(
+				SWT.COLOR_BLACK));
 		styledText.setEditable(false);
 		FormData fd_styledText = new FormData();
 		fd_styledText.bottom = new FormAttachment(100);
@@ -377,8 +380,7 @@ public class DialogCreateNewRule extends Dialog {
 	@Override
 	protected void okPressed() {
 		String wert;
-		if (!validateInput())
-			return;
+
 		String Name = text_name.getText().trim();
 		Regel regel = WissensbasismodelFactory.eINSTANCE.createRegel();
 		Konklusion konklusion = WissensbasismodelFactory.eINSTANCE
@@ -468,19 +470,88 @@ public class DialogCreateNewRule extends Dialog {
 		default:
 			break;
 		}
-		session.saveOrUpdate(konklusion);
 		regel.setKonklusion(konklusion);
 		regel.getPraemisse().clear();
 		regel.getPraemisse().addAll(praemisseContainer.literale);
 
+		if (!validateInput(regel))
+			return;
+
+		session.saveOrUpdate(konklusion);
 		wbs.getRegeln().add(regel);
 		session.flush();
 		session.close();
 		super.okPressed();
 	}
 
-	private boolean validateInput() {
-		// TODO Auto-generated method stub
+	private boolean validateInput(Regel regel) {
+	Konklusion konklusion = regel.getKonklusion();
+	KonklusionsTyp typ = konklusion.getKonklusionTyp();
+		switch (typ) {
+		case DIAGNOSEAUSGABE:
+			if (konklusion.getDiagnoseaussage()==null) {
+				MessageDialog.openWarning(
+						Display.getCurrent().getActiveShell(), "Keine Diangose-Aussage gewählt!",
+						"Keine Aussage gewählt.");
+				return false;
+			}
+			if (konklusion.getDiagnoseaussage().getDiagnosetext().isEmpty()) {
+				MessageDialog.openWarning(
+						Display.getCurrent().getActiveShell(),
+						"Die gewählte Diangose-Aussage hat kein Diagnosetext!",
+						"Keine Aussage gewählt.");
+			return false;
+			}
+			
+			break;
+		case LITERAL:
+			if(konklusion.getLiteral().getAussage()==null){
+				MessageDialog.openWarning(
+						Display.getCurrent().getActiveShell(), "Warnung"," Konklusions-Literal fehlerhaft");	
+			return false;}
+			if(!konklusion.getLiteral().getAussage().getWertebereich().equals(WertebereichTyp.BOOLEAN))
+			{
+				if(konklusion.getLiteral().getPraedikat().equals(LiteralOperatorenPraedikat.NULL)||konklusion.getLiteral().getWert()==null)
+					MessageDialog.openWarning(
+							Display.getCurrent().getActiveShell(), "Warnung"," Konklusions-Literal fehlerhaft");	
+					return false;	
+			}
+			break;
+			
+		case TEXTAUSGABE:
+			if(konklusion.getTextausgabe().isEmpty())
+			{
+				MessageDialog.openWarning(
+						Display.getCurrent().getActiveShell(), "Warnung"," Textausgabe ist leer");	
+			}
+		break;	
+			
+			
+		default:
+			break;
+		}
+		
+		if(regel.getPraemisse().isEmpty()){
+			MessageDialog.openWarning(
+					Display.getCurrent().getActiveShell(), "Warnung"," Prämisse ist leer");	
+		return false;
+	}
+		for (int i = 0; i < regel.getPraemisse().size(); i++) {
+			if(regel.getPraemisse().get(i).getAussage()==null)
+			{
+				MessageDialog.openWarning(
+						Display.getCurrent().getActiveShell(), "Warnung"," Prämisse ist fehlerhaft");	
+				
+				return false;
+			}
+			String frage=regel.getPraemisse().get(i).getAussage().getFragetext();
+			if(frage==null||frage.isEmpty()){
+				MessageDialog.openWarning(
+						Display.getCurrent().getActiveShell(), "Warnung"," Aussage "+regel.getPraemisse().get(i).getAussage().getName()+" ist in der Prämisse und hat keinen Fragetext." );	
+				return false;
+			}
+		}
+		
 		return true;
 	}
 }

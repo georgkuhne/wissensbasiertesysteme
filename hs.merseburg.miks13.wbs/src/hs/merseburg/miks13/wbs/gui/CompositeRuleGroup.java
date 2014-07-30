@@ -31,6 +31,7 @@ import org.hibernate.Session;
 
 import wissensbasismodel.Regel;
 import wissensbasismodel.Regelgruppe;
+import wissensbasismodel.WissensBasis;
 
 public class CompositeRuleGroup extends Composite {
 
@@ -38,11 +39,11 @@ public class CompositeRuleGroup extends Composite {
 	private static TableViewer viewer;
 	private Table table;
 	private Button b_new, b_edit, b_delete;
-
+	private static CompositeRuleGroup instance;
 	public CompositeRuleGroup(Composite parent, int style) {
 		super(parent, style);
 		this.setLayout(new FormLayout());
-
+		setInstance(this);
 		viewer = new TableViewer(this, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
 				| SWT.FULL_SELECTION | SWT.BORDER);
 		table = viewer.getTable();
@@ -57,7 +58,6 @@ public class CompositeRuleGroup extends Composite {
 		fdviewer.left = new FormAttachment(0);
 		fdviewer.right = new FormAttachment(90);
 		table.setLayoutData(fdviewer);
-		refreshTable();
 
 		FormData fdButtons = new FormData();
 		fdButtons.top = new FormAttachment(0);
@@ -128,7 +128,6 @@ public class CompositeRuleGroup extends Composite {
 				editRuleGroup();
 			}
 		});
-		refreshTable();
 	}
 
 	protected void editRuleGroup() {
@@ -150,10 +149,11 @@ public class CompositeRuleGroup extends Composite {
 		refreshTable();
 	}
 
-	static void refreshTable() {
+	public void refreshTable() {
 		Session session = PersistenceUtility.getINSTANCE().createSession();
-		List list = PersistenceUtility.getAll(session, "Regelgruppe", null,
-				null);
+		WissensBasis wb = PersistenceUtility
+				.getWissensBasisById(wbsID, session);
+		List list = wb.getRegelGruppen();
 		viewer.setInput(list);
 		session.close();
 	}
@@ -232,6 +232,14 @@ public class CompositeRuleGroup extends Composite {
 		PersistenceUtility.deleteRuleGroup(session, regelgruppe);
 		session.close();
 		refreshTable();
+	}
+
+	public static CompositeRuleGroup getInstance() {
+		return instance;
+	}
+
+	public void setInstance(CompositeRuleGroup instance) {
+		this.instance = instance;
 	}
 
 }
