@@ -63,6 +63,7 @@ public class DialogCreateNewRule extends Dialog {
 	private Combo combo_prefix;
 	private ComboViewer comboviewerstatement;
 	private EList<Aussage> aussagen;
+	private StyledText styledTextTextausgabe;
 
 	/**
 	 * Create the dialog.
@@ -271,7 +272,7 @@ public class DialogCreateNewRule extends Dialog {
 		TabItem tbtmTextausgabe = new TabItem(tabFolder, SWT.NONE);
 		tbtmTextausgabe.setText("Textausgabe");
 
-		StyledText styledTextTextausgabe = new StyledText(tabFolder, SWT.BORDER);
+		 styledTextTextausgabe = new StyledText(tabFolder, SWT.BORDER);
 		tbtmTextausgabe.setControl(styledTextTextausgabe);
 
 		Group grpPrmisse = new Group(container, SWT.NONE);
@@ -285,9 +286,9 @@ public class DialogCreateNewRule extends Dialog {
 
 		styledText = new StyledText(grpPrmisse, SWT.BORDER | SWT.READ_ONLY);
 		styledText.setAlignment(SWT.CENTER);
-		styledText.setText("");
 		styledText.setBackground(Display.getCurrent().getSystemColor(
 				SWT.COLOR_WHITE));
+		
 		styledText.setForeground(Display.getCurrent().getSystemColor(
 				SWT.COLOR_BLACK));
 		styledText.setEditable(false);
@@ -464,7 +465,7 @@ public class DialogCreateNewRule extends Dialog {
 			break;
 		case 2:
 			konklusion.setKonklusionTyp(KonklusionsTyp.TEXTAUSGABE);
-			String text = styledText.getText().trim();
+			String text = styledTextTextausgabe.getText().trim();
 			konklusion.setTextausgabe(text);
 			break;
 		default:
@@ -511,10 +512,10 @@ public class DialogCreateNewRule extends Dialog {
 			return false;}
 			if(!konklusion.getLiteral().getAussage().getWertebereich().equals(WertebereichTyp.BOOLEAN))
 			{
-				if(konklusion.getLiteral().getPraedikat().equals(LiteralOperatorenPraedikat.NULL)||konklusion.getLiteral().getWert()==null)
+				if(konklusion.getLiteral().getPraedikat().equals(LiteralOperatorenPraedikat.NULL)||konklusion.getLiteral().getWert()==null){
 					MessageDialog.openWarning(
 							Display.getCurrent().getActiveShell(), "Warnung"," Konklusions-Literal fehlerhaft");	
-					return false;	
+					return false;}	
 			}
 			break;
 			

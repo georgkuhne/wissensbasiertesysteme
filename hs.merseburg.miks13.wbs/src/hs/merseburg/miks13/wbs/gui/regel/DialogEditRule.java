@@ -468,8 +468,7 @@ public class DialogEditRule extends Dialog {
 		Konklusion konklusion = WissensbasismodelFactory.eINSTANCE
 				.createKonklusion();
 		regel.setName(Name);
-		WissensBasis wbs = PersistenceUtility.getWissensBasisById(wbsID,
-				session);
+		
 		int index = tabFolder.getSelectionIndex();
 
 		switch (index) {
@@ -558,7 +557,7 @@ public class DialogEditRule extends Dialog {
 		regel.setKonklusion(konklusion);
 		regel.getPraemisse().clear();
 		regel.getPraemisse().addAll(praemisseContainer.literale);
-
+		session.saveOrUpdate(konklusion);
 		session.flush();
 		super.okPressed();
 	}

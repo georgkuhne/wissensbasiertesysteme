@@ -44,8 +44,8 @@ public class ExportWissensBasis {
 			writeRegelGruppen();
 			writer.flush();
 		} catch (IOException e) {
-			MessageDialog.openWarning(
-					Display.getCurrent().getActiveShell(),"Fehler",""+e.toString()+" "+ e.getMessage() );	
+			MessageDialog.openWarning(Display.getCurrent().getActiveShell(),
+					"Fehler", "" + e.toString() + " " + e.getMessage());
 		}
 
 	}
@@ -66,7 +66,7 @@ public class ExportWissensBasis {
 		writer.write("\tName\t" + InternExternRepresenationMapping.bezeichner
 				+ regelgruppe.getName() + ","
 				+ System.getProperty("line.separator"));
-		writer.write("\tWertebereicht\t"
+		writer.write("\tWertebereich\t"
 				+ InternExternRepresenationMapping.bezeichner + "Liste{");
 		ArrayList<Regel> regeln = new ArrayList<Regel>(regelgruppe.getRegeln());
 		for (int i = 0; i < regeln.size(); i++) {
@@ -94,9 +94,9 @@ public class ExportWissensBasis {
 				+ regel.getName() + "," + System.getProperty("line.separator"));
 		writer.write("\tPr\u00E4misse\t"
 				+ InternExternRepresenationMapping.bezeichner + "{");
-		ArrayList<Literal> prämisse = new ArrayList<>(regel.getPraemisse());
-		for (int i = 0; i < prämisse.size(); i++) {
-			Literal literal = prämisse.get(i);
+		ArrayList<Literal> praemisse = new ArrayList<Literal>(regel.getPraemisse());
+		for (int i = 0; i < praemisse.size(); i++) {
+			Literal literal = praemisse.get(i);
 			if (literal.getOutLogicOperator() != LiteralOperatorenLogik.NULL)
 				writer.write(LiteralRepresentation.getLogicOperatorName(literal
 						.getOutLogicOperator()) + " ");
@@ -116,7 +116,7 @@ public class ExportWissensBasis {
 			}
 			if (literal.isKlammerZu())
 				writer.write(")");
-			if (i == prämisse.size() - 1)
+			if (i == praemisse.size() - 1)
 				writer.write("}," + System.getProperty("line.separator"));
 			else
 				writer.write(System.getProperty("line.separator") + "\t\t  ");
@@ -171,7 +171,7 @@ public class ExportWissensBasis {
 		switch (type) {
 		case INTEGER:
 			writer.write("\tWertebereicht\t"
-					+ InternExternRepresenationMapping.bezeichner + "integer"
+					+ InternExternRepresenationMapping.bezeichner + "integer,"
 					+ System.getProperty("line.separator"));
 			break;
 		case BOOLEAN:
@@ -204,14 +204,18 @@ public class ExportWissensBasis {
 		if (fragetext != null && !"".equals(fragetext.trim())) {
 			writer.write("\tFragetext\t"
 					+ InternExternRepresenationMapping.bezeichner + "{\""
-					+ fragetext + "\"}," + System.getProperty("line.separator"));
+					+ fragetext + "\"}");
+			if (diagnosetext != null && !"".equals(diagnosetext.trim()))
+				writer.write("," + System.getProperty("line.separator"));
+			else
+				writer.write(";" + System.getProperty("line.separator"));
 
 		}
 		if (diagnosetext != null && !"".equals(diagnosetext.trim())) {
 			writer.write("\tDiagnosetext\t"
 					+ InternExternRepresenationMapping.bezeichner + "{\""
 					+ diagnosetext + "\"};");
-		}
+		} 
 		writer.write(System.getProperty("line.separator"));
 
 	}
